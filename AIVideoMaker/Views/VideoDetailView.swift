@@ -6,9 +6,11 @@ struct VideoDetailView: View {
     let video: VideoItem
     let animation: Namespace.ID
     @Binding var isNavForDetail: Bool
+    @Binding var isCurrentVideo: Bool
     
     @State private var player: AVPlayer?
     @State private var isPlaying: Bool = true
+    @State private var isLoading: Bool = true
     @State private var progress: Double = 0
     @State private var duration: Double = 0
     @State private var isDragging: Bool = false
@@ -34,8 +36,15 @@ struct VideoDetailView: View {
                 }
             }
             
+            // Loading Indicator
+            if isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    .scaleEffect(2)
+            }
+            
             // Play/Pause Center Indicator
-            if !isPlaying {
+            if !isPlaying && !isLoading {
                 Image(systemName: "play.fill")
                     .font(.system(size: 60))
                     .foregroundColor(.white.opacity(0.8))
@@ -55,8 +64,8 @@ struct VideoDetailView: View {
                             .background(.white.opacity(0.1))
                             .clipShape(Circle())
                     }
-                    .padding(.leading, 20)
-                    .padding(.top, 10)
+                    .padding(.leading, 24)
+                    .padding(.top, 42)
                     
                     Spacer()
                 }
@@ -116,6 +125,15 @@ struct VideoDetailView: View {
         .onAppear {
             setupPlayer()
         }
+        .onChange(of: isCurrentVideo) { oldValue, newValue in
+            if newValue {
+                player?.play()
+                isPlaying = true
+            } else {
+                player?.pause()
+                isPlaying = false
+            }
+        }
         .onDisappear {
             player?.pause()
             player = nil
@@ -123,7 +141,9 @@ struct VideoDetailView: View {
     }
     
     private func setupPlayer() {
-        let player = AVPlayer(url: video.url)
+        // Use cached video if available
+        let urlToPlay = VideoCacheManager.shared.getURLToPlay(for: video.url)
+        let player = AVPlayer(url: urlToPlay)
         self.player = player
         
         // Loop video
@@ -132,10 +152,16 @@ struct VideoDetailView: View {
             player.play()
         }
         
-        // Track progress
-        player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.1, preferredTimescale: 600), queue: .main) { time in
+        // Track progress and detect when ready to play
+        player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.1, preferredTimescale: 600), queue: .main) { [weak player] time in
             guard !isDragging else { return }
-            if let duration = player.currentItem?.duration.seconds, duration > 0 {
+            
+            // Hide loading indicator when player starts playing
+            if player?.timeControlStatus == .playing {
+                isLoading = false
+            }
+            
+            if let duration = player?.currentItem?.duration.seconds, duration > 0 {
                 self.duration = duration
                 self.progress = time.seconds / duration
             }

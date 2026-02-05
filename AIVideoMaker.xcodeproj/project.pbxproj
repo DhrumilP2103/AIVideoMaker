@@ -19,6 +19,7 @@
 		19293FA02F3349030000973C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293F9E2F3349030000973C /* Utilities.swift */; };
 		19293FA42F3365B50000973C /* VideoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293FA32F3365B50000973C /* VideoDetailView.swift */; };
 		19D6BA562F346213009805E6 /* VideoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D6BA542F346213009805E6 /* VideoCacheManager.swift */; };
+		19D6BA582F347B12009805E6 /* VideoReelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D6BA572F347B12009805E6 /* VideoReelsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		19293F9E2F3349030000973C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		19293FA32F3365B50000973C /* VideoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailView.swift; sourceTree = "<group>"; };
 		19D6BA542F346213009805E6 /* VideoCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCacheManager.swift; sourceTree = "<group>"; };
+		19D6BA572F347B12009805E6 /* VideoReelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoReelsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				19293F8D2F3320CC0000973C /* DashBoardView.swift */,
 				19293F8F2F3325680000973C /* HomeView.swift */,
 				19293FA32F3365B50000973C /* VideoDetailView.swift */,
+				19D6BA572F347B12009805E6 /* VideoReelsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				19293FA42F3365B50000973C /* VideoDetailView.swift in Sources */,
 				19293F902F3325680000973C /* HomeView.swift in Sources */,
 				19293F8A2F3320B10000973C /* AIVideoMakerApp.swift in Sources */,
+				19D6BA582F347B12009805E6 /* VideoReelsView.swift in Sources */,
 				19293FA02F3349030000973C /* Utilities.swift in Sources */,
 				19D6BA562F346213009805E6 /* VideoCacheManager.swift in Sources */,
 				19293F8B2F3320B10000973C /* ContentView.swift in Sources */,

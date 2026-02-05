@@ -4,6 +4,7 @@ import AVFoundation
 struct HomeView: View {
     @State private var selectedCategory: VideoCategory = .trending
     @State private var selectedVideo: VideoItem?
+    @State private var selectedVideoIndex: Int = 0
     @State private var isNavForDetail: Bool = false
     @Namespace private var categoryAnimation
     @Namespace private var videoTransition
@@ -43,12 +44,13 @@ struct HomeView: View {
                             GridItem(.flexible(), spacing: 15),
                             GridItem(.flexible(), spacing: 15)
                         ], spacing: 15) {
-                            ForEach(filteredVideos) { video in
+                            ForEach(Array(filteredVideos.enumerated()), id: \.element.id) { index, video in
                                 VideoCard(video: video, isActive: .constant(isActive))
                                     .matchedGeometryEffect(id: video.id.uuidString, in: videoTransition)
                                     .onTapGesture {
                                         withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                                             selectedVideo = video
+                                            selectedVideoIndex = index
                                             isNavForDetail = true
                                         }
                                     }
@@ -65,9 +67,15 @@ struct HomeView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .navigationDestination(isPresented: $isNavForDetail) {
-            if let video = selectedVideo {
-                VideoDetailView(video: video, animation: videoTransition, isNavForDetail: $isNavForDetail)
-                    .navigationBarHidden(true)
+            if selectedVideo != nil {
+                let filteredVideos = videos.filter { $0.category == selectedCategory }
+                VideoReelsView(
+                    videos: filteredVideos,
+                    startIndex: selectedVideoIndex,
+                    animation: videoTransition,
+                    isNavForDetail: $isNavForDetail
+                )
+                .navigationBarHidden(true)
             }
         }
     }
@@ -130,7 +138,16 @@ struct VideoCard: View {
                         .stroke(.white.opacity(0.1), lineWidth: 1)
                 }
             
+            // Loading indicator
+            if !isReady {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    .scaleEffect(1.5)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            
             VStack(alignment: .leading, spacing: 4) {
+
                 Text(video.title)
                     .font(Utilities.font(.Bold, size: 12))
                     .foregroundColor(.white)
