@@ -37,13 +37,14 @@ struct HomeView: View {
                 ForEach(VideoCategory.allCases, id: \.self) { category in
                     ScrollView {
                         let filteredVideos = videos.filter { $0.category == category }
+                        let isActive = selectedCategory == category
                         
                         LazyVGrid(columns: [
                             GridItem(.flexible(), spacing: 15),
                             GridItem(.flexible(), spacing: 15)
                         ], spacing: 15) {
                             ForEach(filteredVideos) { video in
-                                VideoCard(video: video)
+                                VideoCard(video: video, isActive: .constant(isActive))
                                     .matchedGeometryEffect(id: video.id.uuidString, in: videoTransition)
                                     .onTapGesture {
                                         withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
@@ -112,13 +113,14 @@ struct HomeView: View {
 // MARK: - Video Card View
 struct VideoCard: View {
     let video: VideoItem
+    @Binding var isActive: Bool
     @State private var isReady: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             Color.white.opacity(0.05)
             
-            VideoPlayerView(url: video.url, isReady: $isReady)
+            VideoPlayerView(url: video.url, isReady: $isReady, isActive: $isActive)
                 .opacity(isReady ? 1 : 0)
                 .scaleEffect(isReady ? 1 : 0.98)
                 .frame(height: 250)
@@ -151,6 +153,7 @@ struct VideoCard: View {
 struct VideoPlayerView: UIViewRepresentable {
     let url: URL
     @Binding var isReady: Bool
+    @Binding var isActive: Bool
     
     func makeUIView(context: Context) -> LoopingPlayerUIView {
         let view = LoopingPlayerUIView(url: url)
@@ -162,7 +165,13 @@ struct VideoPlayerView: UIViewRepresentable {
         return view
     }
     
-    func updateUIView(_ uiView: LoopingPlayerUIView, context: Context) {}
+    func updateUIView(_ uiView: LoopingPlayerUIView, context: Context) {
+        if isActive {
+            uiView.resumePlayback()
+        } else {
+            uiView.pausePlayback()
+        }
+    }
 }
 
 class LoopingPlayerUIView: UIView {
@@ -174,8 +183,12 @@ class LoopingPlayerUIView: UIView {
     init(url: URL) {
         super.init(frame: .zero)
         
-        let asset = AVAsset(url: url)
+        // Check cache and get appropriate URL
+        let urlToPlay = VideoCacheManager.shared.getURLToPlay(for: url)
+        
+        let asset = AVAsset(url: urlToPlay)
         let playerItem = AVPlayerItem(asset: asset)
+
         
         
         // playerItem.forwardPlaybackEndTime = CMTime(seconds: 5, preferredTimescale: 600)
@@ -213,6 +226,14 @@ class LoopingPlayerUIView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func pausePlayback() {
+        queuePlayer?.pause()
+    }
+    
+    func resumePlayback() {
+        queuePlayer?.play()
+    }
+    
     deinit {
         queuePlayer?.removeObserver(self, forKeyPath: "timeControlStatus")
         queuePlayer?.pause()
@@ -232,8 +253,8 @@ struct VideoItem: Identifiable {
         // Reliable direct MP4 URLs from Google's sample video bucket
         let trendingUrl = URL(string: "https://www.pexels.com/download/video/7515918/")!
         let horrorUrl = URL(string: "https://www.pexels.com/download/video/5427399/")!
-        let funnyUrl = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")!
-        let cartoonUrl = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4")!
+        let funnyUrl = URL(string: "https://www.pexels.com/download/video/9177142/")!
+        let cartoonUrl = URL(string: "https://www.pexels.com/download/video/6518200/")!
         let babyUrl = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")!
         
         let extraTrending = URL(string: "https://www.pexels.com/download/video/27670450/")!
@@ -241,7 +262,7 @@ struct VideoItem: Identifiable {
         let extraHorror = URL(string: "https://www.pexels.com/download/video/5435725/")!
         let extraHorror2 = URL(string: "https://www.pexels.com/download/video/34564177/")!
         let extraHorror3 = URL(string: "https://www.pexels.com/download/video/5435720/")!
-        let extraFunny = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4")!
+        let extraFunny = URL(string: "https://www.pexels.com/download/video/6519537/")!
         
         return [
             VideoItem(title: "Trending Clip 1", url: trendingUrl, category: .trending),
