@@ -83,8 +83,10 @@ struct HomeView: View {
     @ViewBuilder
     func CategoryItem(category: VideoCategory) -> some View {
         let isSelected = selectedCategory == category
+        let impactFeedback = UIImpactFeedbackGenerator(style: .light)
         
         Button {
+            impactFeedback.impactOccurred()
             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                 selectedCategory = category
             }
@@ -104,6 +106,7 @@ struct HomeView: View {
                     Capsule()
                         .fill(.white)
                         .matchedGeometryEffect(id: "CATEGORY_CAPSULE", in: categoryAnimation)
+                        .shadow(color: .white.opacity(0.3), radius: 8, x: 0, y: 4)
                 } else {
                     Capsule()
                         .fill(.white.opacity(0.05))
@@ -115,6 +118,7 @@ struct HomeView: View {
             }
             .scaleEffect(isSelected ? 1.02 : 1.0)
         }
+        .buttonStyle(ScaleButtonStyle())
     }
 }
 
@@ -265,6 +269,7 @@ struct VideoItem: Identifiable {
     let title: String
     let url: URL
     let category: VideoCategory
+    let template: String
     
     static var sampleData: [VideoItem] {
         // Reliable direct MP4 URLs from Google's sample video bucket
@@ -282,19 +287,19 @@ struct VideoItem: Identifiable {
         let extraFunny = URL(string: "https://www.pexels.com/download/video/6519537/")!
         
         return [
-            VideoItem(title: "Trending Clip 1", url: trendingUrl, category: .trending),
-            VideoItem(title: "Trending Clip 2", url: extraTrending, category: .trending),
-            VideoItem(title: "Trending Clip 3", url: extraTrending2, category: .trending),
-            VideoItem(title: "Horror Clip 1", url: horrorUrl, category: .horror),
-            VideoItem(title: "Horror Clip 2", url: extraHorror, category: .horror),
-            VideoItem(title: "Horror Clip 2", url: extraHorror2, category: .horror),
-            VideoItem(title: "Horror Clip 2", url: extraHorror3, category: .horror),
-            VideoItem(title: "Funny Clip 1", url: funnyUrl, category: .funny),
-            VideoItem(title: "Funny Clip 2", url: extraFunny, category: .funny),
-            VideoItem(title: "Cartoon Clip 1", url: cartoonUrl, category: .cartoon),
-            VideoItem(title: "Cartoon Clip 2", url: trendingUrl, category: .cartoon),
-            VideoItem(title: "Baby Clip 1", url: babyUrl, category: .babyVideo),
-            VideoItem(title: "Baby Clip 2", url: extraTrending, category: .babyVideo)
+            VideoItem(title: "Trending Clip 1", url: trendingUrl, category: .trending, template: "Modern Vlog"),
+            VideoItem(title: "Trending Clip 2", url: extraTrending, category: .trending, template: "Cinematic Intro"),
+            VideoItem(title: "Trending Clip 3", url: extraTrending2, category: .trending, template: "Fast Paced Edit"),
+            VideoItem(title: "Horror Clip 1", url: horrorUrl, category: .horror, template: "Dark Atmosphere"),
+            VideoItem(title: "Horror Clip 2", url: extraHorror, category: .horror, template: "Suspense Build"),
+            VideoItem(title: "Horror Clip 2", url: extraHorror2, category: .horror, template: "Creepy Montage"),
+            VideoItem(title: "Horror Clip 2", url: extraHorror3, category: .horror, template: "Thriller Effect"),
+            VideoItem(title: "Funny Clip 1", url: funnyUrl, category: .funny, template: "Comedy Sketch"),
+            VideoItem(title: "Funny Clip 2", url: extraFunny, category: .funny, template: "Meme Template"),
+            VideoItem(title: "Cartoon Clip 1", url: cartoonUrl, category: .cartoon, template: "Animation Style"),
+            VideoItem(title: "Cartoon Clip 2", url: trendingUrl, category: .cartoon, template: "Kids Friendly"),
+            VideoItem(title: "Baby Clip 1", url: babyUrl, category: .babyVideo, template: "Sweet Moments"),
+            VideoItem(title: "Baby Clip 2", url: extraTrending, category: .babyVideo, template: "Family Vlog")
         ]
     }
 }

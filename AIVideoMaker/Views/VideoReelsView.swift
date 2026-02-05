@@ -6,15 +6,7 @@ struct VideoReelsView: View {
     let animation: Namespace.ID
     @Binding var isNavForDetail: Bool
     
-    @State private var currentIndex: Int?
-    
-    init(videos: [VideoItem], startIndex: Int, animation: Namespace.ID, isNavForDetail: Binding<Bool>) {
-        self.videos = videos
-        self.startIndex = startIndex
-        self.animation = animation
-        self._isNavForDetail = isNavForDetail
-        self._currentIndex = State(initialValue: startIndex)
-    }
+    @State private var currentIndex: Int? = nil
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -33,9 +25,17 @@ struct VideoReelsView: View {
             }
             .scrollTargetLayout()
         }
+        .scrollBounceBehavior(.basedOnSize)
         .background(Color._041_C_32)
         .scrollTargetBehavior(.paging)
         .scrollPosition(id: $currentIndex)
         .ignoresSafeArea()
+//        .animation(.easeInOut(duration: 0.3), value: currentIndex)
+        .onAppear {
+            // Set the current index to the start index when view appears
+//            withAnimation(.easeInOut(duration: 0.3)) {
+                currentIndex = startIndex
+//            }
+        }
     }
 }

@@ -14,6 +14,9 @@ struct VideoDetailView: View {
     @State private var progress: Double = 0
     @State private var duration: Double = 0
     @State private var isDragging: Bool = false
+    @State private var showUI: Bool = false
+    
+    private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
     
     var body: some View {
         ZStack {
@@ -41,6 +44,7 @@ struct VideoDetailView: View {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
                     .scaleEffect(2)
+                    .transition(.opacity.combined(with: .scale))
             }
             
             // Play/Pause Center Indicator
@@ -48,24 +52,32 @@ struct VideoDetailView: View {
                 Image(systemName: "play.fill")
                     .font(.system(size: 60))
                     .foregroundColor(.white.opacity(0.8))
+                    .scaleEffect(showUI ? 1.0 : 0.8)
                     .transition(.scale.combined(with: .opacity))
+                    .animation(.spring(response: 0.3, dampingFraction: 0.6), value: !isPlaying)
             }
             
             // Back Button
             VStack {
                 HStack {
                     Button {
-                        isNavForDetail = false
+                        impactFeedback.impactOccurred()
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            isNavForDetail = false
+                        }
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.title3.bold())
                             .foregroundColor(.white)
                             .padding(12)
-                            .background(.white.opacity(0.1))
+                            .background(._041_C_32.opacity(0.3))
                             .clipShape(Circle())
                     }
+                    .buttonStyle(ScaleButtonStyle())
                     .padding(.leading, 24)
                     .padding(.top, 42)
+                    .opacity(showUI ? 1 : 0)
+                    .offset(y: showUI ? 0 : -20)
                     
                     Spacer()
                 }
@@ -73,8 +85,32 @@ struct VideoDetailView: View {
             }
             
             // Right Side Actions
-            HStack {
+            HStack(alignment: .bottom) {
+                // Left Side - Video Title
+                VStack(alignment: .leading, spacing: 8) {
+                    Spacer()
+                    
+                    Text(video.title)
+                        .font(Utilities.font(.Bold, size: 20))
+                        .foregroundColor(.white)
+                        .shadow(color: .black.opacity(0.8), radius: 2, x: 0, y: 1)
+                        .background(
+                            // Text stroke for better visibility
+                            Text(video.title)
+                                .font(Utilities.font(.Bold, size: 20))
+                                .foregroundColor(.black.opacity(0.5))
+                                .blur(radius: 1)
+                        )
+                        .padding(.bottom, 180)
+                        .opacity(showUI ? 1 : 0)
+                        .offset(x: showUI ? 0 : -20)
+                }
+                .padding(.leading, 20)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
                 Spacer()
+                
+                // Right Side Actions
                 VStack(spacing: 25) {
                     Spacer()
                     
@@ -86,22 +122,55 @@ struct VideoDetailView: View {
                         .frame(height: 150)
                 }
                 .padding(.trailing, 20)
+                .opacity(showUI ? 1 : 0)
+                .offset(x: showUI ? 0 : 20)
             }
             
             // Bottom Controls and Button
             VStack(spacing: 20) {
                 Spacer()
                 
-                // Progress Bar
+                // Progress Bar with Time Display
                 VStack(spacing: 8) {
+                    // Progress Bar
                     CustomSlider(value: $progress, range: 0...1, isDragging: $isDragging) { newValue in
+                        impactFeedback.impactOccurred()
                         seek(to: newValue)
                     }
                     .padding(.horizontal, 20)
+                    .animation(.easeOut(duration: 0.1), value: progress)
+                    
+                    // Time Display
+                    HStack {
+                        Text(formatTime(progress * duration))
+                            .font(Utilities.font(.Medium, size: 12))
+                            .foregroundColor(.white.opacity(0.8))
+                        
+                        Spacer()
+                        
+                        Text(formatTime(duration))
+                            .font(Utilities.font(.Medium, size: 12))
+                            .foregroundColor(.white.opacity(0.8))
+                    }
+                    .padding(.horizontal, 20)
+                    
+                    // Template Name
+//                    HStack {
+//                        Image(systemName: "film.fill")
+//                            .font(.system(size: 10))
+//                            .foregroundColor(.white.opacity(0.6))
+//                        
+//                        Text(video.template)
+//                            .font(Utilities.font(.Medium, size: 13))
+//                            .foregroundColor(.white.opacity(0.9))
+//                    }
+//                    .padding(.horizontal, 20)
+//                    .padding(.top, 4)
                 }
                 
                 // Make Video Button
                 Button {
+                    impactFeedback.impactOccurred()
                     // Make Video Action
                 } label: {
                     HStack(spacing: 12) {
@@ -118,12 +187,19 @@ struct VideoDetailView: View {
                             .shadow(color: .white.opacity(0.3), radius: 15, x: 0, y: 8)
                     }
                 }
-                .padding(.horizontal, 30)
-                .padding(.bottom, 20)
+                .buttonStyle(ScaleButtonStyle())
+                .padding([.horizontal, .bottom], 30)
+                .opacity(showUI ? 1 : 0)
+                .offset(y: showUI ? 0 : 20)
             }
         }
+        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: showUI)
         .onAppear {
             setupPlayer()
+            // Animate UI elements in smoothly
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.1)) {
+                showUI = true
+            }
         }
         .onChange(of: isCurrentVideo) { oldValue, newValue in
             if newValue {
@@ -171,9 +247,17 @@ struct VideoDetailView: View {
     }
     
     private func seek(to value: Double) {
-        guard let player = player else { return }
+        guard let player = player, duration > 0 else { return }
         let targetTime = CMTime(seconds: value * duration, preferredTimescale: 600)
-        player.seek(to: targetTime)
+        player.seek(to: targetTime, toleranceBefore: .zero, toleranceAfter: .zero)
+    }
+    
+    private func formatTime(_ seconds: Double) -> String {
+        guard !seconds.isNaN && !seconds.isInfinite else { return "0:00" }
+        let totalSeconds = Int(seconds)
+        let minutes = totalSeconds / 60
+        let remainingSeconds = totalSeconds % 60
+        return String(format: "%d:%02d", minutes, remainingSeconds)
     }
 }
 
@@ -182,17 +266,21 @@ struct SideActionButton: View {
     let icon: String
     let label: String
     var color: Color = .white
+    private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
     
     var body: some View {
         Button {
+            impactFeedback.impactOccurred()
             // Action
         } label: {
             VStack(spacing: 8) {
-                Image(systemName: icon)
-                    .font(.title2)
-                    .foregroundColor(color)
-                    .padding(12)
-                    .background(.white.opacity(0.1))
+                ZStack {
+                    Image(systemName: icon)
+                        .font(.title2)
+                        .foregroundColor(color)
+                        .padding(8)
+                }.frame(width: 40, height: 40)
+                    .background(._041_C_32.opacity(0.3))
                     .clipShape(Circle())
                 
                 Text(label)
@@ -200,6 +288,17 @@ struct SideActionButton: View {
                     .foregroundColor(.white)
             }
         }
+        .buttonStyle(ScaleButtonStyle())
+    }
+}
+
+// MARK: - Scale Button Style
+struct ScaleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.92 : 1.0)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
     }
 }
 
@@ -213,31 +312,36 @@ struct CustomSlider: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
+                // Background track
                 Rectangle()
                     .fill(.white.opacity(0.2))
                     .frame(height: 4)
                 
+                // Progress track
                 Rectangle()
                     .fill(.white)
                     .frame(width: geometry.size.width * CGFloat(value), height: 4)
                 
+                // Draggable handle
                 Circle()
                     .fill(.white)
                     .frame(width: 12, height: 12)
                     .offset(x: geometry.size.width * CGFloat(value) - 6)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { gesture in
-                                isDragging = true
-                                let newValue = min(max(0, Double(gesture.location.x / geometry.size.width)), 1)
-                                value = newValue
-                            }
-                            .onEnded { _ in
-                                isDragging = false
-                                onEditingChanged(value)
-                            }
-                    )
             }
+            .contentShape(Rectangle()) // Make entire area tappable
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { gesture in
+                        isDragging = true
+                        let newValue = min(max(0, Double(gesture.location.x / geometry.size.width)), 1)
+                        value = newValue
+                        // Seek immediately during drag for better UX
+                        onEditingChanged(newValue)
+                    }
+                    .onEnded { _ in
+                        isDragging = false
+                    }
+            )
         }
         .frame(height: 12)
     }
