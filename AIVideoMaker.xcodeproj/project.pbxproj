@@ -11,7 +11,6 @@
 		19293F8B2F3320B10000973C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293F882F3320B10000973C /* ContentView.swift */; };
 		19293F8C2F3320B10000973C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19293F872F3320B10000973C /* Assets.xcassets */; };
 		19293F8E2F3320CC0000973C /* DashBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293F8D2F3320CC0000973C /* DashBoardView.swift */; };
-		19293F902F3325680000973C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293F8F2F3325680000973C /* HomeView.swift */; };
 		19293F962F3342930000973C /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19293F952F3342930000973C /* Poppins-SemiBold.ttf */; };
 		19293F972F3342930000973C /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19293F942F3342930000973C /* Poppins-Regular.ttf */; };
 		19293F982F3342930000973C /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19293F932F3342930000973C /* Poppins-Medium.ttf */; };
@@ -20,6 +19,38 @@
 		19293FA42F3365B50000973C /* VideoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293FA32F3365B50000973C /* VideoDetailView.swift */; };
 		19D6BA562F346213009805E6 /* VideoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D6BA542F346213009805E6 /* VideoCacheManager.swift */; };
 		19D6BA582F347B12009805E6 /* VideoReelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D6BA572F347B12009805E6 /* VideoReelsView.swift */; };
+		19DF54D72F35B36F008392F3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54D62F35B36F008392F3 /* ProfileView.swift */; };
+		19DF54E22F35F0BB008392F3 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54DD2F35F0BB008392F3 /* APIService.swift */; };
+		19DF54E32F35F0BB008392F3 /* APIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54DC2F35F0BB008392F3 /* APIConstant.swift */; };
+		19DF54E62F35F130008392F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 19DF54E52F35F130008392F3 /* Alamofire */; };
+		19DF54EE2F35F161008392F3 /* Lib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54EC2F35F161008392F3 /* Lib.swift */; };
+		19DF54F02F35F16D008392F3 /* LetsReach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54EF2F35F16D008392F3 /* LetsReach.swift */; };
+		19DF54FB2F35F4D0008392F3 /* NavigationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54F42F35F4D0008392F3 /* NavigationConfiguration.swift */; };
+		19DF54FC2F35F4D0008392F3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54F72F35F4D0008392F3 /* NetworkError.swift */; };
+		19DF54FD2F35F4D0008392F3 /* NetworkAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54F82F35F4D0008392F3 /* NetworkAppState.swift */; };
+		19DF54FE2F35F4D0008392F3 /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54F52F35F4D0008392F3 /* AppRoute.swift */; };
+		19DF54FF2F35F4D0008392F3 /* NavigationControllerRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54F32F35F4D0008392F3 /* NavigationControllerRootView.swift */; };
+		19DF55002F35F4D0008392F3 /* NetworkStatusPopupHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54F92F35F4D0008392F3 /* NetworkStatusPopupHandler.swift */; };
+		19DF55022F35F525008392F3 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55012F35F525008392F3 /* BaseViewModel.swift */; };
+		19DF55062F35F6B6008392F3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55042F35F6B6008392F3 /* HomeView.swift */; };
+		19DF550F2F35F7D6008392F3 /* AppKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF550E2F35F7D6008392F3 /* AppKey.swift */; };
+		19DF55102F35F7D6008392F3 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF550D2F35F7D6008392F3 /* APIError.swift */; };
+		19DF55182F35F96F008392F3 /* ExView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55132F35F96F008392F3 /* ExView.swift */; };
+		19DF55192F35F96F008392F3 /* ExString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55142F35F96F008392F3 /* ExString.swift */; };
+		19DF551A2F35F96F008392F3 /* ExDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55152F35F96F008392F3 /* ExDate.swift */; };
+		19DF551B2F35F96F008392F3 /* ExDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55162F35F96F008392F3 /* ExDateFormatter.swift */; };
+		19DF55252F35F99A008392F3 /* KRProgressHUDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55232F35F99A008392F3 /* KRProgressHUDViewController.swift */; };
+		19DF55262F35F99A008392F3 /* KRProgressHUDIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55222F35F99A008392F3 /* KRProgressHUDIconType.swift */; };
+		19DF55272F35F99A008392F3 /* InnerKRProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF551D2F35F99A008392F3 /* InnerKRProgressHUD.swift */; };
+		19DF55282F35F99A008392F3 /* KRActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF551E2F35F99A008392F3 /* KRActivityIndicatorView.swift */; };
+		19DF55292F35F99A008392F3 /* KRProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55212F35F99A008392F3 /* KRProgressHUD.swift */; };
+		19DF552A2F35F99A008392F3 /* KRExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55202F35F99A008392F3 /* KRExtensions.swift */; };
+		19DF552B2F35F99A008392F3 /* KRActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF551F2F35F99A008392F3 /* KRActivityIndicatorViewStyle.swift */; };
+		19DF552C2F35F99A008392F3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF551C2F35F99A008392F3 /* Extensions.swift */; };
+		19DF552E2F35FE3B008392F3 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF552D2F35FE3B008392F3 /* VideoManager.swift */; };
+		19DF55342F35FEBE008392F3 /* HomeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55302F35FEBE008392F3 /* HomeAPIService.swift */; };
+		19DF55352F35FEBE008392F3 /* HomeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55312F35FEBE008392F3 /* HomeResponseModel.swift */; };
+		19DF55362F35FEBE008392F3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55322F35FEBE008392F3 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +59,6 @@
 		19293F872F3320B10000973C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19293F882F3320B10000973C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		19293F8D2F3320CC0000973C /* DashBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardView.swift; sourceTree = "<group>"; };
-		19293F8F2F3325680000973C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		19293F922F3342930000973C /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		19293F932F3342930000973C /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		19293F942F3342930000973C /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
@@ -38,6 +68,37 @@
 		19293FA32F3365B50000973C /* VideoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailView.swift; sourceTree = "<group>"; };
 		19D6BA542F346213009805E6 /* VideoCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCacheManager.swift; sourceTree = "<group>"; };
 		19D6BA572F347B12009805E6 /* VideoReelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoReelsView.swift; sourceTree = "<group>"; };
+		19DF54D62F35B36F008392F3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		19DF54DC2F35F0BB008392F3 /* APIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstant.swift; sourceTree = "<group>"; };
+		19DF54DD2F35F0BB008392F3 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		19DF54EC2F35F161008392F3 /* Lib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lib.swift; sourceTree = "<group>"; };
+		19DF54EF2F35F16D008392F3 /* LetsReach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetsReach.swift; sourceTree = "<group>"; };
+		19DF54F32F35F4D0008392F3 /* NavigationControllerRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerRootView.swift; sourceTree = "<group>"; };
+		19DF54F42F35F4D0008392F3 /* NavigationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfiguration.swift; sourceTree = "<group>"; };
+		19DF54F52F35F4D0008392F3 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
+		19DF54F72F35F4D0008392F3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		19DF54F82F35F4D0008392F3 /* NetworkAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAppState.swift; sourceTree = "<group>"; };
+		19DF54F92F35F4D0008392F3 /* NetworkStatusPopupHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusPopupHandler.swift; sourceTree = "<group>"; };
+		19DF55012F35F525008392F3 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		19DF55042F35F6B6008392F3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		19DF550D2F35F7D6008392F3 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		19DF550E2F35F7D6008392F3 /* AppKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKey.swift; sourceTree = "<group>"; };
+		19DF55132F35F96F008392F3 /* ExView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExView.swift; sourceTree = "<group>"; };
+		19DF55142F35F96F008392F3 /* ExString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExString.swift; sourceTree = "<group>"; };
+		19DF55152F35F96F008392F3 /* ExDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExDate.swift; sourceTree = "<group>"; };
+		19DF55162F35F96F008392F3 /* ExDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExDateFormatter.swift; sourceTree = "<group>"; };
+		19DF551C2F35F99A008392F3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		19DF551D2F35F99A008392F3 /* InnerKRProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerKRProgressHUD.swift; sourceTree = "<group>"; };
+		19DF551E2F35F99A008392F3 /* KRActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KRActivityIndicatorView.swift; sourceTree = "<group>"; };
+		19DF551F2F35F99A008392F3 /* KRActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KRActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
+		19DF55202F35F99A008392F3 /* KRExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KRExtensions.swift; sourceTree = "<group>"; };
+		19DF55212F35F99A008392F3 /* KRProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KRProgressHUD.swift; sourceTree = "<group>"; };
+		19DF55222F35F99A008392F3 /* KRProgressHUDIconType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KRProgressHUDIconType.swift; sourceTree = "<group>"; };
+		19DF55232F35F99A008392F3 /* KRProgressHUDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KRProgressHUDViewController.swift; sourceTree = "<group>"; };
+		19DF552D2F35FE3B008392F3 /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
+		19DF55302F35FEBE008392F3 /* HomeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIService.swift; sourceTree = "<group>"; };
+		19DF55312F35FEBE008392F3 /* HomeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeResponseModel.swift; sourceTree = "<group>"; };
+		19DF55322F35FEBE008392F3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19DF54E62F35F130008392F3 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,7 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				19293F8D2F3320CC0000973C /* DashBoardView.swift */,
-				19293F8F2F3325680000973C /* HomeView.swift */,
+				19DF55052F35F6B6008392F3 /* HomeView */,
+				19DF54D62F35B36F008392F3 /* ProfileView.swift */,
 				19293FA32F3365B50000973C /* VideoDetailView.swift */,
 				19D6BA572F347B12009805E6 /* VideoReelsView.swift */,
 			);
@@ -85,8 +148,11 @@
 				19293F862F3320B10000973C /* AIVideoMakerApp.swift */,
 				19293F872F3320B10000973C /* Assets.xcassets */,
 				19293F882F3320B10000973C /* ContentView.swift */,
+				19DF54F62F35F4D0008392F3 /* NavigationHelper */,
+				19DF54FA2F35F4D0008392F3 /* NetworkPopupHandler */,
+				19DF54ED2F35F161008392F3 /* Helper */,
+				19DF54DF2F35F0BB008392F3 /* API */,
 				19D6BA552F346213009805E6 /* Managers */,
-				19293F9F2F3349030000973C /* Utilities */,
 				19293F912F33427E0000973C /* Fonts */,
 				19293F852F3320B10000973C /* Views */,
 			);
@@ -108,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				19293F9E2F3349030000973C /* Utilities.swift */,
+				19DF54EF2F35F16D008392F3 /* LetsReach.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -116,8 +183,97 @@
 			isa = PBXGroup;
 			children = (
 				19D6BA542F346213009805E6 /* VideoCacheManager.swift */,
+				19DF552D2F35FE3B008392F3 /* VideoManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		19DF54DF2F35F0BB008392F3 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				19DF54DC2F35F0BB008392F3 /* APIConstant.swift */,
+				19DF54DD2F35F0BB008392F3 /* APIService.swift */,
+				19DF550D2F35F7D6008392F3 /* APIError.swift */,
+				19DF550E2F35F7D6008392F3 /* AppKey.swift */,
+				19DF55012F35F525008392F3 /* BaseViewModel.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		19DF54ED2F35F161008392F3 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				19293F9F2F3349030000973C /* Utilities */,
+				19DF55242F35F99A008392F3 /* Loader */,
+				19DF55172F35F96F008392F3 /* Extension */,
+				19DF54EC2F35F161008392F3 /* Lib.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		19DF54F62F35F4D0008392F3 /* NavigationHelper */ = {
+			isa = PBXGroup;
+			children = (
+				19DF54F32F35F4D0008392F3 /* NavigationControllerRootView.swift */,
+				19DF54F42F35F4D0008392F3 /* NavigationConfiguration.swift */,
+				19DF54F52F35F4D0008392F3 /* AppRoute.swift */,
+			);
+			path = NavigationHelper;
+			sourceTree = "<group>";
+		};
+		19DF54FA2F35F4D0008392F3 /* NetworkPopupHandler */ = {
+			isa = PBXGroup;
+			children = (
+				19DF54F72F35F4D0008392F3 /* NetworkError.swift */,
+				19DF54F82F35F4D0008392F3 /* NetworkAppState.swift */,
+				19DF54F92F35F4D0008392F3 /* NetworkStatusPopupHandler.swift */,
+			);
+			path = NetworkPopupHandler;
+			sourceTree = "<group>";
+		};
+		19DF55052F35F6B6008392F3 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				19DF55332F35FEBE008392F3 /* Service */,
+				19DF55042F35F6B6008392F3 /* HomeView.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		19DF55172F35F96F008392F3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				19DF55132F35F96F008392F3 /* ExView.swift */,
+				19DF55142F35F96F008392F3 /* ExString.swift */,
+				19DF55152F35F96F008392F3 /* ExDate.swift */,
+				19DF55162F35F96F008392F3 /* ExDateFormatter.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		19DF55242F35F99A008392F3 /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				19DF551C2F35F99A008392F3 /* Extensions.swift */,
+				19DF551D2F35F99A008392F3 /* InnerKRProgressHUD.swift */,
+				19DF551E2F35F99A008392F3 /* KRActivityIndicatorView.swift */,
+				19DF551F2F35F99A008392F3 /* KRActivityIndicatorViewStyle.swift */,
+				19DF55202F35F99A008392F3 /* KRExtensions.swift */,
+				19DF55212F35F99A008392F3 /* KRProgressHUD.swift */,
+				19DF55222F35F99A008392F3 /* KRProgressHUDIconType.swift */,
+				19DF55232F35F99A008392F3 /* KRProgressHUDViewController.swift */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
+		19DF55332F35FEBE008392F3 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				19DF55302F35FEBE008392F3 /* HomeAPIService.swift */,
+				19DF55312F35FEBE008392F3 /* HomeResponseModel.swift */,
+				19DF55322F35FEBE008392F3 /* HomeViewModel.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +293,7 @@
 			);
 			name = AIVideoMaker;
 			packageProductDependencies = (
+				19DF54E52F35F130008392F3 /* Alamofire */,
 			);
 			productName = AIVideoMaker;
 			productReference = 19293F762F3320950000973C /* AIVideoMaker.app */;
@@ -166,6 +323,9 @@
 			);
 			mainGroup = 19293F6D2F3320950000973C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				19DF54E42F35F130008392F3 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 19293F772F3320950000973C /* Products */;
 			projectDirPath = "";
@@ -196,12 +356,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19DF550F2F35F7D6008392F3 /* AppKey.swift in Sources */,
+				19DF55102F35F7D6008392F3 /* APIError.swift in Sources */,
+				19DF54FB2F35F4D0008392F3 /* NavigationConfiguration.swift in Sources */,
+				19DF55022F35F525008392F3 /* BaseViewModel.swift in Sources */,
+				19DF54FC2F35F4D0008392F3 /* NetworkError.swift in Sources */,
+				19DF55182F35F96F008392F3 /* ExView.swift in Sources */,
+				19DF55192F35F96F008392F3 /* ExString.swift in Sources */,
+				19DF551A2F35F96F008392F3 /* ExDate.swift in Sources */,
+				19DF551B2F35F96F008392F3 /* ExDateFormatter.swift in Sources */,
+				19DF54FD2F35F4D0008392F3 /* NetworkAppState.swift in Sources */,
+				19DF54FE2F35F4D0008392F3 /* AppRoute.swift in Sources */,
+				19DF55062F35F6B6008392F3 /* HomeView.swift in Sources */,
+				19DF54FF2F35F4D0008392F3 /* NavigationControllerRootView.swift in Sources */,
+				19DF55002F35F4D0008392F3 /* NetworkStatusPopupHandler.swift in Sources */,
 				19293F8E2F3320CC0000973C /* DashBoardView.swift in Sources */,
+				19DF54D72F35B36F008392F3 /* ProfileView.swift in Sources */,
 				19293FA42F3365B50000973C /* VideoDetailView.swift in Sources */,
-				19293F902F3325680000973C /* HomeView.swift in Sources */,
+				19DF54F02F35F16D008392F3 /* LetsReach.swift in Sources */,
 				19293F8A2F3320B10000973C /* AIVideoMakerApp.swift in Sources */,
+				19DF54EE2F35F161008392F3 /* Lib.swift in Sources */,
+				19DF55252F35F99A008392F3 /* KRProgressHUDViewController.swift in Sources */,
+				19DF55262F35F99A008392F3 /* KRProgressHUDIconType.swift in Sources */,
+				19DF55272F35F99A008392F3 /* InnerKRProgressHUD.swift in Sources */,
+				19DF55282F35F99A008392F3 /* KRActivityIndicatorView.swift in Sources */,
+				19DF55292F35F99A008392F3 /* KRProgressHUD.swift in Sources */,
+				19DF55342F35FEBE008392F3 /* HomeAPIService.swift in Sources */,
+				19DF55352F35FEBE008392F3 /* HomeResponseModel.swift in Sources */,
+				19DF55362F35FEBE008392F3 /* HomeViewModel.swift in Sources */,
+				19DF552A2F35F99A008392F3 /* KRExtensions.swift in Sources */,
+				19DF552B2F35F99A008392F3 /* KRActivityIndicatorViewStyle.swift in Sources */,
+				19DF552C2F35F99A008392F3 /* Extensions.swift in Sources */,
 				19D6BA582F347B12009805E6 /* VideoReelsView.swift in Sources */,
+				19DF54E22F35F0BB008392F3 /* APIService.swift in Sources */,
+				19DF54E32F35F0BB008392F3 /* APIConstant.swift in Sources */,
 				19293FA02F3349030000973C /* Utilities.swift in Sources */,
+				19DF552E2F35FE3B008392F3 /* VideoManager.swift in Sources */,
 				19D6BA562F346213009805E6 /* VideoCacheManager.swift in Sources */,
 				19293F8B2F3320B10000973C /* ContentView.swift in Sources */,
 			);
@@ -345,8 +535,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -356,12 +546,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.aivideo.AIVideoMaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -379,8 +573,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -390,12 +584,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.aivideo.AIVideoMaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -421,6 +619,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		19DF54E42F35F130008392F3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		19DF54E52F35F130008392F3 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19DF54E42F35F130008392F3 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 19293F6E2F3320950000973C /* Project object */;
 }

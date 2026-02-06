@@ -3,7 +3,7 @@ import AVFoundation
 import AVKit
 
 struct VideoDetailView: View {
-    let video: VideoItem
+    let video: HomeResponseVideos
     let animation: Namespace.ID
     @Binding var isNavForDetail: Bool
     @Binding var isCurrentVideo: Bool
@@ -29,7 +29,7 @@ struct VideoDetailView: View {
                         CustomAVPlayerView(player: player)
                             .ignoresSafeArea()
                     }
-                    .matchedGeometryEffect(id: video.id.uuidString, in: animation)
+                    .matchedGeometryEffect(id: video.id, in: animation)
                     .onTapGesture {
                         withAnimation(.spring()) {
                             isPlaying.toggle()
@@ -90,13 +90,13 @@ struct VideoDetailView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Spacer()
                     
-                    Text(video.title)
+                    Text(video.title ?? "")
                         .font(Utilities.font(.Bold, size: 20))
                         .foregroundColor(.white)
                         .shadow(color: .black.opacity(0.8), radius: 2, x: 0, y: 1)
                         .background(
                             // Text stroke for better visibility
-                            Text(video.title)
+                            Text(video.title ?? "")
                                 .font(Utilities.font(.Bold, size: 20))
                                 .foregroundColor(.black.opacity(0.5))
                                 .blur(radius: 1)
@@ -217,8 +217,18 @@ struct VideoDetailView: View {
     }
     
     private func setupPlayer() {
+        isLoading = true
+        
+        // Parse video URL from string
+        guard let videoUrlString = video.videoUrl,
+              let videoURL = URL(string: videoUrlString) else {
+            print("Invalid video URL")
+            isLoading = false
+            return
+        }
+        
         // Use cached video if available
-        let urlToPlay = VideoCacheManager.shared.getURLToPlay(for: video.url)
+        let urlToPlay = VideoCacheManager.shared.getURLToPlay(for: videoURL)
         let player = AVPlayer(url: urlToPlay)
         self.player = player
         
@@ -355,7 +365,7 @@ struct CustomAVPlayerView: UIViewControllerRepresentable {
         let controller = AVPlayerViewController()
         controller.player = player
         controller.showsPlaybackControls = false
-        controller.videoGravity = .resizeAspectFill
+        controller.videoGravity = .resizeAspect
         return controller
     }
     

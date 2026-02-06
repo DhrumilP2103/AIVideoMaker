@@ -18,8 +18,8 @@ struct DashBoardView: View {
                 Color._041_C_32
                 
                 // Subtle Glows
-                RadialGradient(colors: [Color.white.opacity(0.05), .clear], center: .topLeading, startRadius: 0, endRadius: 400)
-                RadialGradient(colors: [Color.white.opacity(0.03), .clear], center: .bottomTrailing, startRadius: 0, endRadius: 500)
+//                RadialGradient(colors: [Color.white.opacity(0.05), .clear], center: .topLeading, startRadius: 0, endRadius: 400)
+//                RadialGradient(colors: [Color.white.opacity(0.03), .clear], center: .bottomTrailing, startRadius: 0, endRadius: 500)
             }
             .ignoresSafeArea()
             
@@ -52,10 +52,7 @@ struct DashBoardView: View {
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                 case .profile:
-                                    Text("Profile View")
-                                        .font(.title2)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.white)
+                                    ProfileView()
                                 }
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct VideoReelsView: View {
-    let videos: [VideoItem]
+    let videos: [HomeResponseVideos]
     let startIndex: Int
     let animation: Namespace.ID
     @Binding var isNavForDetail: Bool
@@ -30,12 +30,8 @@ struct VideoReelsView: View {
         .scrollTargetBehavior(.paging)
         .scrollPosition(id: $currentIndex)
         .ignoresSafeArea()
-//        .animation(.easeInOut(duration: 0.3), value: currentIndex)
         .onAppear {
-            // Set the current index to the start index when view appears
-//            withAnimation(.easeInOut(duration: 0.3)) {
-                currentIndex = startIndex
-//            }
+            currentIndex = startIndex
         }
     }
 }
