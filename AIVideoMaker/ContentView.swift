@@ -11,8 +11,10 @@ struct ContentView: View {
     @StateObject var appState = NetworkAppState()
     
     var body: some View {
-        DashBoardView()
-            .environmentObject(appState)
+        NavigationStack {
+            DashBoardView()
+                .environmentObject(appState)
+        }
     }
 }
 

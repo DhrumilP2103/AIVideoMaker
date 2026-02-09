@@ -15,6 +15,8 @@ struct VideoDetailView: View {
     @State private var duration: Double = 0
     @State private var isDragging: Bool = false
     @State private var showUI: Bool = false
+    @State private var showCreateVideo: Bool = false
+    @State private var showLoginSheet: Bool = false
     
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
     
@@ -171,7 +173,7 @@ struct VideoDetailView: View {
                 // Make Video Button
                 Button {
                     impactFeedback.impactOccurred()
-                    // Make Video Action
+                    showLoginSheet = true
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "video.badge.plus.fill")
@@ -193,6 +195,7 @@ struct VideoDetailView: View {
                 .offset(y: showUI ? 0 : 20)
             }
         }
+        .blur(radius: self.showLoginSheet ? 2 : 0)
         .animation(.spring(response: 0.4, dampingFraction: 0.8), value: showUI)
         .onAppear {
             setupPlayer()
@@ -213,6 +216,15 @@ struct VideoDetailView: View {
         .onDisappear {
             player?.pause()
             player = nil
+        }
+        .navigationDestination(isPresented: $showCreateVideo) {
+            CreateVideoView(video: video)
+                .toolbar(.hidden)
+        }
+        .sheet(isPresented: $showLoginSheet) {
+            LoginSheet()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
         }
     }
     

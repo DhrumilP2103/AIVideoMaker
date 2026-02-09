@@ -130,8 +130,14 @@ struct HomeResponseVideos: Codable, Identifiable {
  
   }
 
-  init() {
-
+    init(id: Int = 0, categoryId: Int = 0, title: String = "", thumbnail: String = "", videoUrl: String = "", duration: String = "", likes: Int = 0) {
+        self.id = id
+        self.categoryId = categoryId
+        self.title = title
+        self.thumbnail = thumbnail
+        self.videoUrl = videoUrl
+        self.duration = duration
+        self.likes = likes
   }
 
 }

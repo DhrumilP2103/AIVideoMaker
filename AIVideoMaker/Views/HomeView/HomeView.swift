@@ -13,61 +13,63 @@ struct HomeView: View {
     @Namespace private var videoTransition
     
     var body: some View {
-        VStack(spacing: 0) {
-            // Premium Top Category Tab Bar
-            ScrollViewReader { proxy in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 15) {
-                        ForEach(viewModel.homeResponseCategories, id: \.id) { category in
-                            CategoryItem(category: category)
-                                .id(category.id)
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 20)
-                }
-                .onChange(of: selectedCategoryId) { old, newValue in
-                    withAnimation(.easeInOut) {
-                        proxy.scrollTo(newValue, anchor: .center)
-                    }
-                }
-            }
-            
-            // Content Area with 2-Column Video Grid
-            TabView(selection: $selectedCategoryId) {
-                ForEach(viewModel.homeResponseCategories, id: \.id) { category in
-                    ScrollView {
-                        let filteredVideos = self.viewModel.homeResponseVideos.filter { $0.categoryId == category.id }
-                        let isActive = selectedCategoryId == category.id
-                        
-                        LazyVGrid(
-                            columns: [
-                                GridItem(.flexible(), spacing: 15),
-                                GridItem(.flexible(), spacing: 15)
-                            ],
-                            spacing: 15
-                        ) {
-                            ForEach(Array(filteredVideos.enumerated()), id: \.element.id) { videoIndex, video in
-                                VideoCard(video: video, isActive: .constant(isActive))
-                                    .onTapGesture {
-                                        withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
-                                            selectedVideo = video
-                                            selectedVideoIndex = videoIndex
-                                            isNavForDetail = true
-                                        }
-                                    }
+        ZStack {
+            VStack(spacing: 0) {
+                // Premium Top Category Tab Bar
+                ScrollViewReader { proxy in
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 15) {
+                            ForEach(viewModel.homeResponseCategories, id: \.id) { category in
+                                CategoryItem(category: category)
+                                    .id(category.id)
                             }
                         }
-                        .padding(.horizontal, 10)
-                        .padding(.top, 10)
-                        .padding(.bottom, 100)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 20)
                     }
-                    .tag(category.id)
+                    .onChange(of: selectedCategoryId) { old, newValue in
+                        withAnimation(.easeInOut) {
+                            proxy.scrollTo(newValue, anchor: .center)
+                        }
+                    }
                 }
+                
+                // Content Area with 2-Column Video Grid
+                TabView(selection: $selectedCategoryId) {
+                    ForEach(viewModel.homeResponseCategories, id: \.id) { category in
+                        ScrollView {
+                            let filteredVideos = self.viewModel.homeResponseVideos.filter { $0.categoryId == category.id }
+                            let isActive = selectedCategoryId == category.id
+                            
+                            LazyVGrid(
+                                columns: [
+                                    GridItem(.flexible(), spacing: 15),
+                                    GridItem(.flexible(), spacing: 15)
+                                ],
+                                spacing: 15
+                            ) {
+                                ForEach(Array(filteredVideos.enumerated()), id: \.element.id) { videoIndex, video in
+                                    VideoCard(video: video, isActive: .constant(isActive))
+                                        .onTapGesture {
+                                            withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                                                selectedVideo = video
+                                                selectedVideoIndex = videoIndex
+                                                isNavForDetail = true
+                                            }
+                                        }
+                                }
+                            }
+                            .padding(.horizontal, 10)
+                            .padding(.top, 10)
+                            .padding(.bottom, 100)
+                        }
+                        .tag(category.id)
+                    }
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
+        }.ignoresSafeArea()
         .onAppear() {
             self.viewModel.homeList(appState: self.appState)
         }
@@ -94,7 +96,7 @@ struct HomeView: View {
                     animation: videoTransition,
                     isNavForDetail: $isNavForDetail
                 )
-                .navigationBarHidden(true)
+                .toolbar(.hidden)
             }
         }
         .onChange(of: viewModel.homeResponseCategories.count) { _, _ in

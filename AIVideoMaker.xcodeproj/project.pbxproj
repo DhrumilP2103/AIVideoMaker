@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19005E262F399F7C00D613B1 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E252F399F7C00D613B1 /* EditProfileView.swift */; };
+		19005E292F39A45D00D613B1 /* ImageSourcePickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E282F39A45D00D613B1 /* ImageSourcePickerPopup.swift */; };
+		19005E362F39B9DF00D613B1 /* AssetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E352F39B9DF00D613B1 /* AssetsView.swift */; };
+		19005E382F39B9E800D613B1 /* GeneratedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E372F39B9E800D613B1 /* GeneratedVideo.swift */; };
+		19005E3A2F39D9FE00D613B1 /* CreateVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E392F39D9FE00D613B1 /* CreateVideoView.swift */; };
+		19005E3C2F39DA9F00D613B1 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E3B2F39DA9F00D613B1 /* ImagePicker.swift */; };
+		19005E3F2F39DBE000D613B1 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 19005E3E2F39DBE000D613B1 /* Mantis */; };
+		19005E452F39E99B00D613B1 /* LoginSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E442F39E99B00D613B1 /* LoginSheet.swift */; };
+		19005E472F3A048100D613B1 /* LikedVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E462F3A048100D613B1 /* LikedVideosView.swift */; };
+		19005E492F3A07B000D613B1 /* SubscriptionPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E482F3A07B000D613B1 /* SubscriptionPlansView.swift */; };
+		19005E4B2F3A0D0400D613B1 /* BuyCreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E4A2F3A0D0400D613B1 /* BuyCreditsView.swift */; };
 		19293F8A2F3320B10000973C /* AIVideoMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293F862F3320B10000973C /* AIVideoMakerApp.swift */; };
 		19293F8B2F3320B10000973C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293F882F3320B10000973C /* ContentView.swift */; };
 		19293F8C2F3320B10000973C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19293F872F3320B10000973C /* Assets.xcassets */; };
@@ -54,6 +65,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19005E252F399F7C00D613B1 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		19005E282F39A45D00D613B1 /* ImageSourcePickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSourcePickerPopup.swift; sourceTree = "<group>"; };
+		19005E352F39B9DF00D613B1 /* AssetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsView.swift; sourceTree = "<group>"; };
+		19005E372F39B9E800D613B1 /* GeneratedVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedVideo.swift; sourceTree = "<group>"; };
+		19005E392F39D9FE00D613B1 /* CreateVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVideoView.swift; sourceTree = "<group>"; };
+		19005E3B2F39DA9F00D613B1 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		19005E442F39E99B00D613B1 /* LoginSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSheet.swift; sourceTree = "<group>"; };
+		19005E462F3A048100D613B1 /* LikedVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedVideosView.swift; sourceTree = "<group>"; };
+		19005E482F3A07B000D613B1 /* SubscriptionPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlansView.swift; sourceTree = "<group>"; };
+		19005E4A2F3A0D0400D613B1 /* BuyCreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyCreditsView.swift; sourceTree = "<group>"; };
 		19293F762F3320950000973C /* AIVideoMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIVideoMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19293F862F3320B10000973C /* AIVideoMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIVideoMakerApp.swift; sourceTree = "<group>"; };
 		19293F872F3320B10000973C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19005E3F2F39DBE000D613B1 /* Mantis in Frameworks */,
 				19DF54E62F35F130008392F3 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,6 +135,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19005E272F39A42700D613B1 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				19005E282F39A45D00D613B1 /* ImageSourcePickerPopup.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
 		19293F6D2F3320950000973C = {
 			isa = PBXGroup;
 			children = (
@@ -132,11 +162,20 @@
 		19293F852F3320B10000973C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				19005E372F39B9E800D613B1 /* GeneratedVideo.swift */,
+				19005E352F39B9DF00D613B1 /* AssetsView.swift */,
+				19005E4A2F3A0D0400D613B1 /* BuyCreditsView.swift */,
+				19005E392F39D9FE00D613B1 /* CreateVideoView.swift */,
 				19293F8D2F3320CC0000973C /* DashBoardView.swift */,
+				19005E252F399F7C00D613B1 /* EditProfileView.swift */,
+				19005E442F39E99B00D613B1 /* LoginSheet.swift */,
 				19DF55052F35F6B6008392F3 /* HomeView */,
 				19DF54D62F35B36F008392F3 /* ProfileView.swift */,
+				19005E482F3A07B000D613B1 /* SubscriptionPlansView.swift */,
+				19005E462F3A048100D613B1 /* LikedVideosView.swift */,
 				19293FA32F3365B50000973C /* VideoDetailView.swift */,
 				19D6BA572F347B12009805E6 /* VideoReelsView.swift */,
+				19005E272F39A42700D613B1 /* PopUp */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,6 +246,7 @@
 				19DF55242F35F99A008392F3 /* Loader */,
 				19DF55172F35F96F008392F3 /* Extension */,
 				19DF54EC2F35F161008392F3 /* Lib.swift */,
+				19005E3B2F39DA9F00D613B1 /* ImagePicker.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -294,6 +334,7 @@
 			name = AIVideoMaker;
 			packageProductDependencies = (
 				19DF54E52F35F130008392F3 /* Alamofire */,
+				19005E3E2F39DBE000D613B1 /* Mantis */,
 			);
 			productName = AIVideoMaker;
 			productReference = 19293F762F3320950000973C /* AIVideoMaker.app */;
@@ -325,6 +366,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				19DF54E42F35F130008392F3 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				19005E3D2F39DBE000D613B1 /* XCRemoteSwiftPackageReference "Mantis" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 19293F772F3320950000973C /* Products */;
@@ -361,6 +403,7 @@
 				19DF54FB2F35F4D0008392F3 /* NavigationConfiguration.swift in Sources */,
 				19DF55022F35F525008392F3 /* BaseViewModel.swift in Sources */,
 				19DF54FC2F35F4D0008392F3 /* NetworkError.swift in Sources */,
+				19005E292F39A45D00D613B1 /* ImageSourcePickerPopup.swift in Sources */,
 				19DF55182F35F96F008392F3 /* ExView.swift in Sources */,
 				19DF55192F35F96F008392F3 /* ExString.swift in Sources */,
 				19DF551A2F35F96F008392F3 /* ExDate.swift in Sources */,
@@ -369,25 +412,34 @@
 				19DF54FE2F35F4D0008392F3 /* AppRoute.swift in Sources */,
 				19DF55062F35F6B6008392F3 /* HomeView.swift in Sources */,
 				19DF54FF2F35F4D0008392F3 /* NavigationControllerRootView.swift in Sources */,
+				19005E3A2F39D9FE00D613B1 /* CreateVideoView.swift in Sources */,
 				19DF55002F35F4D0008392F3 /* NetworkStatusPopupHandler.swift in Sources */,
 				19293F8E2F3320CC0000973C /* DashBoardView.swift in Sources */,
 				19DF54D72F35B36F008392F3 /* ProfileView.swift in Sources */,
+				19005E382F39B9E800D613B1 /* GeneratedVideo.swift in Sources */,
 				19293FA42F3365B50000973C /* VideoDetailView.swift in Sources */,
+				19005E3C2F39DA9F00D613B1 /* ImagePicker.swift in Sources */,
 				19DF54F02F35F16D008392F3 /* LetsReach.swift in Sources */,
 				19293F8A2F3320B10000973C /* AIVideoMakerApp.swift in Sources */,
 				19DF54EE2F35F161008392F3 /* Lib.swift in Sources */,
 				19DF55252F35F99A008392F3 /* KRProgressHUDViewController.swift in Sources */,
+				19005E362F39B9DF00D613B1 /* AssetsView.swift in Sources */,
 				19DF55262F35F99A008392F3 /* KRProgressHUDIconType.swift in Sources */,
 				19DF55272F35F99A008392F3 /* InnerKRProgressHUD.swift in Sources */,
+				19005E452F39E99B00D613B1 /* LoginSheet.swift in Sources */,
 				19DF55282F35F99A008392F3 /* KRActivityIndicatorView.swift in Sources */,
+				19005E262F399F7C00D613B1 /* EditProfileView.swift in Sources */,
 				19DF55292F35F99A008392F3 /* KRProgressHUD.swift in Sources */,
 				19DF55342F35FEBE008392F3 /* HomeAPIService.swift in Sources */,
 				19DF55352F35FEBE008392F3 /* HomeResponseModel.swift in Sources */,
 				19DF55362F35FEBE008392F3 /* HomeViewModel.swift in Sources */,
 				19DF552A2F35F99A008392F3 /* KRExtensions.swift in Sources */,
+				19005E472F3A048100D613B1 /* LikedVideosView.swift in Sources */,
 				19DF552B2F35F99A008392F3 /* KRActivityIndicatorViewStyle.swift in Sources */,
 				19DF552C2F35F99A008392F3 /* Extensions.swift in Sources */,
 				19D6BA582F347B12009805E6 /* VideoReelsView.swift in Sources */,
+				19005E4B2F3A0D0400D613B1 /* BuyCreditsView.swift in Sources */,
+				19005E492F3A07B000D613B1 /* SubscriptionPlansView.swift in Sources */,
 				19DF54E22F35F0BB008392F3 /* APIService.swift in Sources */,
 				19DF54E32F35F0BB008392F3 /* APIConstant.swift in Sources */,
 				19293FA02F3349030000973C /* Utilities.swift in Sources */,
@@ -621,6 +673,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		19005E3D2F39DBE000D613B1 /* XCRemoteSwiftPackageReference "Mantis" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/guoyingtao/Mantis.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.5;
+			};
+		};
 		19DF54E42F35F130008392F3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -632,6 +692,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		19005E3E2F39DBE000D613B1 /* Mantis */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19005E3D2F39DBE000D613B1 /* XCRemoteSwiftPackageReference "Mantis" */;
+			productName = Mantis;
+		};
 		19DF54E52F35F130008392F3 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 19DF54E42F35F130008392F3 /* XCRemoteSwiftPackageReference "Alamofire" */;
