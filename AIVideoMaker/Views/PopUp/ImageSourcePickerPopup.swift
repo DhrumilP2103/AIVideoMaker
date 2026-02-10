@@ -30,15 +30,14 @@ struct ImageSourcePickerPopup: View {
                 Text("Choose Photo Source")
                     .font(Utilities.font(.Bold, size: 20))
                     .foregroundColor(.white)
-                    .padding(.top, 8)
+//                    .padding(.top, 8)
                 
                 // Options
                 VStack(spacing: 14) {
                     // Camera Option
                     PickerOptionButton(
-                        icon: "camera.fill",
-                        title: "Camera",
-                        iconColor: Color(hex: "667eea")
+                        icon: "ic_camera",
+                        title: "Camera"
                     ) {
                         dismissPopup()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -48,9 +47,8 @@ struct ImageSourcePickerPopup: View {
                     
                     // Gallery Option
                     PickerOptionButton(
-                        icon: "photo.on.rectangle.angled",
-                        title: "Photo Library",
-                        iconColor: Color(hex: "764ba2")
+                        icon: "ic_gallery",
+                        title: "Photo Library"
                     ) {
                         dismissPopup()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -73,7 +71,7 @@ struct ImageSourcePickerPopup: View {
                                 .fill(.white.opacity(0.08))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 14)
-                                        .stroke(.white.opacity(0.15), lineWidth: 1)
+                                        .stroke(.white.opacity(0.2), lineWidth: 1)
                                 )
                         )
                 }
@@ -86,24 +84,17 @@ struct ImageSourcePickerPopup: View {
                     .fill(
                         LinearGradient(
                             colors: [
-                                Color._041_C_32.opacity(0.95),
-                                Color._041_C_32.opacity(0.98)
+                                Color._041_C_32,
+                                Color(hex: "064663")
                             ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
+                            startPoint: .top,
+                            endPoint: .bottom
                         )
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 24)
                             .stroke(
-                                LinearGradient(
-                                    colors: [
-                                        Color.white.opacity(0.3),
-                                        Color.white.opacity(0.1)
-                                    ],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
+                                Color.white.opacity(0.3),
                                 lineWidth: 1.5
                             )
                     )
@@ -138,7 +129,6 @@ struct ImageSourcePickerPopup: View {
 struct PickerOptionButton: View {
     let icon: String
     let title: String
-    let iconColor: Color
     let action: () -> Void
     
     var body: some View {
@@ -154,57 +144,38 @@ struct PickerOptionButton: View {
                         .fill(
                             LinearGradient(
                                 colors: [
-                                    iconColor.opacity(0.25),
-                                    iconColor.opacity(0.15)
+                                    .white.opacity(0.25),
+                                    .white.opacity(0.15)
                                 ],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
                         )
-                        .frame(width: 56, height: 56)
+                        .frame(width: 50, height: 50)
                     
-                    Image(systemName: icon)
-                        .font(.system(size: 24, weight: .semibold))
-                        .foregroundColor(iconColor)
+                    Image(icon).resizable().renderingMode(.template)
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.white)
                 }
                 
                 // Title
                 Text(title)
-                    .font(Utilities.font(.SemiBold, size: 17))
+                    .font(Utilities.font(.SemiBold, size: 16))
                     .foregroundColor(.white)
                 
                 Spacer()
-                
-                // Chevron
-//                Image(systemName: "chevron.right")
-//                    .font(.system(size: 14, weight: .semibold))
-//                    .foregroundColor(.white.opacity(0.4))
             }
             .padding(.horizontal, 18)
             .padding(.vertical, 14)
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(
-                        LinearGradient(
-                            colors: [
-                                Color.white.opacity(0.12),
-                                Color.white.opacity(0.06)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
+                        Color.white.opacity(0.06)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
                             .stroke(
-                                LinearGradient(
-                                    colors: [
-                                        Color.white.opacity(0.25),
-                                        Color.white.opacity(0.08)
-                                    ],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
+                                Color.white.opacity(0.2),
                                 lineWidth: 1
                             )
                     )

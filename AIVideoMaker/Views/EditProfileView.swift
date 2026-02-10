@@ -16,7 +16,14 @@ struct EditProfileView: View {
     var body: some View {
         ZStack {
             // Background
-            Color._041_C_32.ignoresSafeArea()
+            LinearGradient(
+                colors: [
+                    Color._041_C_32,
+                    Color(hex: "064663")
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            ).ignoresSafeArea()
             
             VStack(spacing: 0) {
                 // Custom Navigation Bar
@@ -27,10 +34,10 @@ struct EditProfileView: View {
                         impactFeedback.impactOccurred()
                         dismiss()
                     } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .semibold))
+                        Image("ic_back").resizable()
+                            .frame(width: 20, height: 20)
                             .foregroundColor(.white)
-                            .frame(width: 44, height: 44)
+                            .frame(width: 40, height: 40)
                             .background(
                                 Circle()
                                     .fill(.white.opacity(0.1))
@@ -56,45 +63,48 @@ struct EditProfileView: View {
                     VStack(spacing: 32) {
                         // Profile Image Section
                         VStack(spacing: 16) {
-                            ZStack(alignment: .bottomTrailing) {
-                                // Avatar with gradient border
-                                ZStack {
-                                    // Avatar
-                                    if let selectedImage = selectedImage {
-                                        Image(uiImage: selectedImage)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 116, height: 116)
-                                            .clipShape(Circle())
-                                    } else {
-                                        Image("ic_profile")
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 116, height: 116)
-                                            .clipShape(Circle())
+                            
+                            Button {
+                                let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                                impactFeedback.impactOccurred()
+                                showSourceSelection = true
+                            } label: {
+                                ZStack(alignment: .bottomTrailing) {
+                                    // Avatar with gradient border
+                                    ZStack {
+                                        // Avatar
+                                        if let selectedImage = selectedImage {
+                                            Image(uiImage: selectedImage)
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 116, height: 116)
+                                                .clipShape(Circle())
+                                        } else {
+                                            Image("ic_profile")
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 116, height: 116)
+                                                .clipShape(Circle())
+                                        }
                                     }
-                                }
-                                .shadow(color: .purple.opacity(0.3), radius: 20, x: 0, y: 10)
-                                
-                                // Edit Image Button
-                                Button {
-                                    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-                                    impactFeedback.impactOccurred()
-                                    showSourceSelection = true
-                                } label: {
+                                    
+                                    // Edit Image Button
                                     ZStack {
                                         Circle()
                                             .fill(
                                                 LinearGradient(
-                                                    colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
+                                                    colors: [
+                                                        Color(hex: "667eea"),
+                                                        Color(hex: "764ba2")
+                                                    ],
                                                     startPoint: .topLeading,
                                                     endPoint: .bottomTrailing
                                                 )
                                             )
                                             .frame(width: 36, height: 36)
                                         
-                                        Image(systemName: "camera.fill")
-                                            .font(.system(size: 16, weight: .semibold))
+                                        Image("ic_camera").resizable()
+                                            .frame(width: 16, height: 16)
                                             .foregroundColor(.white)
                                     }
                                     .overlay(
@@ -103,7 +113,6 @@ struct EditProfileView: View {
                                     )
                                 }
                             }
-                            
                             Text("Tap to change photo")
                                 .font(Utilities.font(.Medium, size: 14))
                                 .foregroundColor(.white.opacity(0.6))
@@ -117,7 +126,7 @@ struct EditProfileView: View {
                                 title: "First Name",
                                 placeholder: "Enter first name",
                                 text: $firstName,
-                                icon: "person.fill"
+                                icon: "ic_person"
                             )
                             
                             // Last Name Field
@@ -125,7 +134,7 @@ struct EditProfileView: View {
                                 title: "Last Name",
                                 placeholder: "Enter last name",
                                 text: $lastName,
-                                icon: "person.fill"
+                                icon: "ic_person"
                             )
                         }
                         .padding(.horizontal, 24)
@@ -138,9 +147,6 @@ struct EditProfileView: View {
                             saveProfile()
                         } label: {
                             HStack(spacing: 12) {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .font(.system(size: 18, weight: .semibold))
-                                
                                 Text("Save Changes")
                                     .font(Utilities.font(.Bold, size: 16))
                             }
@@ -160,7 +166,7 @@ struct EditProfileView: View {
                                         )
                                     )
                             )
-                            .shadow(color: Color(hex: "667eea").opacity(0.4), radius: 15, x: 0, y: 8)
+//                            .shadow(color: Color(hex: "667eea").opacity(0.4), radius: 15, x: 0, y: 8)
                         }
                         .buttonStyle(SaveButtonStyle())
                         .padding(.horizontal, 24)
@@ -225,9 +231,9 @@ struct ProfileInputField: View {
             // Input Field
             HStack(spacing: 14) {
                 // Icon
-                Image(systemName: icon)
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(isFocused ? Color(hex: "667eea") : .white.opacity(0.5))
+                Image(icon).resizable().renderingMode(.template)
+                    .frame(width: 18, height: 18)
+                    .foregroundColor(.white.opacity(0.5))
                     .frame(width: 24)
                 
                 // Text Field
@@ -242,27 +248,13 @@ struct ProfileInputField: View {
             .background(
                 RoundedRectangle(cornerRadius: 14)
                     .fill(
-                        LinearGradient(
-                            colors: [
-                                Color.white.opacity(isFocused ? 0.12 : 0.08),
-                                Color.white.opacity(isFocused ? 0.08 : 0.05)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
+                        Color.white.opacity(0.08)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 14)
                             .stroke(
-                                LinearGradient(
-                                    colors: [
-                                        isFocused ? Color(hex: "667eea").opacity(0.5) : Color.white.opacity(0.2),
-                                        isFocused ? Color(hex: "764ba2").opacity(0.5) : Color.white.opacity(0.1)
-                                    ],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
-                                lineWidth: isFocused ? 1.5 : 1
+                                Color.white.opacity(0.2),
+                                lineWidth: 1
                             )
                     )
             )

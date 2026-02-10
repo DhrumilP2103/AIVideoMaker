@@ -24,11 +24,14 @@ struct CreateVideoView: View {
         ZStack {
             // Premium Background
             ZStack {
-                Color._041_C_32
-                
-                // Subtle Glows
-                RadialGradient(colors: [Color.white.opacity(0.05), .clear], center: .topLeading, startRadius: 0, endRadius: 400)
-                RadialGradient(colors: [Color.white.opacity(0.03), .clear], center: .bottomTrailing, startRadius: 0, endRadius: 500)
+                LinearGradient(
+                    colors: [
+                        Color._041_C_32,
+                        Color(hex: "064663")
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
             }
             .ignoresSafeArea()
             
@@ -72,12 +75,14 @@ struct CreateVideoView: View {
                 impactFeedback.impactOccurred()
                 dismiss()
             } label: {
-                Image(systemName: "chevron.left")
-                    .font(.title3.bold())
+                Image("ic_back").resizable()
+                    .frame(width: 20, height: 20)
                     .foregroundColor(.white)
-                    .padding(12)
-                    .background(Color.white.opacity(0.1))
-                    .clipShape(Circle())
+                    .frame(width: 40, height: 40)
+                    .background(
+                        Circle()
+                            .fill(.white.opacity(0.1))
+                    )
             }
             .buttonStyle(ScaleButtonStyle())
             
@@ -108,8 +113,8 @@ struct CreateVideoView: View {
                     .fill(.white.opacity(0.1))
                     .frame(width: 60, height: 60)
                 
-                Image(systemName: "film.fill")
-                    .font(.title2)
+                Image("ic_film").resizable()
+                    .frame(width: 28, height: 28)
                     .foregroundColor(.white)
             }
             
@@ -187,8 +192,9 @@ struct CreateVideoView: View {
                                 .fill(.white.opacity(0.1))
                                 .frame(width: 80, height: 80)
                             
-                            Image(systemName: "photo.badge.plus")
-                                .font(.system(size: 35))
+                            Image("ic_image").resizable()
+                                .frame(width: 30, height: 30
+                                )
                                 .foregroundColor(.white.opacity(0.5))
                         }
                         

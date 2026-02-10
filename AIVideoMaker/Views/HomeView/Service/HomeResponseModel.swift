@@ -10,7 +10,7 @@ import Foundation
 
 struct HomeResponseModel: Codable {
 
-  var status  : Bool?   = nil
+  var status  : Int?   = nil
   var code    : Int?    = nil
   var message : String? = nil
   var data    : HomeResponseData?   = HomeResponseData()
@@ -27,7 +27,7 @@ struct HomeResponseModel: Codable {
   init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
-    status  = try values.decodeIfPresent(Bool.self   , forKey: .status  )
+    status  = try values.decodeIfPresent(Int.self   , forKey: .status  )
     code    = try values.decodeIfPresent(Int.self    , forKey: .code    )
     message = try values.decodeIfPresent(String.self , forKey: .message )
     data    = try values.decodeIfPresent(HomeResponseData.self   , forKey: .data    )

@@ -26,7 +26,7 @@ struct BackgroundClearView: UIViewRepresentable {
 
 func showLoader(){
     DispatchQueue.main.async(execute: {
-        KRProgressHUD.set(activityIndicatorViewColors: [UIColor(named: "394A5F") ?? UIColor.cyan ])
+        KRProgressHUD.set(activityIndicatorViewColors: [UIColor(named: "041C32") ?? UIColor.cyan ])
         KRProgressHUD.show()
     })
 }

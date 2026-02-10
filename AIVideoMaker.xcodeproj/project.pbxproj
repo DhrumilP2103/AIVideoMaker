@@ -28,6 +28,8 @@
 		19293F992F3342930000973C /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19293F922F3342930000973C /* Poppins-Bold.ttf */; };
 		19293FA02F3349030000973C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293F9E2F3349030000973C /* Utilities.swift */; };
 		19293FA42F3365B50000973C /* VideoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293FA32F3365B50000973C /* VideoDetailView.swift */; };
+		195D67392F3B143300936DBD /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 195D67382F3B143300936DBD /* IQKeyboardManagerSwift */; };
+		195D673B2F3B144D00936DBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D673A2F3B144D00936DBD /* AppDelegate.swift */; };
 		19D6BA562F346213009805E6 /* VideoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D6BA542F346213009805E6 /* VideoCacheManager.swift */; };
 		19D6BA582F347B12009805E6 /* VideoReelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D6BA572F347B12009805E6 /* VideoReelsView.swift */; };
 		19DF54D72F35B36F008392F3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54D62F35B36F008392F3 /* ProfileView.swift */; };
@@ -87,6 +89,7 @@
 		19293F9A2F3343050000973C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		19293F9E2F3349030000973C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		19293FA32F3365B50000973C /* VideoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailView.swift; sourceTree = "<group>"; };
+		195D673A2F3B144D00936DBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19D6BA542F346213009805E6 /* VideoCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCacheManager.swift; sourceTree = "<group>"; };
 		19D6BA572F347B12009805E6 /* VideoReelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoReelsView.swift; sourceTree = "<group>"; };
 		19DF54D62F35B36F008392F3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -129,6 +132,7 @@
 			files = (
 				19005E3F2F39DBE000D613B1 /* Mantis in Frameworks */,
 				19DF54E62F35F130008392F3 /* Alamofire in Frameworks */,
+				195D67392F3B143300936DBD /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +142,7 @@
 		19005E272F39A42700D613B1 /* PopUp */ = {
 			isa = PBXGroup;
 			children = (
+				19005E442F39E99B00D613B1 /* LoginSheet.swift */,
 				19005E282F39A45D00D613B1 /* ImageSourcePickerPopup.swift */,
 			);
 			path = PopUp;
@@ -168,7 +173,6 @@
 				19005E392F39D9FE00D613B1 /* CreateVideoView.swift */,
 				19293F8D2F3320CC0000973C /* DashBoardView.swift */,
 				19005E252F399F7C00D613B1 /* EditProfileView.swift */,
-				19005E442F39E99B00D613B1 /* LoginSheet.swift */,
 				19DF55052F35F6B6008392F3 /* HomeView */,
 				19DF54D62F35B36F008392F3 /* ProfileView.swift */,
 				19005E482F3A07B000D613B1 /* SubscriptionPlansView.swift */,
@@ -187,6 +191,7 @@
 				19293F862F3320B10000973C /* AIVideoMakerApp.swift */,
 				19293F872F3320B10000973C /* Assets.xcassets */,
 				19293F882F3320B10000973C /* ContentView.swift */,
+				195D673A2F3B144D00936DBD /* AppDelegate.swift */,
 				19DF54F62F35F4D0008392F3 /* NavigationHelper */,
 				19DF54FA2F35F4D0008392F3 /* NetworkPopupHandler */,
 				19DF54ED2F35F161008392F3 /* Helper */,
@@ -335,6 +340,7 @@
 			packageProductDependencies = (
 				19DF54E52F35F130008392F3 /* Alamofire */,
 				19005E3E2F39DBE000D613B1 /* Mantis */,
+				195D67382F3B143300936DBD /* IQKeyboardManagerSwift */,
 			);
 			productName = AIVideoMaker;
 			productReference = 19293F762F3320950000973C /* AIVideoMaker.app */;
@@ -367,6 +373,7 @@
 			packageReferences = (
 				19DF54E42F35F130008392F3 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				19005E3D2F39DBE000D613B1 /* XCRemoteSwiftPackageReference "Mantis" */,
+				195D67372F3B143300936DBD /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 19293F772F3320950000973C /* Products */;
@@ -409,6 +416,7 @@
 				19DF551A2F35F96F008392F3 /* ExDate.swift in Sources */,
 				19DF551B2F35F96F008392F3 /* ExDateFormatter.swift in Sources */,
 				19DF54FD2F35F4D0008392F3 /* NetworkAppState.swift in Sources */,
+				195D673B2F3B144D00936DBD /* AppDelegate.swift in Sources */,
 				19DF54FE2F35F4D0008392F3 /* AppRoute.swift in Sources */,
 				19DF55062F35F6B6008392F3 /* HomeView.swift in Sources */,
 				19DF54FF2F35F4D0008392F3 /* NavigationControllerRootView.swift in Sources */,
@@ -589,6 +597,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -627,6 +636,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -681,6 +691,14 @@
 				minimumVersion = 1.7.5;
 			};
 		};
+		195D67372F3B143300936DBD /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.2;
+			};
+		};
 		19DF54E42F35F130008392F3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -696,6 +714,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 19005E3D2F39DBE000D613B1 /* XCRemoteSwiftPackageReference "Mantis" */;
 			productName = Mantis;
+		};
+		195D67382F3B143300936DBD /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 195D67372F3B143300936DBD /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		19DF54E52F35F130008392F3 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

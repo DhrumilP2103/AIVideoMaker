@@ -68,16 +68,18 @@ struct VideoDetailView: View {
                             isNavForDetail = false
                         }
                     } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.title3.bold())
+                        Image("ic_back").resizable()
+                            .frame(width: 20, height: 20)
                             .foregroundColor(.white)
-                            .padding(12)
-                            .background(._041_C_32.opacity(0.3))
-                            .clipShape(Circle())
+                            .frame(width: 40, height: 40)
+                            .background(
+                                Circle()
+                                    .fill(.white.opacity(0.1))
+                            )
                     }
                     .buttonStyle(ScaleButtonStyle())
                     .padding(.leading, 24)
-                    .padding(.top, 42)
+                    .padding(.top, 48)
                     .opacity(showUI ? 1 : 0)
                     .offset(y: showUI ? 0 : -20)
                     
@@ -116,9 +118,9 @@ struct VideoDetailView: View {
                 VStack(spacing: 25) {
                     Spacer()
                     
-                    SideActionButton(icon: "heart.fill", label: "1.2k", color: .red)
-                    SideActionButton(icon: "arrowshape.turn.up.right.fill", label: "Share")
-                    SideActionButton(icon: "ellipsis", label: "More")
+                    SideActionButton(icon: "ic_heart_fill", label: "1.2k", color: .red)
+                    SideActionButton(icon: "ic_share", label: "Share")
+                    SideActionButton(icon: "ic_download", label: "Download")
                     
                     Spacer()
                         .frame(height: 150)
@@ -173,7 +175,8 @@ struct VideoDetailView: View {
                 // Make Video Button
                 Button {
                     impactFeedback.impactOccurred()
-                    showLoginSheet = true
+//                    showLoginSheet = true
+                    showCreateVideo = true
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "video.badge.plus.fill")
@@ -295,19 +298,19 @@ struct SideActionButton: View {
             impactFeedback.impactOccurred()
             // Action
         } label: {
-            VStack(spacing: 8) {
+            VStack(spacing: 4) {
                 ZStack {
-                    Image(systemName: icon)
-                        .font(.title2)
-                        .foregroundColor(color)
+                    Image(icon).resizable()
+                        .frame(width: 20, height: 20)
                         .padding(8)
                 }.frame(width: 40, height: 40)
-                    .background(._041_C_32.opacity(0.3))
+                    .background(.black.opacity(0.3))
                     .clipShape(Circle())
                 
                 Text(label)
                     .font(Utilities.font(.Bold, size: 11))
                     .foregroundColor(.white)
+                    .shadow(color: .black.opacity(0.8), radius: 2, x: 0, y: 1)
             }
         }
         .buttonStyle(ScaleButtonStyle())

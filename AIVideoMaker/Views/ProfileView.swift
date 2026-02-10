@@ -17,37 +17,37 @@ struct ProfileView: View {
     var body: some View {
         ZStack {
             // Background
-            Color._041_C_32.ignoresSafeArea()
+//            Color._041_C_32.ignoresSafeArea()
             
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
                     // Profile Card
-                    VStack(spacing: 20) {
+                    VStack(spacing: 10) {
                         // Avatar with gradient border
                         ZStack {
                             // Avatar
                             Image("ic_profile")
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 116, height: 116)
+                                .frame(width: 110, height: 110)
                                 .clipShape(Circle())
                         }
-                        .shadow(color: .purple.opacity(0.3), radius: 20, x: 0, y: 10)
+//                        .shadow(color: .purple.opacity(0.3), radius: 20, x: 0, y: 10)
                         
                         // User Info
-                        VStack(spacing: 8) {
+                        VStack(spacing: 4) {
                             Text(userName)
-                                .font(Utilities.font(.Bold, size: 24))
+                                .font(Utilities.font(.Bold, size: 22))
                                 .foregroundColor(.white)
                             
                             HStack(spacing: 6) {
-                                Image(systemName: "envelope.fill")
-                                    .font(.system(size: 12))
+                                Image("ic_email").resizable().renderingMode(.template)
+                                    .frame(width: 14, height: 14)
                                     .foregroundColor(.white.opacity(0.6))
                                 
                                 Text(userEmail)
                                     .font(Utilities.font(.Medium, size: 14))
-                                    .foregroundColor(.white.opacity(0.7))
+                                    .foregroundColor(.white.opacity(0.6))
                             }
                         }
                         
@@ -60,8 +60,8 @@ struct ProfileView: View {
                             showEditProfile = true
                         } label: {
                             HStack(spacing: 10) {
-                                Image(systemName: "pencil")
-                                    .font(.system(size: 14, weight: .semibold))
+                                Image("ic_pencil").resizable()
+                                    .frame(width: 14, height: 14)
                                 
                                 Text("Edit Profile")
                                     .font(Utilities.font(.SemiBold, size: 15))
@@ -100,7 +100,7 @@ struct ProfileView: View {
                         }
                         .buttonStyle(EditButtonStyle())
                         .padding(.horizontal, 20)
-                        .padding(.top, 16)
+                        .padding(.top, 10)
                         
                     }.frame(maxWidth: .infinity)
                         .padding(.vertical, 30)
@@ -118,11 +118,9 @@ struct ProfileView: View {
                     
                     // Menu Options
                     VStack(spacing: 12) {
-                        // Liked Videos Option
                         ProfileMenuOption(
-                            icon: "heart.fill",
-                            title: "Liked Videos",
-                            iconColor: .pink
+                            icon: "ic_heart_fill",
+                            title: "Liked Videos"
                         ) {
                             // Haptic feedback
                             let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
@@ -131,11 +129,9 @@ struct ProfileView: View {
                             showLikedVideos = true
                         }
                         
-                        // Settings Option
                         ProfileMenuOption(
-                            icon: "gearshape.fill",
-                            title: "Settings",
-                            iconColor: .blue
+                            icon: "ic_settings",
+                            title: "Settings"
                         ) {
                             // Haptic feedback
                             let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
@@ -144,18 +140,27 @@ struct ProfileView: View {
                             print("Settings tapped")
                         }
                         
-//                        // Logout Option
-//                        ProfileMenuOption(
-//                            icon: "rectangle.portrait.and.arrow.right",
-//                            title: "Logout",
-//                            iconColor: .red
-//                        ) {
-//                            // Haptic feedback
-//                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-//                            impactFeedback.impactOccurred()
-//                            // Logout action
-//                            print("Logout tapped")
-//                        }
+                        ProfileMenuOption(
+                            icon: "ic_delete",
+                            title: "Delete Account"
+                        ) {
+                            // Haptic feedback
+                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                            impactFeedback.impactOccurred()
+                            // Logout action
+                            print("Logout tapped")
+                        }
+                        
+                        ProfileMenuOption(
+                            icon: "ic_logout",
+                            title: "Logout"
+                        ) {
+                            // Haptic feedback
+                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                            impactFeedback.impactOccurred()
+                            // Logout action
+                            print("Logout tapped")
+                        }
                     }
                     .padding(.horizontal, 24)
                     .padding(.bottom, 30)
@@ -195,7 +200,6 @@ struct StatItem: View {
 struct ProfileMenuOption: View {
     let icon: String
     let title: String
-    let iconColor: Color
     let action: () -> Void
     
     var body: some View {
@@ -205,20 +209,12 @@ struct ProfileMenuOption: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(
-                            LinearGradient(
-                                colors: [
-                                    iconColor.opacity(0.2),
-                                    iconColor.opacity(0.1)
-                                ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
+                            Color.white.opacity(0.2)
                         )
-                        .frame(width: 48, height: 48)
+                        .frame(width: 40, height: 40)
                     
-                    Image(systemName: icon)
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(iconColor)
+                    Image(icon).resizable()
+                        .frame(width: 20, height: 20)
                 }
                 
                 // Title
@@ -234,7 +230,7 @@ struct ProfileMenuOption: View {
                     .foregroundColor(.white.opacity(0.4))
             }
             .padding(.horizontal, 20)
-            .padding(.vertical, 16)
+            .padding(.vertical, 14)
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(

@@ -16,11 +16,14 @@ struct DashBoardView: View {
         ZStack(alignment: .bottom) {
             // Premium Background
             ZStack {
-                Color._041_C_32
-                
-                // Subtle Glows
-//                RadialGradient(colors: [Color.white.opacity(0.05), .clear], center: .topLeading, startRadius: 0, endRadius: 400)
-//                RadialGradient(colors: [Color.white.opacity(0.03), .clear], center: .bottomTrailing, startRadius: 0, endRadius: 500)
+                LinearGradient(
+                    colors: [
+                        Color._041_C_32,
+                        Color(hex: "064663")
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
             }
             .ignoresSafeArea()
             
@@ -28,16 +31,6 @@ struct DashBoardView: View {
                 // Top Header Section
                 NavigationStack {
                     ZStack(alignment: .bottom) {
-                        // Premium Background
-                        ZStack {
-                            Color._041_C_32
-                            
-                            // Subtle Glows
-                            RadialGradient(colors: [Color.white.opacity(0.05), .clear], center: .topLeading, startRadius: 0, endRadius: 400)
-                            RadialGradient(colors: [Color.white.opacity(0.03), .clear], center: .bottomTrailing, startRadius: 0, endRadius: 500)
-                        }
-                        .ignoresSafeArea()
-                        
                         VStack(spacing: 0) {
                             // Top Header Section
                             HeaderView()
@@ -58,7 +51,6 @@ struct DashBoardView: View {
                         
                         // Premium Custom Tab Bar
                         CustomBottomBar()
-                            .padding(.bottom, 20)
                     }
                 }
             }
@@ -99,9 +91,9 @@ struct DashBoardView: View {
                     Text("AI Video Maker")
                         .font(Utilities.font(.Bold, size: 18))
                         .foregroundColor(.white)
-                    Text("Funny Edition")
-                        .font(Utilities.font(.Medium, size: 10))
-                        .foregroundColor(.white.opacity(0.5))
+//                    Text("Funny Edition")
+//                        .font(Utilities.font(.Medium, size: 10))
+//                        .foregroundColor(.white.opacity(0.5))
                 }
             }
             
@@ -111,20 +103,29 @@ struct DashBoardView: View {
             Button {
                 self.showLoginSheet = true
             } label: {
-                HStack(spacing: 8) {
-                    Image(systemName: "crown.fill")
-                        .font(.caption)
+                HStack(spacing: 6) {
+                    Image("ic_crown").resizable()
+                        .frame(width: 22, height: 22)
                     
                     Text("PRO")
                         .font(Utilities.font(.Bold, size: 12))
                 }
                 .foregroundColor(.black)
-                .padding(.horizontal, 16)
+                .padding(.horizontal, 14)
                 .padding(.vertical, 10)
                 .background {
                     Capsule()
-                        .fill(LinearGradient(colors: [Color(hex: "FFD700"), Color(hex: "FFA500")], startPoint: .topLeading, endPoint: .bottomTrailing))
-                        .shadow(color: Color(hex: "FFA500").opacity(0.4), radius: 12, x: 0, y: 6)
+                        .fill(
+                            LinearGradient(
+                                colors: [
+                                    Color(hex: "FFD700"),
+                                    Color(hex: "FFA500")
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+//                        .shadow(color: Color(hex: "FFA500").opacity(0.4), radius: 12, x: 0, y: 6)
                 }
             }
         }
