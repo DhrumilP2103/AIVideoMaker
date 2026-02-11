@@ -67,7 +67,7 @@ struct LoginSheet: View {
                     }
                     
                     VStack(spacing: 8) {
-                        Text("Welcome to AI Video Maker")
+                        Text("Welcome to Rimoo")
                             .font(Utilities.font(.Bold, size: 24))
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)

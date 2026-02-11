@@ -122,7 +122,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 
             let cropViewController = Mantis.cropViewController(image: image)
             cropViewController.delegate = self
-
+            cropViewController.modalPresentationStyle = .overFullScreen
             picker.present(cropViewController, animated: true)
         }
 

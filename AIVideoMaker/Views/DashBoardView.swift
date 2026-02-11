@@ -99,7 +99,7 @@ struct DashBoardView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("AI Video Maker")
+                    Text("Rimoo")
                         .font(Utilities.font(.Bold, size: 18))
                         .foregroundColor(.white)
 //                    Text("Funny Edition")

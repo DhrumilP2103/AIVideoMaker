@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		19005E262F399F7C00D613B1 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E252F399F7C00D613B1 /* EditProfileView.swift */; };
 		19005E292F39A45D00D613B1 /* ImageSourcePickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E282F39A45D00D613B1 /* ImageSourcePickerPopup.swift */; };
-		19005E382F39B9E800D613B1 /* GeneratedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E372F39B9E800D613B1 /* GeneratedVideo.swift */; };
 		19005E3A2F39D9FE00D613B1 /* CreateVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E392F39D9FE00D613B1 /* CreateVideoView.swift */; };
 		19005E3C2F39DA9F00D613B1 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E3B2F39DA9F00D613B1 /* ImagePicker.swift */; };
 		19005E3F2F39DBE000D613B1 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 19005E3E2F39DBE000D613B1 /* Mantis */; };
@@ -78,7 +77,6 @@
 /* Begin PBXFileReference section */
 		19005E252F399F7C00D613B1 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		19005E282F39A45D00D613B1 /* ImageSourcePickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSourcePickerPopup.swift; sourceTree = "<group>"; };
-		19005E372F39B9E800D613B1 /* GeneratedVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedVideo.swift; sourceTree = "<group>"; };
 		19005E392F39D9FE00D613B1 /* CreateVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVideoView.swift; sourceTree = "<group>"; };
 		19005E3B2F39DA9F00D613B1 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		19005E442F39E99B00D613B1 /* LoginSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSheet.swift; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 				19DF55052F35F6B6008392F3 /* HomeView */,
 				1931E16E2F3C56D300C5A38F /* AssetsView */,
 				1931E1782F3C5D4700C5A38F /* LikedVideosView */,
-				19005E372F39B9E800D613B1 /* GeneratedVideo.swift */,
 				19005E4A2F3A0D0400D613B1 /* BuyCreditsView.swift */,
 				19005E392F39D9FE00D613B1 /* CreateVideoView.swift */,
 				19293F8D2F3320CC0000973C /* DashBoardView.swift */,
@@ -498,7 +495,6 @@
 				19293F8E2F3320CC0000973C /* DashBoardView.swift in Sources */,
 				19DF54D72F35B36F008392F3 /* ProfileView.swift in Sources */,
 				1931E16B2F3C568100C5A38F /* ResponseVideos.swift in Sources */,
-				19005E382F39B9E800D613B1 /* GeneratedVideo.swift in Sources */,
 				19293FA42F3365B50000973C /* VideoDetailView.swift in Sources */,
 				1931E1852F3C8FCB00C5A38F /* NoInternetPopUp.swift in Sources */,
 				19005E3C2F39DA9F00D613B1 /* ImagePicker.swift in Sources */,

@@ -95,8 +95,8 @@ struct SubscriptionPlansView: View {
             // Background Gradient
             LinearGradient(
                 colors: [
-                    Color(hex: "0A1F32"),
-                    Color(hex: "051420")
+                    Color._041_C_32,
+                    Color(hex: "064663")
                 ],
                 startPoint: .top,
                 endPoint: .bottom
@@ -111,12 +111,14 @@ struct SubscriptionPlansView: View {
                         impactFeedback.impactOccurred()
                         dismiss()
                     } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .semibold))
+                        Image("ic_back").resizable()
+                            .frame(width: 20, height: 20)
                             .foregroundColor(.white)
                             .frame(width: 40, height: 40)
-                            .background(Color.white.opacity(0.1))
-                            .clipShape(Circle())
+                            .background(
+                                Circle()
+                                    .fill(.white.opacity(0.1))
+                            )
                     }
                     
                     Spacer()
@@ -133,11 +135,11 @@ struct SubscriptionPlansView: View {
                         impactFeedback.impactOccurred()
                         showBuyCredits = true
                     } label: {
-                        Image(systemName: "crown.fill")
-                            .font(.system(size: 18))
+                        Image("ic_coin").resizable()
+                            .frame(width: 18, height: 18)
                             .foregroundColor(.white)
                             .frame(width: 40, height: 40)
-                            .background(Color.green)
+                            .background(Color.white.opacity(0.2))
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                 }
@@ -211,7 +213,7 @@ struct TabButton: View {
                 .font(Utilities.font(.SemiBold, size: 16))
                 .foregroundColor(isSelected ? .white : .white.opacity(0.6))
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 12)
+                .padding(.vertical, 10)
                 .background {
                     if isSelected {
                         RoundedRectangle(cornerRadius: 20)
@@ -232,13 +234,13 @@ struct PlanCard: View {
         VStack(alignment: .leading, spacing: 0) {
             // Header with Title and Badge
             HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: 0) {
                     Text(plan.title)
-                        .font(Utilities.font(.Bold, size: 36))
+                        .font(Utilities.font(.Bold, size: 26))
                         .foregroundColor(.white)
                     
                     Text(plan.subtitle)
-                        .font(Utilities.font(.Medium, size: 15))
+                        .font(Utilities.font(.Medium, size: 12))
                         .foregroundColor(.white.opacity(0.6))
                 }
                 
@@ -246,7 +248,7 @@ struct PlanCard: View {
                 
                 if let badge = plan.badge {
                     Text(badge)
-                        .font(Utilities.font(.Bold, size: 11))
+                        .font(Utilities.font(.Bold, size: 10))
                         .foregroundColor(.white)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
@@ -259,11 +261,11 @@ struct PlanCard: View {
             // Price
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Text("$\(plan.price)")
-                    .font(Utilities.font(.Bold, size: 64))
+                    .font(Utilities.font(.Bold, size: 36))
                     .foregroundColor(.white)
                 
                 Text("/month")
-                    .font(Utilities.font(.Medium, size: 18))
+                    .font(Utilities.font(.Medium, size: 14))
                     .foregroundColor(.white.opacity(0.6))
             }
             .padding(.bottom, 32)
@@ -275,7 +277,7 @@ struct PlanCard: View {
             } label: {
                 HStack(spacing: 8) {
                     Text(plan.isCurrentPlan ? "Current Plan" : "Subscribe Now")
-                        .font(Utilities.font(.SemiBold, size: 16))
+                        .font(Utilities.font(.SemiBold, size: 14))
                         .foregroundColor(.white)
                     
                     if !plan.isCurrentPlan {
@@ -289,7 +291,7 @@ struct PlanCard: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
+                .padding(.vertical, 10)
                 .background(
                     RoundedRectangle(cornerRadius: 14)
                         .fill(plan.isCurrentPlan ? Color(hex: "1A4D5C") : Color.white.opacity(0.1))
@@ -310,7 +312,7 @@ struct PlanCard: View {
                             .foregroundColor(.white.opacity(0.6))
                         
                         Text(feature)
-                            .font(Utilities.font(.Medium, size: 15))
+                            .font(Utilities.font(.Medium, size: 14))
                             .foregroundColor(.white.opacity(0.8))
                             .fixedSize(horizontal: false, vertical: true)
                     }

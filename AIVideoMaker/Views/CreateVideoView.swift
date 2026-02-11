@@ -59,7 +59,7 @@ struct CreateVideoView: View {
                 }
             }
         }
-        .sheet(isPresented: $showImagePicker) {
+        .fullScreenCover(isPresented: $showImagePicker) {
             ImagePicker(
                 sourceType: imagePickerSourceType,
                 selectedImage: $selectedImage,
@@ -192,9 +192,8 @@ struct CreateVideoView: View {
                                 .fill(.white.opacity(0.1))
                                 .frame(width: 80, height: 80)
                             
-                            Image("ic_image").resizable()
-                                .frame(width: 30, height: 30
-                                )
+                            Image("ic_image").resizable().renderingMode(.template)
+                                .frame(width: 30, height: 30)
                                 .foregroundColor(.white.opacity(0.5))
                         }
                         
@@ -302,21 +301,28 @@ struct CreateVideoView: View {
                             .progressViewStyle(CircularProgressViewStyle(tint: .black))
                         Text("Generating...")
                     } else {
-                        Image(systemName: "wand.and.stars")
-                            .font(.title3)
-                        
-                        Text("Generate Video")
-                            .font(Utilities.font(.Bold, size: 16))
-                        
-                        Text("•")
-                            .font(Utilities.font(.Bold, size: 16))
-                        
-                        HStack(spacing: 4) {
-                            Text("4")
+//                        Image(systemName: "wand.and.stars")
+//                            .font(.title3)
+                        if selectedImage == nil{
+//                            Text(selectedImage == nil ? "Select Image First" :"Generate Video")
+                            Text("Select Image First")
                                 .font(Utilities.font(.Bold, size: 16))
-                            Image(systemName: "crown.fill")
-                                .font(.caption)
+                                .foregroundStyle(.white)
+                        } else {
+                            HStack(spacing: 4) {
+                                Image("ic_coin").resizable()
+                                    .frame(width: 16, height: 16)
+                                Text("4")
+                                    .font(Utilities.font(.Bold, size: 16))
+                                    .foregroundStyle(.black)
+                            }
                         }
+                        
+                        
+//                        Text("•")
+//                            .font(Utilities.font(.Bold, size: 16))
+                        
+                        
                     }
                 }
                 .foregroundColor(.black)
@@ -325,7 +331,7 @@ struct CreateVideoView: View {
                 .background {
                     Capsule()
                         .fill(selectedImage == nil ? Color.white.opacity(0.3) : Color.white)
-                        .shadow(color: selectedImage == nil ? .clear : .white.opacity(0.3), radius: 15, x: 0, y: 8)
+//                        .shadow(color: selectedImage == nil ? .clear : .white.opacity(0.3), radius: 15, x: 0, y: 8)
                 }
             }
             .disabled(selectedImage == nil || isGenerating)

@@ -88,12 +88,14 @@ struct BuyCreditsView: View {
                         impactFeedback.impactOccurred()
                         dismiss()
                     } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .semibold))
+                        Image("ic_back").resizable()
+                            .frame(width: 20, height: 20)
                             .foregroundColor(.white)
                             .frame(width: 40, height: 40)
-                            .background(Color.white.opacity(0.1))
-                            .clipShape(Circle())
+                            .background(
+                                Circle()
+                                    .fill(.white.opacity(0.1))
+                            )
                     }
                     
                     Spacer()
@@ -161,7 +163,7 @@ struct CurrentCreditsCard: View {
                     .foregroundColor(.white.opacity(0.6))
                 
                 Text("\(credits)")
-                    .font(Utilities.font(.Bold, size: 48))
+                    .font(Utilities.font(.Bold, size: 36))
                     .foregroundColor(.white)
             }
             
@@ -170,11 +172,11 @@ struct CurrentCreditsCard: View {
             // Ticket Icon
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(Color.orange)
+                    .fill(Color.white.opacity(0.2))
                     .frame(width: 70, height: 70)
                 
-                Image(systemName: "ticket.fill")
-                    .font(.system(size: 32))
+                Image("ic_coin").resizable()
+                    .frame(width: 36, height: 36)
                     .foregroundColor(.white)
             }
         }
@@ -215,16 +217,15 @@ struct CreditPackageCard: View {
             
             // Credits
             HStack(spacing: 8) {
-                Image(systemName: "ticket.fill")
-                    .font(.system(size: 20))
-                    .foregroundColor(.orange)
+                Image("ic_coin").resizable()
+                    .frame(width: 18, height: 18)
                 
                 Text("\(package.credits)")
-                    .font(Utilities.font(.Bold, size: 28))
+                    .font(Utilities.font(.Bold, size: 22))
                     .foregroundColor(.white)
                 
                 Text("credits")
-                    .font(Utilities.font(.Medium, size: 12))
+                    .font(Utilities.font(.Medium, size: 10))
                     .foregroundColor(.white.opacity(0.6))
             }
             .padding(.bottom, 8)
@@ -243,11 +244,11 @@ struct CreditPackageCard: View {
             // Pricing
             HStack(spacing: 4) {
                 Text("$\(String(format: "%.2f", package.finalPrice))")
-                    .font(Utilities.font(.Bold, size: 22))
+                    .font(Utilities.font(.Bold, size: 18))
                     .foregroundColor(.white)
                 
                 Text("$\(String(format: "%.2f", package.originalPrice))")
-                    .font(Utilities.font(.Medium, size: 12))
+                    .font(Utilities.font(.Medium, size: 10))
                     .foregroundColor(.white.opacity(0.4))
                     .strikethrough()
                 Spacer()
