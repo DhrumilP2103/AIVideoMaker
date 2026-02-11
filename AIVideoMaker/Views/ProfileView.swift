@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var appState: NetworkAppState
     //    @State private var selectedVideo: VideoItem?
     @State private var selectedVideoIndex: Int = 0
     @State private var isNavForDetail: Bool = false
@@ -173,6 +174,7 @@ struct ProfileView: View {
         }
         .navigationDestination(isPresented: $showLikedVideos) {
             LikedVideosView()
+                .environmentObject(appState)
                 .toolbar(.hidden)
         }
     }

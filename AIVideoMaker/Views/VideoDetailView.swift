@@ -3,7 +3,7 @@ import AVFoundation
 import AVKit
 
 struct VideoDetailView: View {
-    let video: HomeResponseVideos
+    let video: ResponseVideos
     let animation: Namespace.ID
     @Binding var isNavForDetail: Bool
     @Binding var isCurrentVideo: Bool
@@ -118,7 +118,7 @@ struct VideoDetailView: View {
                 VStack(spacing: 25) {
                     Spacer()
                     
-                    SideActionButton(icon: "ic_heart_fill", label: "1.2k", color: .red)
+                    SideActionButton(icon: "ic_heart", label: "\(video.likes ?? 0)", color: .red)
                     SideActionButton(icon: "ic_share", label: "Share")
                     SideActionButton(icon: "ic_download", label: "Download")
                     

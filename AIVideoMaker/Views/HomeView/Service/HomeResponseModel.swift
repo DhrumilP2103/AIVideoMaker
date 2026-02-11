@@ -43,7 +43,7 @@ struct HomeResponseModel: Codable {
 struct HomeResponseData: Codable {
 
   var categories : [HomeResponseCategories]? = []
-  var videos     : [HomeResponseVideos]?     = []
+  var videos     : [ResponseVideos]?     = []
 
   enum CodingKeys: String, CodingKey {
 
@@ -56,7 +56,7 @@ struct HomeResponseData: Codable {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
     categories = try values.decodeIfPresent([HomeResponseCategories].self , forKey: .categories )
-    videos     = try values.decodeIfPresent([HomeResponseVideos].self     , forKey: .videos     )
+    videos     = try values.decodeIfPresent([ResponseVideos].self     , forKey: .videos     )
  
   }
 
@@ -68,24 +68,27 @@ struct HomeResponseData: Codable {
 
 struct HomeResponseCategories: Codable, Identifiable {
 
-  var id   : Int?    = nil
-  var name : String? = nil
-  var icon : String? = nil
+  var id      : Int?    = nil
+  var hashKey : String? = nil
+  var name    : String? = nil
+  var icon    : String? = nil
 
   enum CodingKeys: String, CodingKey {
 
-    case id   = "id"
-    case name = "name"
-    case icon = "icon"
+    case id      = "id"
+    case hashKey = "hash_key"
+    case name    = "name"
+    case icon    = "icon"
   
   }
 
   init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
-    id   = try values.decodeIfPresent(Int.self    , forKey: .id   )
-    name = try values.decodeIfPresent(String.self , forKey: .name )
-    icon = try values.decodeIfPresent(String.self , forKey: .icon )
+    id      = try values.decodeIfPresent(Int.self    , forKey: .id      )
+    hashKey = try values.decodeIfPresent(String.self , forKey: .hashKey )
+    name    = try values.decodeIfPresent(String.self , forKey: .name    )
+    icon    = try values.decodeIfPresent(String.self , forKey: .icon    )
  
   }
 
@@ -95,49 +98,4 @@ struct HomeResponseCategories: Codable, Identifiable {
 
 }
 
-struct HomeResponseVideos: Codable, Identifiable {
 
-  var id         : Int?    = nil
-  var categoryId : Int?    = nil
-  var title      : String? = nil
-  var thumbnail  : String? = nil
-  var videoUrl   : String? = nil
-  var duration   : String? = nil
-  var likes      : Int?    = nil
-
-  enum CodingKeys: String, CodingKey {
-
-    case id         = "id"
-    case categoryId = "category_id"
-    case title      = "title"
-    case thumbnail  = "thumbnail"
-    case videoUrl   = "video_url"
-    case duration   = "duration"
-    case likes      = "likes"
-  
-  }
-
-  init(from decoder: Decoder) throws {
-    let values = try decoder.container(keyedBy: CodingKeys.self)
-
-    id         = try values.decodeIfPresent(Int.self    , forKey: .id         )
-    categoryId = try values.decodeIfPresent(Int.self    , forKey: .categoryId )
-    title      = try values.decodeIfPresent(String.self , forKey: .title      )
-    thumbnail  = try values.decodeIfPresent(String.self , forKey: .thumbnail  )
-    videoUrl   = try values.decodeIfPresent(String.self , forKey: .videoUrl   )
-    duration   = try values.decodeIfPresent(String.self , forKey: .duration   )
-    likes      = try values.decodeIfPresent(Int.self    , forKey: .likes      )
- 
-  }
-
-    init(id: Int = 0, categoryId: Int = 0, title: String = "", thumbnail: String = "", videoUrl: String = "", duration: String = "", likes: Int = 0) {
-        self.id = id
-        self.categoryId = categoryId
-        self.title = title
-        self.thumbnail = thumbnail
-        self.videoUrl = videoUrl
-        self.duration = duration
-        self.likes = likes
-  }
-
-}

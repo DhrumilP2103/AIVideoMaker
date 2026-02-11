@@ -9,68 +9,16 @@ import SwiftUI
 
 struct LikedVideosView: View {
     @Environment(\.dismiss) var dismiss
-    @State private var selectedVideo: HomeResponseVideos?
+    @StateObject var viewModel = LikedVideosViewModel()
+    @EnvironmentObject var appState: NetworkAppState
+    
+    @State private var selectedVideo: ResponseVideos?
     @State private var selectedVideoIndex: Int = 0
     @State private var isNavForDetail: Bool = false
     @Namespace private var videoTransition
     
     // Sample liked videos data - Replace with actual data from API/database
-    @State private var likedVideos: [HomeResponseVideos] = [
-        HomeResponseVideos(
-            id: 1,
-            categoryId: 1,
-            title: "Morning Motivation",
-            thumbnail: "https://picsum.photos/400/600?random=1",
-            videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-            duration: "0:45",
-            likes: 1250
-        ),
-        HomeResponseVideos(
-            id: 2,
-            categoryId: 2,
-            title: "Workout Energy",
-            thumbnail: "https://picsum.photos/400/600?random=2",
-            videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-            duration: "1:20",
-            likes: 890
-        ),
-        HomeResponseVideos(
-            id: 3,
-            categoryId: 1,
-            title: "Nature Vibes",
-            thumbnail: "https://picsum.photos/400/600?random=3",
-            videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-            duration: "0:55",
-            likes: 2100
-        ),
-        HomeResponseVideos(
-            id: 4,
-            categoryId: 3,
-            title: "Music Flow",
-            thumbnail: "https://picsum.photos/400/600?random=4",
-            videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-            duration: "1:10",
-            likes: 1580
-        ),
-        HomeResponseVideos(
-            id: 5,
-            categoryId: 2,
-            title: "Fitness Goals",
-            thumbnail: "https://picsum.photos/400/600?random=5",
-            videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-            duration: "0:38",
-            likes: 945
-        ),
-        HomeResponseVideos(
-            id: 6,
-            categoryId: 1,
-            title: "Daily Inspiration",
-            thumbnail: "https://picsum.photos/400/600?random=6",
-            videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-            duration: "1:05",
-            likes: 1720
-        )
-    ]
+    // Sample liked videos data - Replace with actual data from API/database
     
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
     
@@ -120,7 +68,7 @@ struct LikedVideosView: View {
                 
                 // Videos Count
                 HStack {
-                    Text("\(likedVideos.count) video\(likedVideos.count != 1 ? "s" : "")")
+                    Text("\(viewModel.likedVideosData.count) video\(viewModel.likedVideosData.count != 1 ? "s" : "")")
                         .font(Utilities.font(.Medium, size: 14))
                         .foregroundColor(.white.opacity(0.6))
                     
@@ -130,7 +78,7 @@ struct LikedVideosView: View {
                 .padding(.bottom, 16)
                 
                 // Video Grid
-                if likedVideos.isEmpty {
+                if viewModel.likedVideosData.isEmpty {
                     EmptyLikedVideosView()
                 } else {
                     ScrollView(showsIndicators: false) {
@@ -141,7 +89,7 @@ struct LikedVideosView: View {
                             ],
                             spacing: 15
                         ) {
-                            ForEach(Array(likedVideos.enumerated()), id: \.element.id) { index, video in
+                            ForEach(Array(viewModel.likedVideosData.enumerated()), id: \.element.id) { index, video in
                                 VideoCard(video: video, isActive: .constant(true))
                                     .onTapGesture {
                                         impactFeedback.impactOccurred()
@@ -159,10 +107,26 @@ struct LikedVideosView: View {
                 }
             }
         }
+        .onAppear() {
+            self.viewModel.likedVideosList(appState: self.appState)
+        }
+        .networkStatusPopups(viewModel: viewModel)
+        .onChange(of: appState.retryRequestedForAPI) { _, apiName in
+            guard let name = apiName else { return }
+            if checkInternet() {
+                withAnimation {
+                    appState.isNoInternet = false
+                    if let retry = viewModel.retryAPIs[name] {
+                        retry()
+                        appState.retryRequestedForAPI = nil
+                    }
+                }
+            }
+        }
         .navigationDestination(isPresented: $isNavForDetail) {
             if selectedVideo != nil {
                 VideoReelsView(
-                    videos: likedVideos,
+                    videos: viewModel.likedVideosData,
                     startIndex: selectedVideoIndex,
                     animation: videoTransition,
                     isNavForDetail: $isNavForDetail

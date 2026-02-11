@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct VideoReelsView: View {
-    let videos: [HomeResponseVideos]
+    let videos: [ResponseVideos]
     let startIndex: Int
     let animation: Namespace.ID
     @Binding var isNavForDetail: Bool

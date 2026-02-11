@@ -1,5 +1,5 @@
 //
-//  HomeViewModel.swift
+//  AssetsViewModel.swift
 //  The House Repair
 //
 //  Created by Kiran Jamod on 23/12/25.
@@ -8,23 +8,21 @@
 import Foundation
 import Combine
 
-class HomeViewModel: BaseModel {
-    private let homeAPIService: HomeAPIService
+class AssetsViewModel: BaseModel {
+    private let assetsAPIService: AssetsAPIService
     
-    @Published var homeResponseData: HomeResponseData = HomeResponseData()
-    @Published var homeResponseCategories: [HomeResponseCategories] = [HomeResponseCategories]()
-    @Published var homeResponseVideos: [ResponseVideos] = [ResponseVideos]()
+    @Published var assetsResponseData: [ResponseVideos] = [ResponseVideos]()
     
-    init(homeAPIService: HomeAPIService = HomeAPIService())
+    init(assetsAPIService: AssetsAPIService = AssetsAPIService())
     {
-        self.homeAPIService = homeAPIService
+        self.assetsAPIService = assetsAPIService
         super.init()
     }
-    func homeList(appState: NetworkAppState) {
+    func assetsList(appState: NetworkAppState) {
         
         retryAPIs[.homeList] = { [weak self] in
             guard let self else { return }
-            self.homeList(appState: appState)
+            self.assetsList(appState: appState)
         }
         
         guard checkInternet() else {
@@ -34,15 +32,13 @@ class HomeViewModel: BaseModel {
         }
         
         showLoader()
-        homeAPIService.homeList() { [weak self] result in
+        assetsAPIService.assetsList() { [weak self] result in
             dismissLoader()
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {
                 case .success(let response):
-                    self.homeResponseData = response.data ?? HomeResponseData()
-                    self.homeResponseCategories = self.homeResponseData.categories ?? [HomeResponseCategories]()
-                    self.homeResponseVideos = self.homeResponseData.videos ?? [ResponseVideos]()
+                    self.assetsResponseData = response.data ?? [ResponseVideos]()
                 case .failure(let error):
                     switch error {
                     case .unAuthorizationError(let message):

@@ -14,6 +14,8 @@ struct APIConstants {
     // MARK: - API Endpoints
     struct Endpoints {
         static let home = "home"
+        static let assets = "assets"
+        static let likedVideos = "liked_videos"
     }
 }
 

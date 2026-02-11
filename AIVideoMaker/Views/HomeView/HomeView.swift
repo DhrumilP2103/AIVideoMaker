@@ -5,8 +5,8 @@ struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     @EnvironmentObject var appState: NetworkAppState
     
-    @State private var selectedCategoryId: Int? = nil
-    @State private var selectedVideo: HomeResponseVideos?
+    @State private var selectedCategoryId: String = ""
+    @State private var selectedVideo: ResponseVideos?
     @State private var selectedVideoIndex: Int = 0
     @State private var isNavForDetail: Bool = false
     @Namespace private var categoryAnimation
@@ -18,9 +18,10 @@ struct HomeView: View {
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
-                        ForEach(viewModel.homeResponseCategories, id: \.id) { category in
+                        ForEach(viewModel.homeResponseCategories.indices, id: \.self) { index in
+                            let category = viewModel.homeResponseCategories[index]
                             CategoryItem(category: category)
-                                .id(category.id)
+                                .id(category.hashKey ?? "")
                         }
                     }
                     .padding(.horizontal, 20)
@@ -35,10 +36,10 @@ struct HomeView: View {
             
             // Content Area with 2-Column Video Grid
             TabView(selection: $selectedCategoryId) {
-                ForEach(viewModel.homeResponseCategories, id: \.id) { category in
+                ForEach(viewModel.homeResponseCategories, id: \.hashKey) { category in
                     ScrollView {
-                        let filteredVideos = self.viewModel.homeResponseVideos.filter { $0.categoryId == category.id }
-                        let isActive = selectedCategoryId == category.id
+                        let filteredVideos = self.viewModel.homeResponseVideos.filter { $0.categoryHashKey == category.hashKey }
+                        let isActive = selectedCategoryId == category.hashKey
                         
                         LazyVGrid(
                             columns: [
@@ -62,7 +63,7 @@ struct HomeView: View {
                         .padding(.top, 10)
                         .padding(.bottom, 100)
                     }
-                    .tag(category.id)
+                    .tag(category.hashKey ?? "")
                 }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -85,9 +86,9 @@ struct HomeView: View {
             }
         }
         .navigationDestination(isPresented: $isNavForDetail) {
-            if selectedVideo != nil, let categoryId = selectedCategoryId {
+            if !selectedCategoryId.isEmpty {
                 let filteredVideos = (viewModel.homeResponseVideos)
-                    .filter { $0.categoryId == categoryId }
+                    .filter { $0.categoryHashKey == selectedCategoryId }
                 VideoReelsView(
                     videos: filteredVideos,
                     startIndex: selectedVideoIndex,
@@ -98,22 +99,22 @@ struct HomeView: View {
             }
         }
         .onChange(of: viewModel.homeResponseCategories.count) { _, _ in
-            if selectedCategoryId == nil,
+            if selectedCategoryId == "",
                let first = viewModel.homeResponseCategories.first {
-                selectedCategoryId = first.id
+                selectedCategoryId = first.hashKey ?? ""
             }
         }
     }
     
     @ViewBuilder
     func CategoryItem(category: HomeResponseCategories) -> some View {
-        let isSelected = selectedCategoryId == category.id
+        let isSelected = selectedCategoryId == category.hashKey ?? ""
         let impactFeedback = UIImpactFeedbackGenerator(style: .light)
         
         Button {
             impactFeedback.impactOccurred()
             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                selectedCategoryId = category.id
+                selectedCategoryId = category.hashKey ?? ""
             }
         } label: {
             HStack(spacing: 8) {

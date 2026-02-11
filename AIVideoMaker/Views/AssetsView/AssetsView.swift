@@ -8,27 +8,29 @@
 import SwiftUI
 
 struct AssetsView: View {
-    @State private var videos: [GeneratedVideo] = GeneratedVideo.getSampleData()
-    @State private var selectedVideo: GeneratedVideo?
+    @StateObject var viewModel = AssetsViewModel()
+    @EnvironmentObject var appState: NetworkAppState
+    
+    @State private var selectedVideo: ResponseVideos?
     @State private var isNavForDetail: Bool = false
     @Namespace private var videoTransition
     
     // Group videos by date
-    var groupedVideos: [(String, [GeneratedVideo])] {
-        let grouped = Dictionary(grouping: videos) { $0.dateString }
+    var groupedVideos: [(String, [ResponseVideos])] {
+        let grouped = Dictionary(grouping: viewModel.assetsResponseData) { video in
+            getDateString(from: video.createdAt)
+        }
         return grouped.sorted { (first, second) in
-            // Sort by original date, not string
-            if let firstVideo = first.value.first,
-               let secondVideo = second.value.first {
-                return firstVideo.createdDate > secondVideo.createdDate
-            }
-            return false
+            // Sort by date descending
+            let date1 = getDate(from: first.value.first?.createdAt)
+            let date2 = getDate(from: second.value.first?.createdAt)
+            return date1 > date2
         }
     }
     
     var body: some View {
         VStack(spacing: 0) {
-            if videos.isEmpty {
+            if viewModel.assetsResponseData.isEmpty {
                 EmptyStateView()
             } else {
                 ScrollView(showsIndicators: false) {
@@ -50,22 +52,27 @@ struct AssetsView: View {
                 }
             }
         }
+        .onAppear() {
+            self.viewModel.assetsList(appState: self.appState)
+        }
+        .networkStatusPopups(viewModel: viewModel)
+        .onChange(of: appState.retryRequestedForAPI) { _, apiName in
+            guard let name = apiName else { return }
+            if checkInternet() {
+                withAnimation {
+                    appState.isNoInternet = false
+                    if let retry = viewModel.retryAPIs[name] {
+                        retry()
+                        appState.retryRequestedForAPI = nil
+                    }
+                }
+            }
+        }
         .navigationDestination(isPresented: $isNavForDetail) {
             if let video = selectedVideo {
-                // Convert GeneratedVideo to HomeResponseVideos for compatibility with VideoDetailView
-                let homeVideo = HomeResponseVideos(
-                    id: video.id,
-                    categoryId: 1,
-                    title: video.title,
-                    thumbnail: video.thumbnail ?? "",
-                    videoUrl: video.videoUrl,
-                    duration: video.duration,
-                    likes: 0
-                )
-                
                 AssetVideoDetailView(
-                    video: homeVideo,
-                    templateName: video.templateName,
+                    video: video,
+                    templateName: video.categoryName ?? "Unknown Template",
                     animation: videoTransition,
                     isNavForDetail: $isNavForDetail
                 )
@@ -73,13 +80,37 @@ struct AssetsView: View {
             }
         }
     }
+    
+    // MARK: - Helper Functions
+    
+    private func getDate(from dateString: String?) -> Date {
+        guard let dateString = dateString else { return Date() }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.date(from: dateString) ?? Date()
+    }
+    
+    private func getDateString(from dateString: String?) -> String {
+        let date = getDate(from: dateString)
+        let calendar = Calendar.current
+        
+        if calendar.isDateInToday(date) {
+            return "Today"
+        } else if calendar.isDateInYesterday(date) {
+            return "Yesterday"
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM d, yyyy"
+            return formatter.string(from: date)
+        }
+    }
 }
 
 // MARK: - Date Section
 struct DateSection: View {
     let dateTitle: String
-    let videos: [GeneratedVideo]
-    let onVideoTap: (GeneratedVideo) -> Void
+    let videos: [ResponseVideos]
+    let onVideoTap: (ResponseVideos) -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -118,7 +149,7 @@ struct DateSection: View {
 
 // MARK: - Asset Video Card
 struct AssetVideoCard: View {
-    let video: GeneratedVideo
+    let video: ResponseVideos
     @State private var isReady: Bool = false
     @State private var isActive: Bool = true
     @State private var viewID = UUID()
@@ -128,7 +159,7 @@ struct AssetVideoCard: View {
             Color.white.opacity(0.05)
             
             // Video Preview
-            if let videoURL = URL(string: video.videoUrl) {
+            if let videoUrlString = video.videoUrl, let videoURL = URL(string: videoUrlString) {
                 VideoPlayerView(url: videoURL, isReady: $isReady, isActive: $isActive)
                     .id(viewID)
                     .opacity(isReady ? 1 : 0)
@@ -155,15 +186,17 @@ struct AssetVideoCard: View {
                     Spacer()
                     
                     // Duration Badge
-                    Text(video.duration)
-                        .font(Utilities.font(.Bold, size: 11))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background {
-                            Capsule()
-                                .fill(.black.opacity(0.7))
-                        }
+                    if let duration = video.duration {
+                        Text(duration)
+                            .font(Utilities.font(.Bold, size: 11))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background {
+                                Capsule()
+                                    .fill(.black.opacity(0.7))
+                            }
+                    }
                 }
                 .padding(.top, 8)
                 .padding(.trailing, 8)
@@ -172,7 +205,7 @@ struct AssetVideoCard: View {
                 
                 // Title and Template
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(video.title)
+                    Text(video.title ?? "Untitled")
                         .font(Utilities.font(.Bold, size: 13))
                         .foregroundColor(.white)
                         .lineLimit(1)
@@ -182,7 +215,7 @@ struct AssetVideoCard: View {
                             .font(.system(size: 9))
                             .foregroundColor(.white.opacity(0.6))
                         
-                        Text(video.templateName)
+                        Text(video.categoryName ?? "Unknown Template")
                             .font(Utilities.font(.Medium, size: 10))
                             .foregroundColor(.white.opacity(0.7))
                             .lineLimit(1)
@@ -219,8 +252,8 @@ struct EmptyStateView: View {
             
             ZStack {
                 Circle()
-                    .fill(.white.opacity(0.05))
-                    .frame(width: 120, height: 120)
+                .fill(.white.opacity(0.05))
+                .frame(width: 120, height: 120)
                 
                 Image(systemName: "video.badge.plus")
                     .font(.system(size: 50))
@@ -246,7 +279,7 @@ struct EmptyStateView: View {
 
 // MARK: - Asset Video Detail View
 struct AssetVideoDetailView: View {
-    let video: HomeResponseVideos
+    let video: ResponseVideos
     let templateName: String
     let animation: Namespace.ID
     @Binding var isNavForDetail: Bool

@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: - Video Card View
 struct VideoCard: View {
-    let video: HomeResponseVideos
+    let video: ResponseVideos
     @Binding var isActive: Bool
     @State private var isReady: Bool = false
     @State private var viewID = UUID()

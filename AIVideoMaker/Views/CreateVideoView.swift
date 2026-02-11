@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CreateVideoView: View {
-    let video: HomeResponseVideos
+    let video: ResponseVideos
     
     @State private var selectedImage: UIImage?
     @State private var selectedVideoURL: URL?
@@ -352,14 +352,6 @@ struct CreateVideoView: View {
 
 #Preview {
     NavigationStack {
-        CreateVideoView(video: HomeResponseVideos(
-            id: 1,
-            categoryId: 1,
-            title: "Funny Template",
-            thumbnail: "",
-            videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-            duration: "0:15",
-            likes: 0
-        ))
+        CreateVideoView(video: ResponseVideos())
     }
 }
