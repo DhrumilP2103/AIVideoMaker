@@ -148,8 +148,18 @@ struct ProfileView: View {
                             // Haptic feedback
                             let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
                             impactFeedback.impactOccurred()
-                            // Logout action
-                            print("Logout tapped")
+                            
+                            // Show Delete Account Popup
+                            appState.popupTitle = "Delete Account"
+                            appState.popupMessage = "Are you sure you want to delete your account? This action cannot be undone and all your data will be lost."
+                            appState.popupIcon = "ic_delete"
+                            appState.popupConfirmTitle = "Delete"
+                            appState.popupIsDestructive = true
+                            appState.popupAction = {
+                                print("Delete Account Confirmed")
+                                // TODO: Implement delete account logic
+                            }
+                            appState.showConfirmationPopup = true
                         }
                         
                         ProfileMenuOption(
@@ -159,8 +169,18 @@ struct ProfileView: View {
                             // Haptic feedback
                             let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
                             impactFeedback.impactOccurred()
-                            // Logout action
-                            print("Logout tapped")
+                            
+                            // Show Logout Popup
+                            appState.popupTitle = "Logout"
+                            appState.popupMessage = "Are you sure you want to log out of your account?"
+                            appState.popupIcon = "ic_logout"
+                            appState.popupConfirmTitle = "Logout"
+                            appState.popupIsDestructive = true
+                            appState.popupAction = {
+                                print("Logout Confirmed")
+                                // TODO: Implement logout logic
+                            }
+                            appState.showConfirmationPopup = true
                         }
                     }
                     .padding(.horizontal, 24)
@@ -168,6 +188,7 @@ struct ProfileView: View {
                 }
             }
         }
+//        .networkStatusPopups(viewModel: BaseModel())
         .navigationDestination(isPresented: $showEditProfile) {
             EditProfileView()
                 .toolbar(.hidden)

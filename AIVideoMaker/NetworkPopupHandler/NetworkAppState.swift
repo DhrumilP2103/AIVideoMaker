@@ -18,4 +18,13 @@ final class NetworkAppState: ObservableObject {
     @Published var showAlert: Bool = false
     @Published var alertTitle: String = ""
     @Published var alertDescription: String = ""
+    
+    // Popup State
+    @Published var showConfirmationPopup: Bool = false
+    @Published var popupTitle: String = ""
+    @Published var popupIcon: String = ""
+    @Published var popupMessage: String = ""
+    @Published var popupConfirmTitle: String = ""
+    @Published var popupIsDestructive: Bool = false
+    @Published var popupAction: () -> Void = {}
 }

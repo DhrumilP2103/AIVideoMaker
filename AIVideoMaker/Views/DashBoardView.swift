@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DashBoardView: View {
     @State private var activeTab: Tab = .home
+    @EnvironmentObject var appState: NetworkAppState
     @Namespace private var animation
     @State var showLoginSheet: Bool = false
     
@@ -54,7 +55,17 @@ struct DashBoardView: View {
                     }
                 }
             }
+            
+//            ZStack { }
+//                .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                .ignoresSafeArea()
+//                .background(._041_C_32.opacity(0.2))
+//                .blur(radius: 20)
+//                .opacity(appState.isNoInternet || appState.isAuthExpired || appState.showConfirmationPopup ? 1 : 0)
+//                .animation(.easeInOut, value: appState.isNoInternet || appState.isAuthExpired || appState.showConfirmationPopup)
+            
         }
+        .networkStatusPopups(viewModel: BaseModel())
 //        .blur(radius: self.showLoginSheet ? 2 : 0)
 //        .sheet(isPresented: $showLoginSheet) {
 //            LoginSheet()

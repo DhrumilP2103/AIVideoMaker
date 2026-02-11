@@ -70,7 +70,9 @@ struct HomeView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .onAppear() {
-            self.viewModel.homeList(appState: self.appState)
+            Utilities().delay(delay: 0.2, closure: {
+                self.viewModel.homeList(appState: self.appState)
+            })
         }
         .networkStatusPopups(viewModel: viewModel)
         .onChange(of: appState.retryRequestedForAPI) { _, apiName in
