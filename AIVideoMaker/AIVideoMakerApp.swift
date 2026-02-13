@@ -10,9 +10,12 @@ import SwiftUI
 @main
 struct AIVideoMakerApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject var router = Router()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationControllerRootView(router: router)
+                .environmentObject(router)
+                .ignoresSafeArea(.all)
         }
     }
 }

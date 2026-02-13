@@ -11,7 +11,12 @@ import Foundation
 /// Enum defining all possible routes/screens in the app.
 enum AppRoute {
     case contentView
-    case login
-    case register
-    case dashboard
+    case homeView
+    case videoReelsView
+    case assetVideoDetailView
+    case subscriptionPlansView
+    case editProfileView
+    case likedVideosView
+    case buyCreditsView
+    case createVideoView
 }

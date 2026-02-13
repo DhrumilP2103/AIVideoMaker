@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DashBoardView: View {
     @State private var activeTab: Tab = .home
+    @EnvironmentObject var router: Router
     @EnvironmentObject var appState: NetworkAppState
     @Namespace private var animation
     @State var showLoginSheet: Bool = false
@@ -30,29 +31,27 @@ struct DashBoardView: View {
             
             VStack(spacing: 0) {
                 // Top Header Section
-                NavigationStack {
-                    ZStack(alignment: .bottom) {
-                        VStack(spacing: 0) {
-                            // Top Header Section
-                            HeaderView()
-                            
-                            // Content Area (Swipe Disabled for Main Tabs)
-                            Group {
-                                switch activeTab {
-                                case .home:
-                                    HomeView()
-                                case .assets:
-                                    AssetsView()
-                                case .profile:
-                                    ProfileView()
-                                }
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        }
+                ZStack(alignment: .bottom) {
+                    VStack(spacing: 0) {
+                        // Top Header Section
+                        HeaderView()
                         
-                        // Premium Custom Tab Bar
-                        CustomBottomBar()
+                        // Content Area (Swipe Disabled for Main Tabs)
+                        Group {
+                            switch activeTab {
+                            case .home:
+                                HomeView()
+                            case .assets:
+                                AssetsView()
+                            case .profile:
+                                ProfileView()
+                            }
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
+                    
+                    // Premium Custom Tab Bar
+                    CustomBottomBar()
                 }
             }
             
@@ -66,18 +65,12 @@ struct DashBoardView: View {
             
         }
         .networkStatusPopups(viewModel: BaseModel())
-//        .blur(radius: self.showLoginSheet ? 2 : 0)
-//        .sheet(isPresented: $showLoginSheet) {
-//            LoginSheet()
-//                .presentationDetents([.medium])
-//                .presentationDragIndicator(.visible)
-//        }
-        .navigationDestination(isPresented: $showLoginSheet) {
-            SubscriptionPlansView().toolbar(.hidden)
+        .blur(radius: self.showLoginSheet ? 2 : 0)
+        .sheet(isPresented: $showLoginSheet) {
+            LoginSheet()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
         }
-//        .fullScreenCover(isPresented: $showLoginSheet) {
-//            LoginSheet().background(BackgroundClearView())
-//        }
     }
     @ViewBuilder
     func HeaderView() -> some View {
@@ -97,6 +90,9 @@ struct DashBoardView: View {
                         .font(.title2)
                         .foregroundStyle(.white)
                 }
+                .onTapGesture {
+                    self.showLoginSheet = true
+                }
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Rimoo")
@@ -112,7 +108,7 @@ struct DashBoardView: View {
             
             // Subscription Button
             Button {
-                self.showLoginSheet = true
+                self.router.push(SubscriptionPlansView(), route: .subscriptionPlansView)
             } label: {
                 HStack(spacing: 6) {
                     Image("ic_crown").resizable()

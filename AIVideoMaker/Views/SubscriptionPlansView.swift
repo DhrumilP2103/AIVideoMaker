@@ -27,9 +27,8 @@ struct SubscriptionPlan {
 }
 
 struct SubscriptionPlansView: View {
-    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var router: Router
     @State private var selectedPlan: PlanType = .premium
-    @State private var showBuyCredits: Bool = false
     @Namespace private var animation
     
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
@@ -109,7 +108,7 @@ struct SubscriptionPlansView: View {
                     // Back Button
                     Button {
                         impactFeedback.impactOccurred()
-                        dismiss()
+                        self.router.pop()
                     } label: {
                         Image("ic_back").resizable()
                             .frame(width: 20, height: 20)
@@ -133,7 +132,7 @@ struct SubscriptionPlansView: View {
                     // Crown Icon
                     Button {
                         impactFeedback.impactOccurred()
-                        showBuyCredits = true
+                        self.router.push(BuyCreditsView(), route: .buyCreditsView)
                     } label: {
                         Image("ic_coin").resizable()
                             .frame(width: 18, height: 18)
@@ -191,11 +190,6 @@ struct SubscriptionPlansView: View {
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
             }
-        }
-        .navigationBarHidden(true)
-        .navigationDestination(isPresented: $showBuyCredits) {
-            BuyCreditsView()
-                .toolbar(.hidden)
         }
     }
 }
@@ -357,7 +351,5 @@ extension Color {
 }
 
 #Preview {
-    NavigationStack {
-        SubscriptionPlansView()
-    }
+    SubscriptionPlansView()
 }

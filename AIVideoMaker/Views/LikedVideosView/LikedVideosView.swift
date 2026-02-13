@@ -9,12 +9,12 @@ import SwiftUI
 
 struct LikedVideosView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var router: Router
     @StateObject var viewModel = LikedVideosViewModel()
     @EnvironmentObject var appState: NetworkAppState
     
     @State private var selectedVideo: ResponseVideos?
     @State private var selectedVideoIndex: Int = 0
-    @State private var isNavForDetail: Bool = false
     @Namespace private var videoTransition
     
     // Sample liked videos data - Replace with actual data from API/database
@@ -89,14 +89,24 @@ struct LikedVideosView: View {
                             ],
                             spacing: 15
                         ) {
-                            ForEach(Array(viewModel.likedVideosData.enumerated()), id: \.element.id) { index, video in
+                            ForEach(Array(viewModel.likedVideosData.enumerated()), id: \.element.id) {
+                                index,
+                                video in
                                 VideoCard(video: video, isActive: .constant(true))
                                     .onTapGesture {
                                         impactFeedback.impactOccurred()
                                         withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                                             selectedVideo = video
                                             selectedVideoIndex = index
-                                            isNavForDetail = true
+                                            
+                                            self.router.push(
+                                                VideoReelsView(
+                                                    videos: viewModel.likedVideosData,
+                                                    startIndex: selectedVideoIndex,
+                                                    animation: videoTransition
+                                                ),
+                                                route: .videoReelsView
+                                            )
                                         }
                                     }
                             }
@@ -121,17 +131,6 @@ struct LikedVideosView: View {
                         appState.retryRequestedForAPI = nil
                     }
                 }
-            }
-        }
-        .navigationDestination(isPresented: $isNavForDetail) {
-            if selectedVideo != nil {
-                VideoReelsView(
-                    videos: viewModel.likedVideosData,
-                    startIndex: selectedVideoIndex,
-                    animation: videoTransition,
-                    isNavForDetail: $isNavForDetail
-                )
-                .toolbar(.hidden)
             }
         }
     }
@@ -171,7 +170,5 @@ struct EmptyLikedVideosView: View {
 }
 
 #Preview {
-    NavigationStack {
-        LikedVideosView()
-    }
+    LikedVideosView()
 }

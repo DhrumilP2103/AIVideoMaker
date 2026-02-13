@@ -1,13 +1,10 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var router: Router
     @EnvironmentObject var appState: NetworkAppState
     //    @State private var selectedVideo: VideoItem?
     @State private var selectedVideoIndex: Int = 0
-    @State private var isNavForDetail: Bool = false
-    @State private var showEditProfile: Bool = false
-    @State private var showLikedVideos: Bool = false
     @Namespace private var videoTransition
     
     // Sample user data
@@ -58,7 +55,7 @@ struct ProfileView: View {
                             let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
                             impactFeedback.impactOccurred()
                             // Navigate to Edit Profile
-                            showEditProfile = true
+                            self.router.push(EditProfileView(), route: .editProfileView)
                         } label: {
                             HStack(spacing: 10) {
                                 Image("ic_pencil").resizable()
@@ -127,7 +124,12 @@ struct ProfileView: View {
                             let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
                             impactFeedback.impactOccurred()
                             // Navigate to liked videos
-                            showLikedVideos = true
+                            self.router.push(
+                                LikedVideosView()
+                                    .environmentObject(appState)
+                                ,
+                                route: .likedVideosView
+                            )
                         }
                         
                         ProfileMenuOption(
@@ -188,16 +190,11 @@ struct ProfileView: View {
                 }
             }
         }
-//        .networkStatusPopups(viewModel: BaseModel())
-        .navigationDestination(isPresented: $showEditProfile) {
-            EditProfileView()
-                .toolbar(.hidden)
-        }
-        .navigationDestination(isPresented: $showLikedVideos) {
-            LikedVideosView()
-                .environmentObject(appState)
-                .toolbar(.hidden)
-        }
+//        .navigationDestination(isPresented: $showLikedVideos) {
+//            LikedVideosView()
+//                .environmentObject(appState)
+//                .toolbar(.hidden)
+//        }
     }
 }
 

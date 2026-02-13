@@ -4,7 +4,6 @@ struct VideoReelsView: View {
     let videos: [ResponseVideos]
     let startIndex: Int
     let animation: Namespace.ID
-    @Binding var isNavForDetail: Bool
     
     @State private var currentIndex: Int? = nil
     
@@ -15,7 +14,6 @@ struct VideoReelsView: View {
                     VideoDetailView(
                         video: video,
                         animation: animation,
-                        isNavForDetail: $isNavForDetail,
                         isCurrentVideo: .constant(currentIndex == index)
                     )
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)

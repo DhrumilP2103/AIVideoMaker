@@ -357,7 +357,5 @@ struct CreateVideoView: View {
 }
 
 #Preview {
-    NavigationStack {
-        CreateVideoView(video: ResponseVideos())
-    }
+    CreateVideoView(video: ResponseVideos())
 }

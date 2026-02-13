@@ -4,11 +4,11 @@ import AVFoundation
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     @EnvironmentObject var appState: NetworkAppState
+    @EnvironmentObject var router: Router
     
     @State private var selectedCategoryId: String = ""
     @State private var selectedVideo: ResponseVideos?
     @State private var selectedVideoIndex: Int = 0
-    @State private var isNavForDetail: Bool = false
     @Namespace private var categoryAnimation
     @Namespace private var videoTransition
     
@@ -48,13 +48,26 @@ struct HomeView: View {
                             ],
                             spacing: 15
                         ) {
-                            ForEach(Array(filteredVideos.enumerated()), id: \.element.id) { videoIndex, video in
+                            ForEach(Array(filteredVideos.enumerated()), id: \.element.id) {
+                                videoIndex,
+                                video in
                                 VideoCard(video: video, isActive: .constant(isActive))
                                     .onTapGesture {
                                         withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                                             selectedVideo = video
                                             selectedVideoIndex = videoIndex
-                                            isNavForDetail = true
+                                            
+                                            let filteredVideos = (viewModel.homeResponseVideos)
+                                                .filter { $0.categoryHashKey == selectedCategoryId }
+                                            
+                                            self.router.push(
+                                                VideoReelsView(
+                                                    videos: filteredVideos,
+                                                    startIndex: selectedVideoIndex,
+                                                    animation: videoTransition
+                                                ),
+                                                route: .videoReelsView
+                                            )
                                         }
                                     }
                             }
@@ -85,19 +98,6 @@ struct HomeView: View {
                         appState.retryRequestedForAPI = nil
                     }
                 }
-            }
-        }
-        .navigationDestination(isPresented: $isNavForDetail) {
-            if !selectedCategoryId.isEmpty {
-                let filteredVideos = (viewModel.homeResponseVideos)
-                    .filter { $0.categoryHashKey == selectedCategoryId }
-                VideoReelsView(
-                    videos: filteredVideos,
-                    startIndex: selectedVideoIndex,
-                    animation: videoTransition,
-                    isNavForDetail: $isNavForDetail
-                )
-                .navigationBarHidden(true)
             }
         }
         .onChange(of: viewModel.homeResponseCategories.count) { _, _ in

@@ -285,7 +285,5 @@ struct CreditPackageCard: View {
 }
 
 #Preview {
-    NavigationStack {
-        BuyCreditsView()
-    }
+    BuyCreditsView()
 }

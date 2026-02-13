@@ -9,10 +9,10 @@ import SwiftUI
 
 struct AssetsView: View {
     @StateObject var viewModel = AssetsViewModel()
+    @EnvironmentObject var router: Router
     @EnvironmentObject var appState: NetworkAppState
     
     @State private var selectedVideo: ResponseVideos?
-    @State private var isNavForDetail: Bool = false
     @Namespace private var videoTransition
     
     // Group videos by date
@@ -41,7 +41,15 @@ struct AssetsView: View {
                                 videos: dateGroup.1,
                                 onVideoTap: { video in
                                     selectedVideo = video
-                                    isNavForDetail = true
+                                    
+                                    self.router.push(
+                                        AssetVideoDetailView(
+                                            video: video,
+                                            templateName: video.categoryName ?? "Unknown Template",
+                                            animation: videoTransition
+                                        ),
+                                        route: .assetVideoDetailView
+                                    )
                                 }
                             )
                         }
@@ -66,17 +74,6 @@ struct AssetsView: View {
                         appState.retryRequestedForAPI = nil
                     }
                 }
-            }
-        }
-        .navigationDestination(isPresented: $isNavForDetail) {
-            if let video = selectedVideo {
-                AssetVideoDetailView(
-                    video: video,
-                    templateName: video.categoryName ?? "Unknown Template",
-                    animation: videoTransition,
-                    isNavForDetail: $isNavForDetail
-                )
-                .toolbar(.hidden)
             }
         }
     }
@@ -282,7 +279,6 @@ struct AssetVideoDetailView: View {
     let video: ResponseVideos
     let templateName: String
     let animation: Namespace.ID
-    @Binding var isNavForDetail: Bool
     
     @State private var isCurrentVideo: Bool = true
     
@@ -292,7 +288,6 @@ struct AssetVideoDetailView: View {
             VideoDetailView(
                 video: video,
                 animation: animation,
-                isNavForDetail: $isNavForDetail,
                 isCurrentVideo: $isCurrentVideo
             )
         }.ignoresSafeArea()

@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import GoogleSignIn
 
 struct LoginSheet: View {
     @Environment(\.dismiss) var dismiss
     @State private var isLoading = false
+    @StateObject var signInManager = GoogleSignInManager.shared
     
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
     
@@ -17,34 +19,17 @@ struct LoginSheet: View {
         ZStack {
             // Premium Background
             ZStack {
-                Color._041_C_32.ignoresSafeArea()
-                
-                // Subtle Glows
-//                RadialGradient(colors: [Color.white.opacity(0.08), .clear], center: .topLeading, startRadius: 0, endRadius: 300)
-//                RadialGradient(colors: [Color.white.opacity(0.05), .clear], center: .bottomTrailing, startRadius: 0, endRadius: 400)
+                LinearGradient(
+                    colors: [
+                        Color._041_C_32,
+                        Color(hex: "064663")
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                ).ignoresSafeArea()
             }
-//            .clipShape(RoundedCorner(radius: 30, corners: [.topLeft, .topRight]))
             
             VStack(spacing: 0) {
-                // Close Button
-//                HStack {
-//                    Spacer()
-//                    
-//                    Button {
-//                        impactFeedback.impactOccurred()
-//                        dismiss()
-//                    } label: {
-//                        Image(systemName: "xmark")
-//                            .font(.title3)
-//                            .foregroundColor(.white.opacity(0.7))
-//                            .padding(12)
-//                            .background(Color.white.opacity(0.1))
-//                            .clipShape(Circle())
-//                    }
-//                }
-//                .padding(.horizontal, 24)
-//                .padding(.top, 20)
-                
                 Spacer().frame(height: 60)
                 
                 // Logo/Icon Section
@@ -90,9 +75,8 @@ struct LoginSheet: View {
                         handleGoogleLogin()
                     } label: {
                         HStack(spacing: 12) {
-                            Image(systemName: "g.circle.fill")
-                                .font(.title2)
-                                .foregroundColor(.red)
+                            Image("ic_google").resizable()
+                                .frame(width: 20, height: 20)
                             
                             Text("Continue with Google")
                                 .font(Utilities.font(.SemiBold, size: 16))
@@ -195,13 +179,24 @@ struct LoginSheet: View {
     
     // MARK: - Login Actions
     private func handleGoogleLogin() {
-        isLoading = true
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let root = windowScene.windows.first?.rootViewController else {
+            return
+        }
         
-        // TODO: Implement Google Sign-In
-        // For now, just simulate
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            isLoading = false
-            dismiss()
+        signInManager.signIn(presenting: root) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    print("idToken:", user.idToken?.tokenString ?? "")
+                    print("userID:", user.userID ?? "")
+                    
+                case .failure(let error):
+                    // Google sign-in failed. Implement handling as needed.
+                    dump("error: \(error)")
+                    break
+                }
+            }
         }
     }
     

@@ -16,6 +16,10 @@
 		19005E472F3A048100D613B1 /* LikedVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E462F3A048100D613B1 /* LikedVideosView.swift */; };
 		19005E492F3A07B000D613B1 /* SubscriptionPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E482F3A07B000D613B1 /* SubscriptionPlansView.swift */; };
 		19005E4B2F3A0D0400D613B1 /* BuyCreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19005E4A2F3A0D0400D613B1 /* BuyCreditsView.swift */; };
+		1910D6312F3EE51300563BE0 /* GoogleLogin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1910D6302F3EE51300563BE0 /* GoogleLogin.plist */; };
+		1910D6332F3EE52A00563BE0 /* GoogleSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1910D6322F3EE52A00563BE0 /* GoogleSignInManager.swift */; };
+		1910D6362F3EE57600563BE0 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 1910D6352F3EE57600563BE0 /* GoogleSignIn */; };
+		1910D6382F3EE57600563BE0 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1910D6372F3EE57600563BE0 /* GoogleSignInSwift */; };
 		19293F8A2F3320B10000973C /* AIVideoMakerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293F862F3320B10000973C /* AIVideoMakerApp.swift */; };
 		19293F8B2F3320B10000973C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19293F882F3320B10000973C /* ContentView.swift */; };
 		19293F8C2F3320B10000973C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19293F872F3320B10000973C /* Assets.xcassets */; };
@@ -83,6 +87,8 @@
 		19005E462F3A048100D613B1 /* LikedVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedVideosView.swift; sourceTree = "<group>"; };
 		19005E482F3A07B000D613B1 /* SubscriptionPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlansView.swift; sourceTree = "<group>"; };
 		19005E4A2F3A0D0400D613B1 /* BuyCreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyCreditsView.swift; sourceTree = "<group>"; };
+		1910D6302F3EE51300563BE0 /* GoogleLogin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GoogleLogin.plist; sourceTree = "<group>"; };
+		1910D6322F3EE52A00563BE0 /* GoogleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInManager.swift; sourceTree = "<group>"; };
 		19293F762F3320950000973C /* AIVideoMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIVideoMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19293F862F3320B10000973C /* AIVideoMakerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIVideoMakerApp.swift; sourceTree = "<group>"; };
 		19293F872F3320B10000973C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,7 +152,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1910D6382F3EE57600563BE0 /* GoogleSignInSwift in Frameworks */,
 				19005E3F2F39DBE000D613B1 /* Mantis in Frameworks */,
+				1910D6362F3EE57600563BE0 /* GoogleSignIn in Frameworks */,
 				19DF54E62F35F130008392F3 /* Alamofire in Frameworks */,
 				195D67392F3B143300936DBD /* IQKeyboardManagerSwift in Frameworks */,
 			);
@@ -205,10 +213,12 @@
 			isa = PBXGroup;
 			children = (
 				19293F9A2F3343050000973C /* Info.plist */,
+				1910D6302F3EE51300563BE0 /* GoogleLogin.plist */,
 				19293F862F3320B10000973C /* AIVideoMakerApp.swift */,
 				19293F872F3320B10000973C /* Assets.xcassets */,
 				19293F882F3320B10000973C /* ContentView.swift */,
 				195D673A2F3B144D00936DBD /* AppDelegate.swift */,
+				1910D6322F3EE52A00563BE0 /* GoogleSignInManager.swift */,
 				19DF54F62F35F4D0008392F3 /* NavigationHelper */,
 				19DF54FA2F35F4D0008392F3 /* NetworkPopupHandler */,
 				19DF54ED2F35F161008392F3 /* Helper */,
@@ -405,6 +415,8 @@
 				19DF54E52F35F130008392F3 /* Alamofire */,
 				19005E3E2F39DBE000D613B1 /* Mantis */,
 				195D67382F3B143300936DBD /* IQKeyboardManagerSwift */,
+				1910D6352F3EE57600563BE0 /* GoogleSignIn */,
+				1910D6372F3EE57600563BE0 /* GoogleSignInSwift */,
 			);
 			productName = AIVideoMaker;
 			productReference = 19293F762F3320950000973C /* AIVideoMaker.app */;
@@ -438,6 +450,7 @@
 				19DF54E42F35F130008392F3 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				19005E3D2F39DBE000D613B1 /* XCRemoteSwiftPackageReference "Mantis" */,
 				195D67372F3B143300936DBD /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				1910D6342F3EE57600563BE0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 19293F772F3320950000973C /* Products */;
@@ -455,6 +468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19293F962F3342930000973C /* Poppins-SemiBold.ttf in Resources */,
+				1910D6312F3EE51300563BE0 /* GoogleLogin.plist in Resources */,
 				19293F972F3342930000973C /* Poppins-Regular.ttf in Resources */,
 				19293F982F3342930000973C /* Poppins-Medium.ttf in Resources */,
 				19293F992F3342930000973C /* Poppins-Bold.ttf in Resources */,
@@ -477,6 +491,7 @@
 				1931E1712F3C56F100C5A38F /* AssetsResponseModel.swift in Sources */,
 				19DF54FC2F35F4D0008392F3 /* NetworkError.swift in Sources */,
 				19005E292F39A45D00D613B1 /* ImageSourcePickerPopup.swift in Sources */,
+				1910D6332F3EE52A00563BE0 /* GoogleSignInManager.swift in Sources */,
 				19DF55182F35F96F008392F3 /* ExView.swift in Sources */,
 				19DF55192F35F96F008392F3 /* ExString.swift in Sources */,
 				19DF551A2F35F96F008392F3 /* ExDate.swift in Sources */,
@@ -676,7 +691,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.aivideo.AIVideoMaker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rimoo.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -715,7 +730,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.aivideo.AIVideoMaker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rimoo.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -763,6 +778,14 @@
 				minimumVersion = 1.7.5;
 			};
 		};
+		1910D6342F3EE57600563BE0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
 		195D67372F3B143300936DBD /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -786,6 +809,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 19005E3D2F39DBE000D613B1 /* XCRemoteSwiftPackageReference "Mantis" */;
 			productName = Mantis;
+		};
+		1910D6352F3EE57600563BE0 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1910D6342F3EE57600563BE0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		1910D6372F3EE57600563BE0 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1910D6342F3EE57600563BE0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 		195D67382F3B143300936DBD /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -5,8 +5,8 @@ import AVKit
 struct VideoDetailView: View {
     let video: ResponseVideos
     let animation: Namespace.ID
-    @Binding var isNavForDetail: Bool
     @Binding var isCurrentVideo: Bool
+    @EnvironmentObject var router: Router
     
     @State private var player: AVPlayer?
     @State private var isPlaying: Bool = true
@@ -15,7 +15,6 @@ struct VideoDetailView: View {
     @State private var duration: Double = 0
     @State private var isDragging: Bool = false
     @State private var showUI: Bool = false
-    @State private var showCreateVideo: Bool = false
     @State private var showLoginSheet: Bool = false
     
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
@@ -65,7 +64,7 @@ struct VideoDetailView: View {
                     Button {
                         impactFeedback.impactOccurred()
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                            isNavForDetail = false
+                            self.router.pop()
                         }
                     } label: {
                         Image("ic_back").resizable()
@@ -175,8 +174,7 @@ struct VideoDetailView: View {
                 // Make Video Button
                 Button {
                     impactFeedback.impactOccurred()
-//                    showLoginSheet = true
-                    showCreateVideo = true
+                    self.router.push(CreateVideoView(video: video), route: .createVideoView)
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "video.badge.plus.fill")
@@ -219,10 +217,6 @@ struct VideoDetailView: View {
         .onDisappear {
             player?.pause()
             player = nil
-        }
-        .navigationDestination(isPresented: $showCreateVideo) {
-            CreateVideoView(video: video)
-                .toolbar(.hidden)
         }
         .sheet(isPresented: $showLoginSheet) {
             LoginSheet()
