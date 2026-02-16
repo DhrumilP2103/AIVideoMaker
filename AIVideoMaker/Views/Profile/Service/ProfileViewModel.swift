@@ -1,44 +1,45 @@
 //
-//   LikedVideosViewModel.swift
-//  The House Repair
+//  ProfileViewModel.swift
+//  AIVideoMaker
 //
-//  Created by Kiran Jamod on 23/12/25.
+//  Created by Kiran Jamod on 16/02/26.
 //
 
 import Foundation
 import Combine
 
-class LikedVideosViewModel: BaseModel {
-    private let likedVideosAPIService: LikedVideosAPIService
+class ProfileViewModel: BaseModel {
+    private let profileAPIService: ProfileAPIService
     
-    @Published var likedVideosData: [ResponseVideos] = [ResponseVideos]()
+    @Published var profileResponseData: ProfileResponseData = ProfileResponseData()
     
-    init(likedVideosAPIService: LikedVideosAPIService = LikedVideosAPIService())
+    init(profileAPIService: ProfileAPIService = ProfileAPIService())
     {
-        self.likedVideosAPIService = likedVideosAPIService
+        self.profileAPIService = profileAPIService
         super.init()
     }
-    func likedVideosList(appState: NetworkAppState) {
+    
+    func getProfile(appState: NetworkAppState) {
         
-        retryAPIs[.likedVideos] = { [weak self] in
+        retryAPIs[.profile] = { [weak self] in
             guard let self else { return }
-            self.likedVideosList(appState: appState)
+            self.getProfile(appState: appState)
         }
         
         guard checkInternet() else {
             appState.isNoInternet = true
-            appState.retryRequestedForAPI = .likedVideos
+            appState.retryRequestedForAPI = .profile
             return
         }
         
         showLoader()
-        likedVideosAPIService.likedVideosList() { [weak self] result in
+        profileAPIService.getProfile { [weak self] result in
             dismissLoader()
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {
                 case .success(let response):
-                    self.likedVideosData = response.data?.videos ?? [ResponseVideos]()
+                    self.profileResponseData = response.data ?? ProfileResponseData()
                 case .failure(let error):
                     switch error {
                     case .unAuthorizationError(let message):

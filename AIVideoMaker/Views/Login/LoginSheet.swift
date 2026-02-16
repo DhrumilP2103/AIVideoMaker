@@ -10,6 +10,9 @@ import GoogleSignIn
 
 struct LoginSheet: View {
     @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel = GLoginViewModel()
+    @EnvironmentObject var appState: NetworkAppState
+    
     @State private var isLoading = false
     @StateObject var signInManager = GoogleSignInManager.shared
     
@@ -175,6 +178,19 @@ struct LoginSheet: View {
 //                Spacer()
             }
         }
+        .networkStatusPopups(viewModel: viewModel)
+        .onChange(of: appState.retryRequestedForAPI) { _, apiName in
+            guard let name = apiName else { return }
+            if checkInternet() {
+                withAnimation {
+                    appState.isNoInternet = false
+                    if let retry = viewModel.retryAPIs[name] {
+                        retry()
+                        appState.retryRequestedForAPI = nil
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Login Actions
@@ -188,12 +204,13 @@ struct LoginSheet: View {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let user):
-                    print("idToken:", user.idToken?.tokenString ?? "")
-                    print("userID:", user.userID ?? "")
-                    
+                    DEBUGLOG("idToken: \(user.idToken?.tokenString ?? "")")
+                    DEBUGLOG("userID: \(user.userID ?? "")")
+                    self.viewModel.tokenString = user.idToken?.tokenString ?? ""
+                    self.viewModel.gLogin(appState: self.appState)
                 case .failure(let error):
                     // Google sign-in failed. Implement handling as needed.
-                    dump("error: \(error)")
+                    DEBUGLOG("error: \(error)")
                     break
                 }
             }

@@ -3,20 +3,17 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var appState: NetworkAppState
-    //    @State private var selectedVideo: VideoItem?
+    @StateObject var viewModel = ProfileViewModel()
+    
     @State private var selectedVideoIndex: Int = 0
     @Namespace private var videoTransition
     
     // Sample user data
     let userName = "John Doe"
     let userEmail = "john.doe@example.com"
-    //    let likedVideos: [VideoItem] = VideoItem.sampleData.prefix(6).map { $0 } // Sample liked videos
     
     var body: some View {
         ZStack {
-            // Background
-//            Color._041_C_32.ignoresSafeArea()
-            
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
                     // Profile Card
@@ -190,11 +187,22 @@ struct ProfileView: View {
                 }
             }
         }
-//        .navigationDestination(isPresented: $showLikedVideos) {
-//            LikedVideosView()
-//                .environmentObject(appState)
-//                .toolbar(.hidden)
-//        }
+        .onAppear() {
+            self.viewModel.getProfile(appState: self.appState)
+        }
+        .networkStatusPopups(viewModel: viewModel)
+        .onChange(of: appState.retryRequestedForAPI) { _, apiName in
+            guard let name = apiName else { return }
+            if checkInternet() {
+                withAnimation {
+                    appState.isNoInternet = false
+                    if let retry = viewModel.retryAPIs[name] {
+                        retry()
+                        appState.retryRequestedForAPI = nil
+                    }
+                }
+            }
+        }
     }
 }
 

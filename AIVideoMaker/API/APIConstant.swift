@@ -16,6 +16,8 @@ struct APIConstants {
         static let home = "home"
         static let assets = "assets"
         static let likedVideos = "liked_videos"
+        static let googleLogin = "google-login"
+        static let profile = "profile"
     }
 }
 

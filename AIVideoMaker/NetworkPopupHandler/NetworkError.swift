@@ -9,4 +9,7 @@ import Foundation
 
 enum NetworkError {
     case homeList
+    case likedVideos
+    case gLogin
+    case profile
 }

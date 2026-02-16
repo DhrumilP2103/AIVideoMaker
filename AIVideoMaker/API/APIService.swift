@@ -48,10 +48,18 @@ class APIService: NSObject {
         DEBUGLOG("📝 [REQUEST] Parameters => \(parameter)")
         #endif
         
-        let formDataString = parameter.map { "\($0.key)=\($0.value)" }
-            .joined(separator: "&")
-        request.httpBody = formDataString.data(using: .utf8)
-        
+//        let formDataString = parameter.map { "\($0.key)=\($0.value)" }
+//            .joined(separator: "&")
+        //        request.httpBody = formDataString.data(using: .utf8)
+        do {
+            // Convert dictionary to raw JSON data
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameter, options: [])
+            
+        } catch {
+            DEBUGLOG("❌ JSON Encoding Error: \(error)")
+            completion(nil, 0, false)
+            return
+        }
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
             DEBUGLOG(data as Any)

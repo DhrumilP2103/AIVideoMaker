@@ -8,5 +8,6 @@
 import Foundation
 
 struct AppKey {
-    
+    static let tokenString = "tokenString"
+    static let device = "device"
 }

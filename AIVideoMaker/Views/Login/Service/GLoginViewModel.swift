@@ -8,37 +8,40 @@
 import Foundation
 import Combine
 
-class LikedVideosViewModel: BaseModel {
-    private let likedVideosAPIService: LikedVideosAPIService
+class GLoginViewModel: BaseModel {
+    private let gLoginAPIService: GLoginAPIService
     
-    @Published var likedVideosData: [ResponseVideos] = [ResponseVideos]()
+    @Published var gLoginResponseData: GLoginResponseData = GLoginResponseData()
+    @Published var tokenString: String = ""
     
-    init(likedVideosAPIService: LikedVideosAPIService = LikedVideosAPIService())
+    init(gLoginAPIService: GLoginAPIService = GLoginAPIService())
     {
-        self.likedVideosAPIService = likedVideosAPIService
+        self.gLoginAPIService = gLoginAPIService
         super.init()
     }
-    func likedVideosList(appState: NetworkAppState) {
+    
+    func gLogin(appState: NetworkAppState) {
         
-        retryAPIs[.likedVideos] = { [weak self] in
+        retryAPIs[.gLogin] = { [weak self] in
             guard let self else { return }
-            self.likedVideosList(appState: appState)
+            self.gLogin(appState: appState)
         }
         
         guard checkInternet() else {
             appState.isNoInternet = true
-            appState.retryRequestedForAPI = .likedVideos
+            appState.retryRequestedForAPI = .gLogin
             return
         }
         
         showLoader()
-        likedVideosAPIService.likedVideosList() { [weak self] result in
+        gLoginAPIService.gLogin(tokenString: self.tokenString) { [weak self] result in
             dismissLoader()
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {
                 case .success(let response):
-                    self.likedVideosData = response.data?.videos ?? [ResponseVideos]()
+                    self.gLoginResponseData = response.data ?? GLoginResponseData()
+                    UserDefaults.standard.setValue(self.gLoginResponseData.token ?? "", forKey: "bearer_token")
                 case .failure(let error):
                     switch error {
                     case .unAuthorizationError(let message):

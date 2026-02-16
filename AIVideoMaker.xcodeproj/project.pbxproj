@@ -40,6 +40,12 @@
 		1931E1812F3C5E0000C5A38F /* LikedVideosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931E1802F3C5E0000C5A38F /* LikedVideosViewModel.swift */; };
 		1931E1832F3C7B6800C5A38F /* ConfirmationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931E1822F3C7B6800C5A38F /* ConfirmationPopup.swift */; };
 		1931E1852F3C8FCB00C5A38F /* NoInternetPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1931E1842F3C8FCB00C5A38F /* NoInternetPopUp.swift */; };
+		1946A6152F434A44003DAB03 /* GLoginResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946A6142F434A44003DAB03 /* GLoginResponseModel.swift */; };
+		1946A6182F434C3C003DAB03 /* GLoginAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946A6172F434C3C003DAB03 /* GLoginAPIService.swift */; };
+		1946A61A2F434C88003DAB03 /* GLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946A6192F434C88003DAB03 /* GLoginViewModel.swift */; };
+		1946A61F2F435369003DAB03 /* ProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946A61E2F435369003DAB03 /* ProfileResponseModel.swift */; };
+		1946A6232F435477003DAB03 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946A6222F435477003DAB03 /* ProfileViewModel.swift */; };
+		1946A6242F435477003DAB03 /* ProfileAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946A6212F435477003DAB03 /* ProfileAPIService.swift */; };
 		195D67392F3B143300936DBD /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 195D67382F3B143300936DBD /* IQKeyboardManagerSwift */; };
 		195D673B2F3B144D00936DBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D673A2F3B144D00936DBD /* AppDelegate.swift */; };
 		19D6BA562F346213009805E6 /* VideoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D6BA542F346213009805E6 /* VideoCacheManager.swift */; };
@@ -111,6 +117,12 @@
 		1931E1802F3C5E0000C5A38F /* LikedVideosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedVideosViewModel.swift; sourceTree = "<group>"; };
 		1931E1822F3C7B6800C5A38F /* ConfirmationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationPopup.swift; sourceTree = "<group>"; };
 		1931E1842F3C8FCB00C5A38F /* NoInternetPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetPopUp.swift; sourceTree = "<group>"; };
+		1946A6142F434A44003DAB03 /* GLoginResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLoginResponseModel.swift; sourceTree = "<group>"; };
+		1946A6172F434C3C003DAB03 /* GLoginAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLoginAPIService.swift; sourceTree = "<group>"; };
+		1946A6192F434C88003DAB03 /* GLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLoginViewModel.swift; sourceTree = "<group>"; };
+		1946A61E2F435369003DAB03 /* ProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseModel.swift; sourceTree = "<group>"; };
+		1946A6212F435477003DAB03 /* ProfileAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPIService.swift; sourceTree = "<group>"; };
+		1946A6222F435477003DAB03 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		195D673A2F3B144D00936DBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19D6BA542F346213009805E6 /* VideoCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCacheManager.swift; sourceTree = "<group>"; };
 		19D6BA572F347B12009805E6 /* VideoReelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoReelsView.swift; sourceTree = "<group>"; };
@@ -167,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				1931E1822F3C7B6800C5A38F /* ConfirmationPopup.swift */,
-				19005E442F39E99B00D613B1 /* LoginSheet.swift */,
 				19005E282F39A45D00D613B1 /* ImageSourcePickerPopup.swift */,
 				1931E1842F3C8FCB00C5A38F /* NoInternetPopUp.swift */,
 			);
@@ -196,11 +207,12 @@
 				19DF55052F35F6B6008392F3 /* HomeView */,
 				1931E16E2F3C56D300C5A38F /* AssetsView */,
 				1931E1782F3C5D4700C5A38F /* LikedVideosView */,
+				1946A6132F434A3C003DAB03 /* Login */,
+				1946A61D2F43535E003DAB03 /* Profile */,
 				19005E4A2F3A0D0400D613B1 /* BuyCreditsView.swift */,
 				19005E392F39D9FE00D613B1 /* CreateVideoView.swift */,
 				19293F8D2F3320CC0000973C /* DashBoardView.swift */,
 				19005E252F399F7C00D613B1 /* EditProfileView.swift */,
-				19DF54D62F35B36F008392F3 /* ProfileView.swift */,
 				19005E482F3A07B000D613B1 /* SubscriptionPlansView.swift */,
 				19293FA32F3365B50000973C /* VideoDetailView.swift */,
 				19D6BA572F347B12009805E6 /* VideoReelsView.swift */,
@@ -293,6 +305,44 @@
 				1931E17B2F3C5D6400C5A38F /* LikedVideosResponseModel.swift */,
 				1931E17E2F3C5DBE00C5A38F /* LikedVideosAPIService.swift */,
 				1931E1802F3C5E0000C5A38F /* LikedVideosViewModel.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		1946A6132F434A3C003DAB03 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1946A6162F434C2F003DAB03 /* Service */,
+				19005E442F39E99B00D613B1 /* LoginSheet.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		1946A6162F434C2F003DAB03 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1946A6142F434A44003DAB03 /* GLoginResponseModel.swift */,
+				1946A6172F434C3C003DAB03 /* GLoginAPIService.swift */,
+				1946A6192F434C88003DAB03 /* GLoginViewModel.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		1946A61D2F43535E003DAB03 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1946A6202F43537F003DAB03 /* Service */,
+				19DF54D62F35B36F008392F3 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		1946A6202F43537F003DAB03 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1946A61E2F435369003DAB03 /* ProfileResponseModel.swift */,
+				1946A6212F435477003DAB03 /* ProfileAPIService.swift */,
+				1946A6222F435477003DAB03 /* ProfileViewModel.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -494,6 +544,7 @@
 				1910D6332F3EE52A00563BE0 /* GoogleSignInManager.swift in Sources */,
 				19DF55182F35F96F008392F3 /* ExView.swift in Sources */,
 				19DF55192F35F96F008392F3 /* ExString.swift in Sources */,
+				1946A6152F434A44003DAB03 /* GLoginResponseModel.swift in Sources */,
 				19DF551A2F35F96F008392F3 /* ExDate.swift in Sources */,
 				19DF551B2F35F96F008392F3 /* ExDateFormatter.swift in Sources */,
 				19DF54FD2F35F4D0008392F3 /* NetworkAppState.swift in Sources */,
@@ -501,11 +552,14 @@
 				1931E17F2F3C5DBE00C5A38F /* LikedVideosAPIService.swift in Sources */,
 				1931E17C2F3C5D6400C5A38F /* LikedVideosResponseModel.swift in Sources */,
 				19DF54FE2F35F4D0008392F3 /* AppRoute.swift in Sources */,
+				1946A61A2F434C88003DAB03 /* GLoginViewModel.swift in Sources */,
 				1931E1742F3C571800C5A38F /* AssetsAPIService.swift in Sources */,
 				1931E1772F3C577200C5A38F /* AssetsViewModel.swift in Sources */,
+				1946A61F2F435369003DAB03 /* ProfileResponseModel.swift in Sources */,
 				19DF55062F35F6B6008392F3 /* HomeView.swift in Sources */,
 				19DF54FF2F35F4D0008392F3 /* NavigationControllerRootView.swift in Sources */,
 				19005E3A2F39D9FE00D613B1 /* CreateVideoView.swift in Sources */,
+				1946A6182F434C3C003DAB03 /* GLoginAPIService.swift in Sources */,
 				19DF55002F35F4D0008392F3 /* NetworkStatusPopupHandler.swift in Sources */,
 				19293F8E2F3320CC0000973C /* DashBoardView.swift in Sources */,
 				19DF54D72F35B36F008392F3 /* ProfileView.swift in Sources */,
@@ -528,6 +582,8 @@
 				19DF55342F35FEBE008392F3 /* HomeAPIService.swift in Sources */,
 				19DF55352F35FEBE008392F3 /* HomeResponseModel.swift in Sources */,
 				19DF55362F35FEBE008392F3 /* HomeViewModel.swift in Sources */,
+				1946A6232F435477003DAB03 /* ProfileViewModel.swift in Sources */,
+				1946A6242F435477003DAB03 /* ProfileAPIService.swift in Sources */,
 				19DF552A2F35F99A008392F3 /* KRExtensions.swift in Sources */,
 				19005E472F3A048100D613B1 /* LikedVideosView.swift in Sources */,
 				19DF552B2F35F99A008392F3 /* KRActivityIndicatorViewStyle.swift in Sources */,

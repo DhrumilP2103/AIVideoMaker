@@ -18,14 +18,20 @@ struct LikedVideosView: View {
     @Namespace private var videoTransition
     
     // Sample liked videos data - Replace with actual data from API/database
-    // Sample liked videos data - Replace with actual data from API/database
     
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
     
     var body: some View {
         ZStack {
             // Background
-            Color._041_C_32.ignoresSafeArea()
+            LinearGradient(
+                colors: [
+                    Color._041_C_32,
+                    Color(hex: "064663")
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            ).ignoresSafeArea()
             
             VStack(spacing: 0) {
                 // Header
