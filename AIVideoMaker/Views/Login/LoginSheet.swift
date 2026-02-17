@@ -12,6 +12,7 @@ struct LoginSheet: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel = GLoginViewModel()
     @EnvironmentObject var appState: NetworkAppState
+    @EnvironmentObject var router: Router
     
     @State private var isLoading = false
     @StateObject var signInManager = GoogleSignInManager.shared
@@ -165,7 +166,11 @@ struct LoginSheet: View {
                             .foregroundColor(.white.opacity(0.5))
                         
                         Button {
-                            // TODO: Open Privacy Policy
+                            withAnimation {
+                                self.dismiss()
+                            } completion: {
+                                self.router.push(PrivacyPolicyView().environmentObject(appState), route: .privacyPolicyView)
+                            }                            
                         } label: {
                             Text("Privacy Policy")
                                 .font(Utilities.font(.SemiBold, size: 12))
@@ -190,6 +195,9 @@ struct LoginSheet: View {
                     }
                 }
             }
+        }
+        .onChange(of: self.viewModel.gLoginResponseData.token) { oldValue, newValue in
+            self.dismiss()
         }
     }
     

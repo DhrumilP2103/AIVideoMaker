@@ -1,5 +1,5 @@
 {
-  "originHash" : "abc57610ed181480b559373571efb308380af0672a39b028a97d3bdb8c47731e",
+  "originHash" : "38d212add1d69a9057848427440170b2474157db7137a90c9ad0134b087532fa",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -152,6 +152,15 @@
       "state" : {
         "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
         "version" : "2.4.0"
+      }
+    },
+    {
+      "identity" : "url-image",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dmytro-anokhin/url-image",
+      "state" : {
+        "revision" : "4042f955f1fdff00ced85545e1eecdbf969b5cd0",
+        "version" : "3.1.1"
       }
     }
   ],

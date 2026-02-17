@@ -48,6 +48,21 @@
 		1946A6242F435477003DAB03 /* ProfileAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946A6212F435477003DAB03 /* ProfileAPIService.swift */; };
 		195D67392F3B143300936DBD /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 195D67382F3B143300936DBD /* IQKeyboardManagerSwift */; };
 		195D673B2F3B144D00936DBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D673A2F3B144D00936DBD /* AppDelegate.swift */; };
+		198E64082F4425EB00B60393 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 198E64072F4425EB00B60393 /* URLImage */; };
+		198E640A2F44260300B60393 /* UrlImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E64092F44260300B60393 /* UrlImageView.swift */; };
+		198E640D2F442EB400B60393 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E640C2F442EB400B60393 /* PermissionManager.swift */; };
+		198E640F2F4439A700B60393 /* FlexibleInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E640E2F4439A700B60393 /* FlexibleInt.swift */; };
+		198E64112F4461B100B60393 /* ProfileUpdateResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E64102F4461B100B60393 /* ProfileUpdateResponseModel.swift */; };
+		198E64132F4472C100B60393 /* ImageViewerRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E64122F4472C100B60393 /* ImageViewerRemote.swift */; };
+		198E64152F4474AA00B60393 /* Zoomable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E64142F4474AA00B60393 /* Zoomable.swift */; };
+		198E64182F447BCC00B60393 /* GlobalResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E64172F447BCC00B60393 /* GlobalResponseModel.swift */; };
+		198E641C2F447CE500B60393 /* LikeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E641B2F447CE500B60393 /* LikeViewModel.swift */; };
+		198E641D2F447CE500B60393 /* LikeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E641A2F447CE500B60393 /* LikeAPIService.swift */; };
+		198E641F2F44870700B60393 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E641E2F44870700B60393 /* PrivacyPolicyView.swift */; };
+		198E64212F44878A00B60393 /* PrivacyPolicyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E64202F44878A00B60393 /* PrivacyPolicyResponseModel.swift */; };
+		198E64252F4488A200B60393 /* PrivacyPolicyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E64232F4488A200B60393 /* PrivacyPolicyAPIService.swift */; };
+		198E64262F4488A200B60393 /* PrivacyPolicyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E64242F4488A200B60393 /* PrivacyPolicyViewModel.swift */; };
+		198E64292F44890F00B60393 /* HTMLStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E64282F44890F00B60393 /* HTMLStringView.swift */; };
 		19D6BA562F346213009805E6 /* VideoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D6BA542F346213009805E6 /* VideoCacheManager.swift */; };
 		19D6BA582F347B12009805E6 /* VideoReelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D6BA572F347B12009805E6 /* VideoReelsView.swift */; };
 		19DF54D72F35B36F008392F3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF54D62F35B36F008392F3 /* ProfileView.swift */; };
@@ -124,6 +139,20 @@
 		1946A6212F435477003DAB03 /* ProfileAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPIService.swift; sourceTree = "<group>"; };
 		1946A6222F435477003DAB03 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		195D673A2F3B144D00936DBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		198E64092F44260300B60393 /* UrlImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlImageView.swift; sourceTree = "<group>"; };
+		198E640C2F442EB400B60393 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
+		198E640E2F4439A700B60393 /* FlexibleInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleInt.swift; sourceTree = "<group>"; };
+		198E64102F4461B100B60393 /* ProfileUpdateResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateResponseModel.swift; sourceTree = "<group>"; };
+		198E64122F4472C100B60393 /* ImageViewerRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerRemote.swift; sourceTree = "<group>"; };
+		198E64142F4474AA00B60393 /* Zoomable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zoomable.swift; sourceTree = "<group>"; };
+		198E64172F447BCC00B60393 /* GlobalResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalResponseModel.swift; sourceTree = "<group>"; };
+		198E641A2F447CE500B60393 /* LikeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeAPIService.swift; sourceTree = "<group>"; };
+		198E641B2F447CE500B60393 /* LikeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewModel.swift; sourceTree = "<group>"; };
+		198E641E2F44870700B60393 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		198E64202F44878A00B60393 /* PrivacyPolicyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyResponseModel.swift; sourceTree = "<group>"; };
+		198E64232F4488A200B60393 /* PrivacyPolicyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyAPIService.swift; sourceTree = "<group>"; };
+		198E64242F4488A200B60393 /* PrivacyPolicyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewModel.swift; sourceTree = "<group>"; };
+		198E64282F44890F00B60393 /* HTMLStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLStringView.swift; sourceTree = "<group>"; };
 		19D6BA542F346213009805E6 /* VideoCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCacheManager.swift; sourceTree = "<group>"; };
 		19D6BA572F347B12009805E6 /* VideoReelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoReelsView.swift; sourceTree = "<group>"; };
 		19DF54D62F35B36F008392F3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -168,6 +197,7 @@
 				19005E3F2F39DBE000D613B1 /* Mantis in Frameworks */,
 				1910D6362F3EE57600563BE0 /* GoogleSignIn in Frameworks */,
 				19DF54E62F35F130008392F3 /* Alamofire in Frameworks */,
+				198E64082F4425EB00B60393 /* URLImage in Frameworks */,
 				195D67392F3B143300936DBD /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,18 +234,16 @@
 		19293F852F3320B10000973C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				19DF55052F35F6B6008392F3 /* HomeView */,
-				1931E16E2F3C56D300C5A38F /* AssetsView */,
-				1931E1782F3C5D4700C5A38F /* LikedVideosView */,
+				19293F8D2F3320CC0000973C /* DashBoardView.swift */,
+				19DF55052F35F6B6008392F3 /* Home */,
+				1931E16E2F3C56D300C5A38F /* Assets */,
+				1931E1782F3C5D4700C5A38F /* LikedVideos */,
 				1946A6132F434A3C003DAB03 /* Login */,
 				1946A61D2F43535E003DAB03 /* Profile */,
+				198E64162F447BC400B60393 /* Videos */,
+				198E64222F44878D00B60393 /* PrivacyPolicy */,
 				19005E4A2F3A0D0400D613B1 /* BuyCreditsView.swift */,
-				19005E392F39D9FE00D613B1 /* CreateVideoView.swift */,
-				19293F8D2F3320CC0000973C /* DashBoardView.swift */,
-				19005E252F399F7C00D613B1 /* EditProfileView.swift */,
 				19005E482F3A07B000D613B1 /* SubscriptionPlansView.swift */,
-				19293FA32F3365B50000973C /* VideoDetailView.swift */,
-				19D6BA572F347B12009805E6 /* VideoReelsView.swift */,
 				19005E272F39A42700D613B1 /* PopUp */,
 			);
 			path = Views;
@@ -230,9 +258,6 @@
 				19293F872F3320B10000973C /* Assets.xcassets */,
 				19293F882F3320B10000973C /* ContentView.swift */,
 				195D673A2F3B144D00936DBD /* AppDelegate.swift */,
-				1910D6322F3EE52A00563BE0 /* GoogleSignInManager.swift */,
-				19DF54F62F35F4D0008392F3 /* NavigationHelper */,
-				19DF54FA2F35F4D0008392F3 /* NetworkPopupHandler */,
 				19DF54ED2F35F161008392F3 /* Helper */,
 				1931E1752F3C575B00C5A38F /* GlobalModel */,
 				19DF54DF2F35F0BB008392F3 /* API */,
@@ -263,13 +288,13 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		1931E16E2F3C56D300C5A38F /* AssetsView */ = {
+		1931E16E2F3C56D300C5A38F /* Assets */ = {
 			isa = PBXGroup;
 			children = (
 				1931E1722F3C56F600C5A38F /* Service */,
 				1931E16D2F3C56D300C5A38F /* AssetsView.swift */,
 			);
-			path = AssetsView;
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		1931E1722F3C56F600C5A38F /* Service */ = {
@@ -285,18 +310,20 @@
 		1931E1752F3C575B00C5A38F /* GlobalModel */ = {
 			isa = PBXGroup;
 			children = (
+				198E64172F447BCC00B60393 /* GlobalResponseModel.swift */,
 				1931E16A2F3C568100C5A38F /* ResponseVideos.swift */,
+				198E640E2F4439A700B60393 /* FlexibleInt.swift */,
 			);
 			path = GlobalModel;
 			sourceTree = "<group>";
 		};
-		1931E1782F3C5D4700C5A38F /* LikedVideosView */ = {
+		1931E1782F3C5D4700C5A38F /* LikedVideos */ = {
 			isa = PBXGroup;
 			children = (
 				1931E17D2F3C5DB100C5A38F /* Service */,
 				19005E462F3A048100D613B1 /* LikedVideosView.swift */,
 			);
-			path = LikedVideosView;
+			path = LikedVideos;
 			sourceTree = "<group>";
 		};
 		1931E17D2F3C5DB100C5A38F /* Service */ = {
@@ -333,6 +360,7 @@
 			children = (
 				1946A6202F43537F003DAB03 /* Service */,
 				19DF54D62F35B36F008392F3 /* ProfileView.swift */,
+				19005E252F399F7C00D613B1 /* EditProfileView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -341,8 +369,59 @@
 			isa = PBXGroup;
 			children = (
 				1946A61E2F435369003DAB03 /* ProfileResponseModel.swift */,
+				198E64102F4461B100B60393 /* ProfileUpdateResponseModel.swift */,
 				1946A6212F435477003DAB03 /* ProfileAPIService.swift */,
 				1946A6222F435477003DAB03 /* ProfileViewModel.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		198E640B2F44261B00B60393 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				19005E3B2F39DA9F00D613B1 /* ImagePicker.swift */,
+				198E64092F44260300B60393 /* UrlImageView.swift */,
+				198E64122F4472C100B60393 /* ImageViewerRemote.swift */,
+				198E64142F4474AA00B60393 /* Zoomable.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		198E64162F447BC400B60393 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				198E64192F447BD100B60393 /* Service */,
+				19005E392F39D9FE00D613B1 /* CreateVideoView.swift */,
+				19293FA32F3365B50000973C /* VideoDetailView.swift */,
+				19D6BA572F347B12009805E6 /* VideoReelsView.swift */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
+		198E64192F447BD100B60393 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				198E641A2F447CE500B60393 /* LikeAPIService.swift */,
+				198E641B2F447CE500B60393 /* LikeViewModel.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		198E64222F44878D00B60393 /* PrivacyPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				198E64272F4488AB00B60393 /* Service */,
+				198E641E2F44870700B60393 /* PrivacyPolicyView.swift */,
+			);
+			path = PrivacyPolicy;
+			sourceTree = "<group>";
+		};
+		198E64272F4488AB00B60393 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				198E64202F44878A00B60393 /* PrivacyPolicyResponseModel.swift */,
+				198E64232F4488A200B60393 /* PrivacyPolicyAPIService.swift */,
+				198E64242F4488A200B60393 /* PrivacyPolicyViewModel.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -352,6 +431,7 @@
 			children = (
 				19D6BA542F346213009805E6 /* VideoCacheManager.swift */,
 				19DF552D2F35FE3B008392F3 /* VideoManager.swift */,
+				1910D6322F3EE52A00563BE0 /* GoogleSignInManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -371,11 +451,15 @@
 		19DF54ED2F35F161008392F3 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				19DF54F62F35F4D0008392F3 /* NavigationHelper */,
+				19DF54FA2F35F4D0008392F3 /* NetworkPopupHandler */,
 				19293F9F2F3349030000973C /* Utilities */,
 				19DF55242F35F99A008392F3 /* Loader */,
 				19DF55172F35F96F008392F3 /* Extension */,
 				19DF54EC2F35F161008392F3 /* Lib.swift */,
-				19005E3B2F39DA9F00D613B1 /* ImagePicker.swift */,
+				198E640C2F442EB400B60393 /* PermissionManager.swift */,
+				198E64282F44890F00B60393 /* HTMLStringView.swift */,
+				198E640B2F44261B00B60393 /* Images */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -400,13 +484,13 @@
 			path = NetworkPopupHandler;
 			sourceTree = "<group>";
 		};
-		19DF55052F35F6B6008392F3 /* HomeView */ = {
+		19DF55052F35F6B6008392F3 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				19DF55332F35FEBE008392F3 /* Service */,
 				19DF55042F35F6B6008392F3 /* HomeView.swift */,
 			);
-			path = HomeView;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		19DF55172F35F96F008392F3 /* Extension */ = {
@@ -438,8 +522,8 @@
 		19DF55332F35FEBE008392F3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				19DF55302F35FEBE008392F3 /* HomeAPIService.swift */,
 				19DF55312F35FEBE008392F3 /* HomeResponseModel.swift */,
+				19DF55302F35FEBE008392F3 /* HomeAPIService.swift */,
 				19DF55322F35FEBE008392F3 /* HomeViewModel.swift */,
 			);
 			path = Service;
@@ -467,6 +551,7 @@
 				195D67382F3B143300936DBD /* IQKeyboardManagerSwift */,
 				1910D6352F3EE57600563BE0 /* GoogleSignIn */,
 				1910D6372F3EE57600563BE0 /* GoogleSignInSwift */,
+				198E64072F4425EB00B60393 /* URLImage */,
 			);
 			productName = AIVideoMaker;
 			productReference = 19293F762F3320950000973C /* AIVideoMaker.app */;
@@ -501,6 +586,7 @@
 				19005E3D2F39DBE000D613B1 /* XCRemoteSwiftPackageReference "Mantis" */,
 				195D67372F3B143300936DBD /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				1910D6342F3EE57600563BE0 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				198E64062F4425EB00B60393 /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 19293F772F3320950000973C /* Products */;
@@ -534,21 +620,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				19DF550F2F35F7D6008392F3 /* AppKey.swift in Sources */,
+				198E64182F447BCC00B60393 /* GlobalResponseModel.swift in Sources */,
 				1931E16F2F3C56D300C5A38F /* AssetsView.swift in Sources */,
 				19DF55102F35F7D6008392F3 /* APIError.swift in Sources */,
 				19DF54FB2F35F4D0008392F3 /* NavigationConfiguration.swift in Sources */,
 				19DF55022F35F525008392F3 /* BaseViewModel.swift in Sources */,
 				1931E1712F3C56F100C5A38F /* AssetsResponseModel.swift in Sources */,
 				19DF54FC2F35F4D0008392F3 /* NetworkError.swift in Sources */,
+				198E64292F44890F00B60393 /* HTMLStringView.swift in Sources */,
 				19005E292F39A45D00D613B1 /* ImageSourcePickerPopup.swift in Sources */,
 				1910D6332F3EE52A00563BE0 /* GoogleSignInManager.swift in Sources */,
 				19DF55182F35F96F008392F3 /* ExView.swift in Sources */,
 				19DF55192F35F96F008392F3 /* ExString.swift in Sources */,
+				198E64132F4472C100B60393 /* ImageViewerRemote.swift in Sources */,
 				1946A6152F434A44003DAB03 /* GLoginResponseModel.swift in Sources */,
 				19DF551A2F35F96F008392F3 /* ExDate.swift in Sources */,
 				19DF551B2F35F96F008392F3 /* ExDateFormatter.swift in Sources */,
+				198E640A2F44260300B60393 /* UrlImageView.swift in Sources */,
 				19DF54FD2F35F4D0008392F3 /* NetworkAppState.swift in Sources */,
+				198E64212F44878A00B60393 /* PrivacyPolicyResponseModel.swift in Sources */,
 				195D673B2F3B144D00936DBD /* AppDelegate.swift in Sources */,
+				198E641F2F44870700B60393 /* PrivacyPolicyView.swift in Sources */,
 				1931E17F2F3C5DBE00C5A38F /* LikedVideosAPIService.swift in Sources */,
 				1931E17C2F3C5D6400C5A38F /* LikedVideosResponseModel.swift in Sources */,
 				19DF54FE2F35F4D0008392F3 /* AppRoute.swift in Sources */,
@@ -571,9 +663,11 @@
 				19293F8A2F3320B10000973C /* AIVideoMakerApp.swift in Sources */,
 				1931E1812F3C5E0000C5A38F /* LikedVideosViewModel.swift in Sources */,
 				19DF54EE2F35F161008392F3 /* Lib.swift in Sources */,
+				198E640F2F4439A700B60393 /* FlexibleInt.swift in Sources */,
 				19DF55252F35F99A008392F3 /* KRProgressHUDViewController.swift in Sources */,
 				1931E1832F3C7B6800C5A38F /* ConfirmationPopup.swift in Sources */,
 				19DF55262F35F99A008392F3 /* KRProgressHUDIconType.swift in Sources */,
+				198E64152F4474AA00B60393 /* Zoomable.swift in Sources */,
 				19DF55272F35F99A008392F3 /* InnerKRProgressHUD.swift in Sources */,
 				19005E452F39E99B00D613B1 /* LoginSheet.swift in Sources */,
 				19DF55282F35F99A008392F3 /* KRActivityIndicatorView.swift in Sources */,
@@ -585,15 +679,21 @@
 				1946A6232F435477003DAB03 /* ProfileViewModel.swift in Sources */,
 				1946A6242F435477003DAB03 /* ProfileAPIService.swift in Sources */,
 				19DF552A2F35F99A008392F3 /* KRExtensions.swift in Sources */,
+				198E64112F4461B100B60393 /* ProfileUpdateResponseModel.swift in Sources */,
 				19005E472F3A048100D613B1 /* LikedVideosView.swift in Sources */,
 				19DF552B2F35F99A008392F3 /* KRActivityIndicatorViewStyle.swift in Sources */,
 				19DF552C2F35F99A008392F3 /* Extensions.swift in Sources */,
 				19D6BA582F347B12009805E6 /* VideoReelsView.swift in Sources */,
+				198E641C2F447CE500B60393 /* LikeViewModel.swift in Sources */,
+				198E641D2F447CE500B60393 /* LikeAPIService.swift in Sources */,
+				198E64252F4488A200B60393 /* PrivacyPolicyAPIService.swift in Sources */,
+				198E64262F4488A200B60393 /* PrivacyPolicyViewModel.swift in Sources */,
 				19005E4B2F3A0D0400D613B1 /* BuyCreditsView.swift in Sources */,
 				19005E492F3A07B000D613B1 /* SubscriptionPlansView.swift in Sources */,
 				19DF54E22F35F0BB008392F3 /* APIService.swift in Sources */,
 				19DF54E32F35F0BB008392F3 /* APIConstant.swift in Sources */,
 				19293FA02F3349030000973C /* Utilities.swift in Sources */,
+				198E640D2F442EB400B60393 /* PermissionManager.swift in Sources */,
 				19DF552E2F35FE3B008392F3 /* VideoManager.swift in Sources */,
 				19D6BA562F346213009805E6 /* VideoCacheManager.swift in Sources */,
 				19293F8B2F3320B10000973C /* ContentView.swift in Sources */,
@@ -735,6 +835,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AIVideoMaker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Rimoo;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) camera use for the take photo";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) photo use for the profile";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -774,6 +877,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AIVideoMaker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Rimoo;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) camera use for the take photo";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) photo use for the profile";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -850,6 +956,14 @@
 				minimumVersion = 8.0.2;
 			};
 		};
+		198E64062F4425EB00B60393 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 		19DF54E42F35F130008392F3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -880,6 +994,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 195D67372F3B143300936DBD /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		198E64072F4425EB00B60393 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 198E64062F4425EB00B60393 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
 		19DF54E52F35F130008392F3 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

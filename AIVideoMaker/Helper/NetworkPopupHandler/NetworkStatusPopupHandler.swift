@@ -36,17 +36,21 @@ struct NetworkStatusPopupHandler: ViewModifier {
                     .animation(.easeInOut, value: appState.isNoInternet || appState.isAuthExpired || appState.showConfirmationPopup)
             }
             .overlay(
-                appState.showConfirmationPopup ?
-                    AnyView(ConfirmationPopup(
-                        isPresented: $appState.showConfirmationPopup,
-                        title: appState.popupTitle,
-                        message: appState.popupMessage,
-                        icon: appState.popupIcon,
-                        confirmActionTitle: appState.popupConfirmTitle,
-                        isDestructive: appState.popupIsDestructive,
-                        confirmAction: appState.popupAction
-                    )) :
-                    AnyView(EmptyView())
+                ZStack {
+                    if appState.showConfirmationPopup {
+                        ConfirmationPopup(
+                            title: appState.popupTitle,
+                            message: appState.popupMessage,
+                            icon: appState.popupIcon,
+                            confirmActionTitle: appState.popupConfirmTitle,
+                            isDestructive: appState.popupIsDestructive,
+                            confirmAction: appState.popupAction,
+                            dismissAction: {
+                                appState.showConfirmationPopup = false
+                            }
+                        )
+                    }
+                }
             )
     }
 }

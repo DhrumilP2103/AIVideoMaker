@@ -19,4 +19,5 @@ enum AppRoute {
     case likedVideosView
     case buyCreditsView
     case createVideoView
+    case privacyPolicyView
 }

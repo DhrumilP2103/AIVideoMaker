@@ -48,14 +48,14 @@ struct HomeView: View {
                             ],
                             spacing: 15
                         ) {
-                            ForEach(Array(filteredVideos.enumerated()), id: \.element.id) {
-                                videoIndex,
-                                video in
+//                            ForEach(Array(filteredVideos.enumerated()), id: \.element.id) {
+                            ForEach(filteredVideos.indices, id: \.self) { index in
+                                let video = filteredVideos[index]
                                 VideoCard(video: video, isActive: .constant(isActive))
                                     .onTapGesture {
                                         withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                                             selectedVideo = video
-                                            selectedVideoIndex = videoIndex
+                                            selectedVideoIndex = index
                                             
                                             let filteredVideos = (viewModel.homeResponseVideos)
                                                 .filter { $0.categoryHashKey == selectedCategoryId }
@@ -65,7 +65,7 @@ struct HomeView: View {
                                                     videos: filteredVideos,
                                                     startIndex: selectedVideoIndex,
                                                     animation: videoTransition
-                                                ),
+                                                ).environmentObject(appState),
                                                 route: .videoReelsView
                                             )
                                         }

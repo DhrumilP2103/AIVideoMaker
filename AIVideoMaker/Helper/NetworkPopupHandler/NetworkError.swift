@@ -12,4 +12,8 @@ enum NetworkError {
     case likedVideos
     case gLogin
     case profile
+    case profileUpdate
+    case like
+    case privacy
+    case logout
 }

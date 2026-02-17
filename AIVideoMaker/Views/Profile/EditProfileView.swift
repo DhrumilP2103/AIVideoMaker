@@ -4,13 +4,22 @@ import PhotosUI
 struct EditProfileView: View {
     @Environment(\.dismiss) var dismiss
     
+    @EnvironmentObject var appState: NetworkAppState
+    @StateObject var viewModel = ProfileViewModel()
+    
+    // Permission Manager
+    @StateObject private var permissionManager = PermissionManager.shared
+    
+    
     // Form States
-    @State private var firstName: String = "John"
-    @State private var lastName: String = "Doe"
+    @State private var name: String = ""
+    //    @State private var lastName: String = "Doe"
     @State private var selectedImage: UIImage?
     @State private var showImagePicker = false
     @State private var imagePickerSource: UIImagePickerController.SourceType = .photoLibrary
     @State private var showSourceSelection = false
+    
+    @State private var showProfilePreview = false
     
     
     var body: some View {
@@ -65,9 +74,10 @@ struct EditProfileView: View {
                         VStack(spacing: 16) {
                             
                             Button {
-                                let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-                                impactFeedback.impactOccurred()
-                                showSourceSelection = true
+                                self.showProfilePreview = true
+//                                let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+//                                impactFeedback.impactOccurred()
+//                                showSourceSelection = true
                             } label: {
                                 ZStack(alignment: .bottomTrailing) {
                                     // Avatar with gradient border
@@ -79,6 +89,12 @@ struct EditProfileView: View {
                                                 .scaledToFill()
                                                 .frame(width: 116, height: 116)
                                                 .clipShape(Circle())
+                                        } else if self.viewModel.profileResponseData.profileImage != "" {
+                                            UrlImageView(
+                                                imageURL: URL(string: self.viewModel.profileResponseData.profileImage ?? ""),
+                                                width: 116, height: 116,
+                                                cornerRadius: 58
+                                            )
                                         } else {
                                             Image("ic_profile")
                                                 .resizable()
@@ -89,33 +105,33 @@ struct EditProfileView: View {
                                     }
                                     
                                     // Edit Image Button
-                                    ZStack {
-                                        Circle()
-                                            .fill(
-                                                LinearGradient(
-                                                    colors: [
-                                                        Color(hex: "667eea"),
-                                                        Color(hex: "764ba2")
-                                                    ],
-                                                    startPoint: .topLeading,
-                                                    endPoint: .bottomTrailing
-                                                )
-                                            )
-                                            .frame(width: 36, height: 36)
-                                        
-                                        Image("ic_camera").resizable()
-                                            .frame(width: 16, height: 16)
-                                            .foregroundColor(.white)
-                                    }
-                                    .overlay(
-                                        Circle()
-                                            .stroke(Color._041_C_32, lineWidth: 3)
-                                    )
+//                                    ZStack {
+//                                        Circle()
+//                                            .fill(
+//                                                LinearGradient(
+//                                                    colors: [
+//                                                        Color(hex: "667eea"),
+//                                                        Color(hex: "764ba2")
+//                                                    ],
+//                                                    startPoint: .topLeading,
+//                                                    endPoint: .bottomTrailing
+//                                                )
+//                                            )
+//                                            .frame(width: 36, height: 36)
+//                                        
+//                                        Image("ic_camera").resizable()
+//                                            .frame(width: 16, height: 16)
+//                                            .foregroundColor(.white)
+//                                    }
+//                                    .overlay(
+//                                        Circle()
+//                                            .stroke(Color._041_C_32, lineWidth: 3)
+//                                    )
                                 }
                             }
-                            Text("Tap to change photo")
-                                .font(Utilities.font(.Medium, size: 14))
-                                .foregroundColor(.white.opacity(0.6))
+//                            Text("Tap to change photo")
+//                                .font(Utilities.font(.Medium, size: 14))
+//                                .foregroundColor(.white.opacity(0.6))
                         }
                         .padding(.top, 10)
                         
@@ -123,19 +139,19 @@ struct EditProfileView: View {
                         VStack(spacing: 20) {
                             // First Name Field
                             ProfileInputField(
-                                title: "First Name",
-                                placeholder: "Enter first name",
-                                text: $firstName,
+                                title: "Name",
+                                placeholder: "Enter name",
+                                text: $name,
                                 icon: "ic_person"
                             )
                             
                             // Last Name Field
-                            ProfileInputField(
-                                title: "Last Name",
-                                placeholder: "Enter last name",
-                                text: $lastName,
-                                icon: "ic_person"
-                            )
+//                            ProfileInputField(
+//                                title: "Last Name",
+//                                placeholder: "Enter last name",
+//                                text: $lastName,
+//                                icon: "ic_person"
+//                            )
                         }
                         .padding(.horizontal, 24)
                         
@@ -166,9 +182,8 @@ struct EditProfileView: View {
                                         )
                                     )
                             )
-//                            .shadow(color: Color(hex: "667eea").opacity(0.4), radius: 15, x: 0, y: 8)
                         }
-                        .buttonStyle(SaveButtonStyle())
+                        .buttonStyle(BtnStyle())
                         .padding(.horizontal, 24)
                         .padding(.top, 12)
                     }
@@ -176,39 +191,89 @@ struct EditProfileView: View {
                 }
             }
         }
-        .navigationBarHidden(true)
+        .onAppear() {
+            self.name = self.viewModel.profileResponseData.name ?? ""
+        }
+        .networkStatusPopups(viewModel: viewModel)
+        .onChange(of: appState.retryRequestedForAPI) { _, apiName in
+            guard let name = apiName else { return }
+            if checkInternet() {
+                withAnimation {
+                    appState.isNoInternet = false
+                    if let retry = viewModel.retryAPIs[name] {
+                        retry()
+                        appState.retryRequestedForAPI = nil
+                    }
+                }
+            }
+        }
+        .fullScreenCover(isPresented: self.$showProfilePreview) {
+            ImageViewerRemote(imageURL: .constant(self.viewModel.profileResponseData.profileImage ?? ""), viewerShown: self.$showProfilePreview, isShowCloseButton: true)
+        }
+        .onChange(of: viewModel.profileUpdateSuccess) { _, success in
+            if success {
+                viewModel.profileUpdateSuccess = false
+                dismiss()
+            }
+        }
         .overlay {
-            if showSourceSelection {
+            if self.showSourceSelection {
                 ImageSourcePickerPopup(
                     isPresented: $showSourceSelection,
                     onCameraSelected: {
-                        imagePickerSource = .camera
-                        showImagePicker = true
+                        // Request camera permission before showing picker
+                        permissionManager.requestCameraAccess { granted, message in
+                            if granted {
+                                self.imagePickerSource = .camera
+                                self.showImagePicker = true
+                            }
+                        }
                     },
                     onGallerySelected: {
-                        imagePickerSource = .photoLibrary
-                        showImagePicker = true
+                        // Request photo library permission before showing picker
+                        permissionManager.requestPhotoLibraryAccess { granted, message in
+                            if granted {
+                                self.imagePickerSource = .photoLibrary
+                                self.showImagePicker = true
+                            }
+                        }
                     }
                 )
             }
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(
-                sourceType: imagePickerSource,
+                sourceType: self.imagePickerSource,
                 selectedImage: $selectedImage
             )
         }
+        .alert(permissionManager.alertTitle, isPresented: $permissionManager.showAlert) {
+            Button("Cancel", role: .cancel) { }
+            if let url = permissionManager.settingsURL {
+                Button("Settings") {
+                    UIApplication.shared.open(url)
+                }
+            }
+        } message: {
+            Text(permissionManager.alertMessage)
+        }
     }
     
+    
     private func saveProfile() {
-        // TODO: Implement profile save logic
-        print("Saving profile:")
-        print("First Name: \(firstName)")
-        print("Last Name: \(lastName)")
-        print("Image: \(selectedImage != nil ? "Updated" : "No change")")
+        // Validate name is not empty
+        guard !name.trimmingCharacters(in: .whitespaces).isEmpty else {
+            DEBUGLOG("Name cannot be empty")
+            return
+        }
         
-        // Dismiss after save
-        dismiss()
+        // Get current email from profile data
+        let email = viewModel.profileResponseData.email ?? ""
+        
+        // Call update profile API
+        self.viewModel.name = self.name
+        self.viewModel.updateProfile(appState: appState)
+        
     }
 }
 
@@ -262,19 +327,8 @@ struct ProfileInputField: View {
         }
     }
 }
-
-// MARK: - Picker Button Style
-struct PickerButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
-            .opacity(configuration.isPressed ? 0.8 : 1.0)
-            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: configuration.isPressed)
-    }
-}
-
 // MARK: - Save Button Style
-struct SaveButtonStyle: ButtonStyle {
+struct BtnStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.96 : 1.0)

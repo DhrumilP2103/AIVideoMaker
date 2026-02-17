@@ -26,10 +26,10 @@ class VideoCacheManager {
     /// Returns the URL to use for playback - cached if available, otherwise remote
     func getURLToPlay(for remoteURL: URL) -> URL {
         if let cachedURL = getCachedURL(for: remoteURL) {
-            print("✓ Cache HIT: \(remoteURL.lastPathComponent)")
+            DEBUGLOG("✓ Cache HIT: \(remoteURL.lastPathComponent)")
             return cachedURL
         } else {
-            print("✗ Cache MISS: \(remoteURL.lastPathComponent)")
+            DEBUGLOG("✗ Cache MISS: \(remoteURL.lastPathComponent)")
             cacheVideo(from: remoteURL)
             return remoteURL
         }
@@ -78,7 +78,7 @@ class VideoCacheManager {
             return
         }
         
-        print("⬇ Downloading: \(fileName)")
+        DEBUGLOG("⬇ Downloading: \(fileName)")
         
         let task = URLSession.shared.downloadTask(with: url) { [weak self] tempURL, response, error in
             guard let self = self else { return }
@@ -90,7 +90,7 @@ class VideoCacheManager {
             }
             
             guard let tempURL = tempURL, error == nil else {
-                print("❌ Download failed: \(fileName) - \(error?.localizedDescription ?? "Unknown")")
+                DEBUGLOG("❌ Download failed: \(fileName) - \(error?.localizedDescription ?? "Unknown")")
                 return
             }
             
@@ -99,9 +99,9 @@ class VideoCacheManager {
                     try self.fileManager.removeItem(at: fileURL)
                 }
                 try self.fileManager.moveItem(at: tempURL, to: fileURL)
-                print("✓ Cached: \(fileName)")
+                DEBUGLOG("✓ Cached: \(fileName)")
             } catch {
-                print("❌ Save failed: \(fileName) - \(error.localizedDescription)")
+                DEBUGLOG("❌ Save failed: \(fileName) - \(error.localizedDescription)")
             }
         }
         task.resume()
@@ -118,7 +118,7 @@ class VideoCacheManager {
         guard let cacheDirectory = cacheDirectory else { return }
         try? fileManager.removeItem(at: cacheDirectory)
         createCacheDirectory()
-        print("🗑 Cache cleared")
+        DEBUGLOG("🗑 Cache cleared")
     }
     
     /// Get total cache size in bytes

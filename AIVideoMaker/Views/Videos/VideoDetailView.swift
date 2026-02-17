@@ -8,6 +8,9 @@ struct VideoDetailView: View {
     @Binding var isCurrentVideo: Bool
     @EnvironmentObject var router: Router
     
+    @EnvironmentObject var appState: NetworkAppState
+    @StateObject var viewModel = LikeViewModel()
+    
     @State private var player: AVPlayer?
     @State private var isPlaying: Bool = true
     @State private var isLoading: Bool = true
@@ -30,7 +33,7 @@ struct VideoDetailView: View {
                         CustomAVPlayerView(player: player)
                             .ignoresSafeArea()
                     }
-                    .matchedGeometryEffect(id: video.id, in: animation)
+                    .matchedGeometryEffect(id: video.id?.value ?? "", in: animation)
                     .onTapGesture {
                         withAnimation(.spring()) {
                             isPlaying.toggle()
@@ -117,9 +120,12 @@ struct VideoDetailView: View {
                 VStack(spacing: 25) {
                     Spacer()
                     
-                    SideActionButton(icon: "ic_heart", label: "\(video.likes ?? 0)", color: .red)
-                    SideActionButton(icon: "ic_share", label: "Share")
-                    SideActionButton(icon: "ic_download", label: "Download")
+                    SideActionButton(icon: "ic_heart", label: video.likes?.value ?? "", color: .red) {
+                        self.viewModel.videoHashKey = video.hashKey ?? ""
+                        self.viewModel.likeVideo(appState: self.appState)
+                    }
+                    SideActionButton(icon: "ic_share", label: "Share") {}
+                    SideActionButton(icon: "ic_download", label: "Download"){}
                     
                     Spacer()
                         .frame(height: 150)
@@ -218,6 +224,19 @@ struct VideoDetailView: View {
             player?.pause()
             player = nil
         }
+        .networkStatusPopups(viewModel: viewModel)
+        .onChange(of: appState.retryRequestedForAPI) { _, apiName in
+            guard let name = apiName else { return }
+            if checkInternet() {
+                withAnimation {
+                    appState.isNoInternet = false
+                    if let retry = viewModel.retryAPIs[name] {
+                        retry()
+                        appState.retryRequestedForAPI = nil
+                    }
+                }
+            }
+        }
         .sheet(isPresented: $showLoginSheet) {
             LoginSheet()
                 .presentationDetents([.medium])
@@ -285,12 +304,13 @@ struct SideActionButton: View {
     let icon: String
     let label: String
     var color: Color = .white
+    let action: () -> Void
     private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
     
     var body: some View {
         Button {
             impactFeedback.impactOccurred()
-            // Action
+            self.action()
         } label: {
             VStack(spacing: 4) {
                 ZStack {

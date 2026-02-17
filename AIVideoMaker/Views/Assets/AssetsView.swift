@@ -133,7 +133,8 @@ struct DateSection: View {
                 ],
                 spacing: 15
             ) {
-                ForEach(videos) { video in
+                ForEach(videos.indices, id: \.self) { index in
+                    let video = videos[index]
                     AssetVideoCard(video: video)
                         .onTapGesture {
                             onVideoTap(video)

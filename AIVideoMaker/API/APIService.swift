@@ -115,63 +115,172 @@ class APIService: NSObject {
 }
 
 extension APIService {
-    public func makePostHeaderImageCall(url: String, parameters: [String: Any], isVideo: Bool = false, completionHandler: @escaping (AnyObject?,Int, NSError?) -> ()) {
+    
+    public func makePostHeaderImageCall(
+        url: String,
+        parameters: [String: Any],
+        image: UIImage?,
+        imageKey: String,
+        completionHandler: @escaping (AnyObject?, Int, NSError?) -> ()
+    ) {
         
-        let token : String = UserDefaults.standard.value(forKey: "bearer_token") as? String ?? ""
+        let token: String = UserDefaults.standard.string(forKey: "bearer_token") ?? ""
+        
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(token)"
         ]
         
-        DEBUGLOG("API Name :::::::::::::::::: \(url)")
-        DEBUGLOG("Parameters ::::::::::::::::::")
-        DEBUGLOG(parameters)
-        DEBUGLOG("::::::::::::::::::")
-        
         AF.upload(
             multipartFormData: { multipartFormData in
+                
+                // ✅ Add Normal Parameters (JSON fields)
                 for (key, value) in parameters {
-                    if let image = value as? UIImage {
-                        if image != UIImage(){
-                            multipartFormData.append(image.jpegData(compressionQuality: 0.5)!, withName: key,fileName: ".jpg", mimeType: "image/jpg")
-                            
-                        } else {
-                            
-                        }
-                    } else if let image = value as? Data {
-                        if isVideo {
-                            multipartFormData.append(image, withName: key,fileName: ".mp4", mimeType: "video/mp4")
-                        } else {
-                            multipartFormData.append(image, withName: key,fileName: ".pdf", mimeType: "application/pdf")
-                        }
+                    if let stringValue = "\(value)".data(using: .utf8) {
+                        multipartFormData.append(stringValue, withName: key)
                     }
-                    else {
-                        multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
-                    }
+                }
+                
+                // ✅ Add Image
+                if let image = image,
+                   let imageData = image.jpegData(compressionQuality: 0.7) {
+                    
+                    multipartFormData.append(
+                        imageData,
+                        withName: imageKey,
+                        fileName: "image.jpg",
+                        mimeType: "image/jpeg"
+                    )
                 }
             },
             to: url,
-            method: HTTPMethod.post,
-            headers: headers).responseData(queue: .main) { (response) in
-                DEBUGLOG(String(data: response.data ?? Data(), encoding: .utf8) ?? "")
-                switch response.result {
-                    
-                case .success(_):
-                    if let value = response.value {
-                        let statusCode = response.response?.statusCode ?? 0
-                        if statusCode == 200 {
-                            let dictString = String(decoding: value, as: UTF8.self)
-//                            DEBUGLOG(dictString)
-                            completionHandler(dictString as AnyObject, statusCode, nil)
-                        } else{
-                            let error = NSError(domain: "com.eezytutorials.iosTuts", code: (response.response?.statusCode)!, userInfo: ["Error reason" : "Invalid Outut"])
-                            completionHandler(nil, statusCode, error)
-                        }
-                    }
-                    
-                case .failure(_):
-                    let error = NSError(domain: "com.eezytutorials.iosTuts", code: (response.response?.statusCode ?? 0), userInfo: ["Error reason" : "Invalid Outut"])
-                    completionHandler(nil, 100, error as NSError)
-                }
+            method: .post,
+            headers: headers
+        )
+        .responseData { response in
+            DEBUGLOG(String(data: response.data ?? Data(), encoding: .utf8) ?? "")
+            switch response.result {
+                
+            case .success(let value):
+                let statusCode = response.response?.statusCode ?? 0
+                let responseString = String(decoding: value, as: UTF8.self)
+                completionHandler(responseString as AnyObject, statusCode, nil)
+                
+            case .failure(let error):
+                completionHandler(nil, response.response?.statusCode ?? 0, error as NSError)
             }
+        }
     }
+
+    
+//    public func makePostHeaderImageCall(
+//        url: String,
+//        parameters: [String: Any],
+//        completionHandler: @escaping (AnyObject?, Int, NSError?) -> ()
+//    ) {
+//        
+//        let token: String = UserDefaults.standard.value(forKey: "bearer_token") as? String ?? ""
+//        
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Bearer \(token)",
+//            "Content-Type": "application/json"
+//        ]
+//        
+//        DEBUGLOG("API Name :::::::::::::::::: \(url)")
+//        DEBUGLOG("Parameters ::::::::::::::::::")
+//        DEBUGLOG(parameters)
+//        DEBUGLOG("::::::::::::::::::")
+//        
+//        AF.request(
+//            url,
+//            method: .post,
+//            parameters: parameters,
+//            encoding: JSONEncoding.default,   // ✅ Important for Raw JSON
+//            headers: headers
+//        )
+//        .responseData(queue: .main) { response in
+//            
+//            DEBUGLOG(String(data: response.data ?? Data(), encoding: .utf8) ?? "")
+//            
+//            switch response.result {
+//                
+//            case .success(let value):
+//                let statusCode = response.response?.statusCode ?? 0
+//                
+//                if statusCode == 200 {
+//                    let dictString = String(decoding: value, as: UTF8.self)
+//                    completionHandler(dictString as AnyObject, statusCode, nil)
+//                } else {
+//                    let error = NSError(
+//                        domain: "com.yourapp.error",
+//                        code: statusCode,
+//                        userInfo: ["Error reason": "Invalid Output"]
+//                    )
+//                    completionHandler(nil, statusCode, error)
+//                }
+//                
+//            case .failure(let error):
+//                completionHandler(nil, response.response?.statusCode ?? 0, error as NSError)
+//            }
+//        }
+//    }
+
+//    public func makePostHeaderImageCall(url: String, parameters: [String: Any], isVideo: Bool = false, completionHandler: @escaping (AnyObject?,Int, NSError?) -> ()) {
+//        
+//        let token : String = UserDefaults.standard.value(forKey: "bearer_token") as? String ?? ""
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Bearer \(token)"
+//        ]
+//        
+//        DEBUGLOG("API Name :::::::::::::::::: \(url)")
+//        DEBUGLOG("Parameters ::::::::::::::::::")
+//        DEBUGLOG(parameters)
+//        DEBUGLOG("::::::::::::::::::")
+//        
+//        AF.upload(
+//            multipartFormData: { multipartFormData in
+//                for (key, value) in parameters {
+//                    if let image = value as? UIImage {
+//                        if image != UIImage(){
+//                            multipartFormData.append(image.jpegData(compressionQuality: 0.5)!, withName: key,fileName: ".jpg", mimeType: "image/jpg")
+//                            
+//                        } else {
+//                            
+//                        }
+//                    } else if let image = value as? Data {
+//                        if isVideo {
+//                            multipartFormData.append(image, withName: key,fileName: ".mp4", mimeType: "video/mp4")
+//                        } else {
+//                            multipartFormData.append(image, withName: key,fileName: ".pdf", mimeType: "application/pdf")
+//                        }
+//                    }
+//                    else {
+//                        multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
+//                    }
+//                }
+//            },
+//            to: url,
+//            method: HTTPMethod.post,
+//            headers: headers).responseData(queue: .main) { (response) in
+//                DEBUGLOG(String(data: response.data ?? Data(), encoding: .utf8) ?? "")
+//                switch response.result {
+//                    
+//                case .success(_):
+//                    if let value = response.value {
+//                        let statusCode = response.response?.statusCode ?? 0
+//                        if statusCode == 200 {
+//                            let dictString = String(decoding: value, as: UTF8.self)
+////                            DEBUGLOG(dictString)
+//                            completionHandler(dictString as AnyObject, statusCode, nil)
+//                        } else{
+//                            let error = NSError(domain: "com.eezytutorials.iosTuts", code: (response.response?.statusCode)!, userInfo: ["Error reason" : "Invalid Outut"])
+//                            completionHandler(nil, statusCode, error)
+//                        }
+//                    }
+//                    
+//                case .failure(_):
+//                    let error = NSError(domain: "com.eezytutorials.iosTuts", code: (response.response?.statusCode ?? 0), userInfo: ["Error reason" : "Invalid Outut"])
+//                    completionHandler(nil, 100, error as NSError)
+//                }
+//            }
+//    }
 }

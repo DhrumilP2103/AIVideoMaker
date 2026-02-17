@@ -75,7 +75,7 @@ struct ImageSourcePickerPopup: View {
                                 )
                         )
                 }
-                .buttonStyle(PickerButtonStyle())
+                .buttonStyle(BtnStyle())
                 .padding(.top, 4)
             }
             .padding(24)
@@ -181,6 +181,6 @@ struct PickerOptionButton: View {
                     )
             )
         }
-        .buttonStyle(PickerButtonStyle())
+        .buttonStyle(BtnStyle())
     }
 }

@@ -66,36 +66,18 @@ struct HomeResponseData: Codable {
 
 }
 
-struct HomeResponseCategories: Codable, Identifiable {
+struct HomeResponseCategories: Codable {
+    var id: FlexibleInt?          // <-- Safe ID
+    var hashKey: String?
+    var name: String?
+    var icon: String?
+    var createdAt: String?
 
-  var id      : Int?    = nil
-  var hashKey : String? = nil
-  var name    : String? = nil
-  var icon    : String? = nil
-
-  enum CodingKeys: String, CodingKey {
-
-    case id      = "id"
-    case hashKey = "hash_key"
-    case name    = "name"
-    case icon    = "icon"
-  
-  }
-
-  init(from decoder: Decoder) throws {
-    let values = try decoder.container(keyedBy: CodingKeys.self)
-
-    id      = try values.decodeIfPresent(Int.self    , forKey: .id      )
-    hashKey = try values.decodeIfPresent(String.self , forKey: .hashKey )
-    name    = try values.decodeIfPresent(String.self , forKey: .name    )
-    icon    = try values.decodeIfPresent(String.self , forKey: .icon    )
- 
-  }
-
-  init() {
-
-  }
-
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case hashKey = "hash_key"
+        case name = "name"
+        case icon = "icon"
+        case createdAt = "created_at"
+    }
 }
-
-

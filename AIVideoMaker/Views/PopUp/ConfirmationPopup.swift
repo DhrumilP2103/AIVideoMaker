@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct ConfirmationPopup: View {
-    @Binding var isPresented: Bool
+//    @Binding var isPresented: Bool
     let title: String
     let message: String
     let icon: String
     let confirmActionTitle: String
     var isDestructive: Bool = false
     let confirmAction: () -> Void
+    let dismissAction: () -> Void
     
     @State private var showContent = false
     
@@ -128,7 +129,7 @@ struct ConfirmationPopup: View {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            isPresented = false
+            self.dismissAction()
         }
     }
 }
@@ -138,13 +139,14 @@ struct ConfirmationPopup: View {
         Color.black.ignoresSafeArea()
         
         ConfirmationPopup(
-            isPresented: .constant(true),
+//            isPresented: .constant(true),
             title: "Delete Account",
             message: "Are you sure you want to delete your account? This action cannot be undone.",
             icon: "ic_delete",
             confirmActionTitle: "Delete",
             isDestructive: true,
-            confirmAction: {}
+            confirmAction: {},
+            dismissAction: {}
         )
     }
 }

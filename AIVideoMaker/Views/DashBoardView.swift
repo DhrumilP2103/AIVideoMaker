@@ -71,6 +71,14 @@ struct DashBoardView: View {
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
         }
+        .onChange(of: appState.shouldNavigateToHome) { _, shouldNavigate in
+            if shouldNavigate {
+                withAnimation {
+                    activeTab = .home
+                }
+                appState.shouldNavigateToHome = false
+            }
+        }
     }
     @ViewBuilder
     func HeaderView() -> some View {

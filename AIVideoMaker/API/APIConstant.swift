@@ -18,6 +18,10 @@ struct APIConstants {
         static let likedVideos = "liked_videos"
         static let googleLogin = "google-login"
         static let profile = "profile"
+        static let profileUpdate = "profile/update"
+        static let like = "like"
+        static let privacy = "privacy"
+        static let logout = "logout"
     }
 }
 

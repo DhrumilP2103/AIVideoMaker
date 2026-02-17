@@ -27,4 +27,7 @@ final class NetworkAppState: ObservableObject {
     @Published var popupConfirmTitle: String = ""
     @Published var popupIsDestructive: Bool = false
     @Published var popupAction: () -> Void = {}
+    
+    // Navigation State
+    @Published var shouldNavigateToHome: Bool = false
 }

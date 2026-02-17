@@ -95,9 +95,9 @@ struct LikedVideosView: View {
                             ],
                             spacing: 15
                         ) {
-                            ForEach(Array(viewModel.likedVideosData.enumerated()), id: \.element.id) {
-                                index,
-                                video in
+//                            ForEach(Array(viewModel.likedVideosData.enumerated()), id: \.element.id) {
+                            ForEach(viewModel.likedVideosData.indices, id: \.self) { index  in
+                                let video = viewModel.likedVideosData[index]
                                 VideoCard(video: video, isActive: .constant(true))
                                     .onTapGesture {
                                         impactFeedback.impactOccurred()
@@ -110,7 +110,7 @@ struct LikedVideosView: View {
                                                     videos: viewModel.likedVideosData,
                                                     startIndex: selectedVideoIndex,
                                                     animation: videoTransition
-                                                ),
+                                                ).environmentObject(appState),
                                                 route: .videoReelsView
                                             )
                                         }

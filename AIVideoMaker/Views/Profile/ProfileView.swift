@@ -8,10 +8,6 @@ struct ProfileView: View {
     @State private var selectedVideoIndex: Int = 0
     @Namespace private var videoTransition
     
-    // Sample user data
-    let userName = "John Doe"
-    let userEmail = "john.doe@example.com"
-    
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
@@ -20,18 +16,25 @@ struct ProfileView: View {
                     VStack(spacing: 10) {
                         // Avatar with gradient border
                         ZStack {
-                            // Avatar
-                            Image("ic_profile")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 110, height: 110)
-                                .clipShape(Circle())
+                            if self.viewModel.profileResponseData.profileImage ?? "" != "" {
+                                UrlImageView(
+                                    imageURL: URL(string: self.viewModel.profileResponseData.profileImage ?? ""),
+                                    width: 110, height: 110,
+                                    cornerRadius: 55
+                                )
+                            } else {
+                                // Avatar
+                                Image("ic_profile")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 110, height: 110)
+                                    .clipShape(Circle())
+                            }
                         }
-//                        .shadow(color: .purple.opacity(0.3), radius: 20, x: 0, y: 10)
                         
                         // User Info
                         VStack(spacing: 4) {
-                            Text(userName)
+                            Text(self.viewModel.profileResponseData.name ?? "")
                                 .font(Utilities.font(.Bold, size: 22))
                                 .foregroundColor(.white)
                             
@@ -40,7 +43,7 @@ struct ProfileView: View {
                                     .frame(width: 14, height: 14)
                                     .foregroundColor(.white.opacity(0.6))
                                 
-                                Text(userEmail)
+                                Text(self.viewModel.profileResponseData.email ?? "")
                                     .font(Utilities.font(.Medium, size: 14))
                                     .foregroundColor(.white.opacity(0.6))
                             }
@@ -52,7 +55,12 @@ struct ProfileView: View {
                             let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
                             impactFeedback.impactOccurred()
                             // Navigate to Edit Profile
-                            self.router.push(EditProfileView(), route: .editProfileView)
+                            self.router.push(
+                                EditProfileView(
+                                    viewModel : self.viewModel
+                                ).environmentObject(appState),
+                                route: .editProfileView
+                            )
                         } label: {
                             HStack(spacing: 10) {
                                 Image("ic_pencil").resizable()
@@ -93,7 +101,7 @@ struct ProfileView: View {
                             )
                             .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
                         }
-                        .buttonStyle(EditButtonStyle())
+                        .buttonStyle(BtnStyle())
                         .padding(.horizontal, 20)
                         .padding(.top, 10)
                         
@@ -176,8 +184,8 @@ struct ProfileView: View {
                             appState.popupConfirmTitle = "Logout"
                             appState.popupIsDestructive = true
                             appState.popupAction = {
-                                print("Logout Confirmed")
-                                // TODO: Implement logout logic
+                                DEBUGLOG("Logout Confirmed")
+//                                viewModel.logout(appState: appState)
                             }
                             appState.showConfirmationPopup = true
                         }
@@ -190,7 +198,7 @@ struct ProfileView: View {
         .onAppear() {
             self.viewModel.getProfile(appState: self.appState)
         }
-        .networkStatusPopups(viewModel: viewModel)
+//        .networkStatusPopups(viewModel: viewModel)
         .onChange(of: appState.retryRequestedForAPI) { _, apiName in
             guard let name = apiName else { return }
             if checkInternet() {
@@ -288,27 +296,7 @@ struct ProfileMenuOption: View {
             )
             .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
         }
-        .buttonStyle(MenuOptionButtonStyle())
-    }
-}
-
-// MARK: - Menu Option Button Style
-struct MenuOptionButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
-            .opacity(configuration.isPressed ? 0.7 : 1.0)
-            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
-    }
-}
-
-// MARK: - Edit Button Style
-struct EditButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
-            .opacity(configuration.isPressed ? 0.8 : 1.0)
-            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
+        .buttonStyle(BtnStyle())
     }
 }
 
