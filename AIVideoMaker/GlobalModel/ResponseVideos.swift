@@ -28,6 +28,7 @@ struct ResponseVideos: Codable {
     var error: String?
     var isOpen: String?
     var createdAt: String?
+    var isLiked: String?
     var updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
@@ -50,6 +51,7 @@ struct ResponseVideos: Codable {
         case isOpen = "is_open"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case isLiked = "is_liked"
     }
 
     // MARK: - Custom Init for Manual Object Creation

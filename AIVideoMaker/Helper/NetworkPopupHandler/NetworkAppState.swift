@@ -30,4 +30,7 @@ final class NetworkAppState: ObservableObject {
     
     // Navigation State
     @Published var shouldNavigateToHome: Bool = false
+    
+    @Published var showLoginSheet: Bool = false
+    
 }

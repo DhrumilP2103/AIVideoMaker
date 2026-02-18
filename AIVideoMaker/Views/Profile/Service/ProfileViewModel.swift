@@ -117,12 +117,13 @@ class ProfileViewModel: BaseModel {
         profileAPIService.logout { [weak self] result in
             dismissLoader()
             DispatchQueue.main.async {
-                guard let self = self else { return }
+                guard self != nil else { return }
                 switch result {
                 case .success(_):
 //                    self.logoutSuccess = true
                     // Clear user data
-                    UserDefaults.standard.removeObject(forKey: "bearer_token")
+                    let domain = Bundle.main.bundleIdentifier!
+                    UserDefaults.standard.removePersistentDomain(forName: domain)
                     UserDefaults.standard.synchronize()
                     // Trigger navigation to home
                     appState.shouldNavigateToHome = true

@@ -117,12 +117,16 @@ struct VideoDetailView: View {
                 Spacer()
                 
                 // Right Side Actions
-                VStack(spacing: 25) {
+                VStack(spacing: 14) {
                     Spacer()
                     
-                    SideActionButton(icon: "ic_heart", label: video.likes?.value ?? "", color: .red) {
-                        self.viewModel.videoHashKey = video.hashKey ?? ""
-                        self.viewModel.likeVideo(appState: self.appState)
+                    SideActionButton(icon: self.viewModel.isVideoLiked ? "ic_heart_fill" : "ic_heart", label: video.likes?.value ?? "", color: .red) {
+                        if AppData.shared.isLogin {
+                            self.viewModel.videoHashKey = video.hashKey ?? ""
+                            self.viewModel.likeVideo(appState: self.appState)
+                        } else {
+                            self.appState.showLoginSheet = true
+                        }
                     }
                     SideActionButton(icon: "ic_share", label: "Share") {}
                     SideActionButton(icon: "ic_download", label: "Download"){}
@@ -130,7 +134,7 @@ struct VideoDetailView: View {
                     Spacer()
                         .frame(height: 150)
                 }
-                .padding(.trailing, 20)
+                .padding(.trailing, 10)
                 .opacity(showUI ? 1 : 0)
                 .offset(x: showUI ? 0 : 20)
             }
@@ -205,6 +209,7 @@ struct VideoDetailView: View {
         .blur(radius: self.showLoginSheet ? 2 : 0)
         .animation(.spring(response: 0.4, dampingFraction: 0.8), value: showUI)
         .onAppear {
+            self.viewModel.isVideoLiked = self.video.isLiked ?? "" == "1"
             setupPlayer()
             // Animate UI elements in smoothly
             withAnimation(.spring(response: 0.6, dampingFraction: 0.8).delay(0.1)) {
@@ -224,7 +229,6 @@ struct VideoDetailView: View {
             player?.pause()
             player = nil
         }
-        .networkStatusPopups(viewModel: viewModel)
         .onChange(of: appState.retryRequestedForAPI) { _, apiName in
             guard let name = apiName else { return }
             if checkInternet() {
@@ -236,11 +240,6 @@ struct VideoDetailView: View {
                     }
                 }
             }
-        }
-        .sheet(isPresented: $showLoginSheet) {
-            LoginSheet()
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
         }
     }
     

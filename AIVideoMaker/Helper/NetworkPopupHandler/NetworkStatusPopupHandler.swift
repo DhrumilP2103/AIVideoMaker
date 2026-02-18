@@ -32,8 +32,14 @@ struct NetworkStatusPopupHandler: ViewModifier {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(._041_C_32.opacity(0.5))
                     .blur(radius: 20)
-                    .opacity(appState.isNoInternet || appState.isAuthExpired || appState.showConfirmationPopup ? 1 : 0)
-                    .animation(.easeInOut, value: appState.isNoInternet || appState.isAuthExpired || appState.showConfirmationPopup)
+                    .opacity(appState.isNoInternet || appState.isAuthExpired || appState.showConfirmationPopup || self.appState.showLoginSheet ? 1 : 0)
+                    .animation(.easeInOut, value: appState.isNoInternet || appState.isAuthExpired || appState.showConfirmationPopup || self.appState.showLoginSheet)
+            }
+//            .blur(radius: self.appState.showLoginSheet ? 2 : 0)
+            .sheet(isPresented: $appState.showLoginSheet) {
+                LoginSheet()
+                    .presentationDetents([.medium])
+                    .presentationDragIndicator(.visible)
             }
             .overlay(
                 ZStack {

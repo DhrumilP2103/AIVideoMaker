@@ -28,7 +28,7 @@ class APIService: NSObject {
             DEBUGLOG("URLRequest => \(APIConstants.baseURL + endPoint)")
             DEBUGLOG("x-access-token => \(token)")
         } else {
-            let token = "29b4d4f941820fa5d9777990300d041b"
+            let token = ""
             request.addValue("\(token)", forHTTPHeaderField: "Api-Key")
             request.addValue("en-US", forHTTPHeaderField: "Accept-Language")
         }

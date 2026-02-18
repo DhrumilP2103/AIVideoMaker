@@ -194,7 +194,7 @@ struct EditProfileView: View {
         .onAppear() {
             self.name = self.viewModel.profileResponseData.name ?? ""
         }
-        .networkStatusPopups(viewModel: viewModel)
+
         .onChange(of: appState.retryRequestedForAPI) { _, apiName in
             guard let name = apiName else { return }
             if checkInternet() {

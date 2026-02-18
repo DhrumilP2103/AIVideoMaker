@@ -81,7 +81,7 @@ struct PrivacyPolicyView: View {
         .onAppear {
             viewModel.getPrivacyPolicy(appState: appState)
         }
-        .networkStatusPopups(viewModel: viewModel)
+
         .onChange(of: appState.retryRequestedForAPI) { _, apiName in
             guard let name = apiName else { return }
             if checkInternet() {

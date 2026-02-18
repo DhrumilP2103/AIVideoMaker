@@ -40,8 +40,10 @@ class GLoginViewModel: BaseModel {
                 guard let self = self else { return }
                 switch result {
                 case .success(let response):
-                    self.gLoginResponseData = response.data ?? GLoginResponseData()
-                    UserDefaults.standard.setValue(self.gLoginResponseData.token ?? "", forKey: "bearer_token")
+                    let data = response.data ?? GLoginResponseData()
+                    UserDefaults.standard.setValue(data.token ?? "", forKey: "bearer_token")
+                    UserDefaults.standard.setValue(data.hashKey ?? "", forKey: "user_hash_key")
+                    self.gLoginResponseData = data
                 case .failure(let error):
                     switch error {
                     case .unAuthorizationError(let message):

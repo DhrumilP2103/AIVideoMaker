@@ -185,7 +185,7 @@ struct ProfileView: View {
                             appState.popupIsDestructive = true
                             appState.popupAction = {
                                 DEBUGLOG("Logout Confirmed")
-//                                viewModel.logout(appState: appState)
+                                viewModel.logout(appState: appState)
                             }
                             appState.showConfirmationPopup = true
                         }
@@ -198,7 +198,7 @@ struct ProfileView: View {
         .onAppear() {
             self.viewModel.getProfile(appState: self.appState)
         }
-//        .networkStatusPopups(viewModel: viewModel)
+
         .onChange(of: appState.retryRequestedForAPI) { _, apiName in
             guard let name = apiName else { return }
             if checkInternet() {

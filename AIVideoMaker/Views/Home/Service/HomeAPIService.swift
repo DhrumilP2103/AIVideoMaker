@@ -6,9 +6,10 @@ protocol HomeServiceProto {
 
 struct HomeAPIService: HomeServiceProto {
     func homeList(completion: @escaping (Result<HomeResponseModel, APIError>) -> Void) {
-        let parameter: [String: AnyObject] = [:]
+        var parameter: [String: AnyObject] = [:]
+        parameter["user_hash_key"] = AppData.shared.userhashKey as AnyObject
         
-        APIService().getAPI(modelType: HomeResponseModel.self, endPoint: APIConstants.Endpoints.home, parameter: parameter) { data, statusCode, success in
+        APIService().postAPI(modelType: HomeResponseModel.self, endPoint: APIConstants.Endpoints.home, parameter: parameter) { data, statusCode, success in
             switch statusCode {
             case 200:
                 if let response = data {

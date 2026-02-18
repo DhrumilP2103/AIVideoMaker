@@ -63,7 +63,7 @@ struct AssetsView: View {
         .onAppear() {
             self.viewModel.assetsList(appState: self.appState)
         }
-        .networkStatusPopups(viewModel: viewModel)
+
         .onChange(of: appState.retryRequestedForAPI) { _, apiName in
             guard let name = apiName else { return }
             if checkInternet() {

@@ -11,6 +11,7 @@ import Combine
 class LikeViewModel: BaseModel {
     private let likeAPIService: LikeAPIService
     
+    @Published var isVideoLiked: Bool = false
     @Published var likeSuccess: Bool = false
     @Published var videoHashKey: String = ""
     
@@ -41,7 +42,7 @@ class LikeViewModel: BaseModel {
                 switch result {
                 case .success(let response):
                     self.likeSuccess = true
-                    DEBUGLOG("Video liked/unliked successfully")
+                    self.isVideoLiked = response.message == "Liked"
                 case .failure(let error):
                     switch error {
                     case .unAuthorizationError(let message):

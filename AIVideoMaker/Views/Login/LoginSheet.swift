@@ -183,7 +183,7 @@ struct LoginSheet: View {
 //                Spacer()
             }
         }
-        .networkStatusPopups(viewModel: viewModel)
+//        .networkStatusPopups(viewModel: viewModel)
         .onChange(of: appState.retryRequestedForAPI) { _, apiName in
             guard let name = apiName else { return }
             if checkInternet() {
@@ -213,7 +213,6 @@ struct LoginSheet: View {
                 switch result {
                 case .success(let user):
                     DEBUGLOG("idToken: \(user.idToken?.tokenString ?? "")")
-                    DEBUGLOG("userID: \(user.userID ?? "")")
                     self.viewModel.tokenString = user.idToken?.tokenString ?? ""
                     self.viewModel.gLogin(appState: self.appState)
                 case .failure(let error):

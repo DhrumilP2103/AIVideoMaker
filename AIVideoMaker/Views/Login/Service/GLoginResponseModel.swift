@@ -43,17 +43,20 @@ struct GLoginResponseModel: Codable {
 struct GLoginResponseData: Codable {
 
   var token : String? = nil
+  var hashKey : String? = nil
 
   enum CodingKeys: String, CodingKey {
 
     case token = "token"
+    case hashKey = "hash_key"
   
   }
 
   init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
-    token = try values.decodeIfPresent(String.self , forKey: .token )
+    token   = try values.decodeIfPresent(String.self , forKey: .token   )
+    hashKey = try values.decodeIfPresent(String.self , forKey: .hashKey )
  
   }
 

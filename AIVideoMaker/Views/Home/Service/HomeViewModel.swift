@@ -43,6 +43,11 @@ class HomeViewModel: BaseModel {
                     self.homeResponseData = response.data ?? HomeResponseData()
                     self.homeResponseCategories = self.homeResponseData.categories ?? [HomeResponseCategories]()
                     self.homeResponseVideos = self.homeResponseData.videos ?? [ResponseVideos]()
+//                    Utilities().delay(delay: 0.5) {
+//                        if !AppData.shared.isLogin {
+//                            appState.showLoginSheet = true
+//                        }
+//                    }
                 case .failure(let error):
                     switch error {
                     case .unAuthorizationError(let message):

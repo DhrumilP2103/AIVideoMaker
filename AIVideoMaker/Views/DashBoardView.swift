@@ -9,6 +9,8 @@ import SwiftUI
 
 struct DashBoardView: View {
     @State private var activeTab: Tab = .home
+    @StateObject var homeViewModel = HomeViewModel()
+    
     @EnvironmentObject var router: Router
     @EnvironmentObject var appState: NetworkAppState
     @Namespace private var animation
@@ -65,12 +67,12 @@ struct DashBoardView: View {
             
         }
         .networkStatusPopups(viewModel: BaseModel())
-        .blur(radius: self.showLoginSheet ? 2 : 0)
-        .sheet(isPresented: $showLoginSheet) {
-            LoginSheet()
-                .presentationDetents([.medium])
-                .presentationDragIndicator(.visible)
-        }
+//        .blur(radius: self.showLoginSheet ? 2 : 0)
+//        .sheet(isPresented: $showLoginSheet) {
+//            LoginSheet()
+//                .presentationDetents([.medium])
+//                .presentationDragIndicator(.visible)
+//        }
         .onChange(of: appState.shouldNavigateToHome) { _, shouldNavigate in
             if shouldNavigate {
                 withAnimation {
@@ -79,6 +81,16 @@ struct DashBoardView: View {
                 appState.shouldNavigateToHome = false
             }
         }
+//        .onChange(of: appState.showLoginSheet) { oldValue, status in
+//            if status {
+//                Utilities().delay(delay: 0.5) {
+//                    if !AppData.shared.isLogin {
+//                        self.showLoginSheet = true
+////                        appState.showLoginSheet = false
+//                    }
+//                }
+//            }
+//        }
     }
     @ViewBuilder
     func HeaderView() -> some View {
@@ -97,9 +109,6 @@ struct DashBoardView: View {
                     Image(systemName: "sparkles.tv")
                         .font(.title2)
                         .foregroundStyle(.white)
-                }
-                .onTapGesture {
-                    self.showLoginSheet = true
                 }
                 
                 VStack(alignment: .leading, spacing: 2) {
@@ -189,13 +198,13 @@ struct DashBoardView: View {
                 .contentShape(Rectangle())
                 .scaleEffect(isActive ? 1.02 : 1.0)
                 .onTapGesture {
-//                    if tab == .assets || tab == .profile {
-//                        showLoginSheet = true
-//                    } else {
+                    if (tab == .assets || tab == .profile) && !AppData.shared.isLogin {
+                        self.appState.showLoginSheet = true
+                    } else {
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                            activeTab = tab
+                            self.activeTab = tab
                         }
-//                    }
+                    }
                 }
                 
                 if tab != Tab.allCases.last {

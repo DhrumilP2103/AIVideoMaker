@@ -48,6 +48,7 @@
 		1946A6242F435477003DAB03 /* ProfileAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1946A6212F435477003DAB03 /* ProfileAPIService.swift */; };
 		195D67392F3B143300936DBD /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 195D67382F3B143300936DBD /* IQKeyboardManagerSwift */; };
 		195D673B2F3B144D00936DBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D673A2F3B144D00936DBD /* AppDelegate.swift */; };
+		1963A2142F45731A00894298 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1963A2132F45731A00894298 /* AppData.swift */; };
 		198E64082F4425EB00B60393 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 198E64072F4425EB00B60393 /* URLImage */; };
 		198E640A2F44260300B60393 /* UrlImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E64092F44260300B60393 /* UrlImageView.swift */; };
 		198E640D2F442EB400B60393 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E640C2F442EB400B60393 /* PermissionManager.swift */; };
@@ -139,6 +140,7 @@
 		1946A6212F435477003DAB03 /* ProfileAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPIService.swift; sourceTree = "<group>"; };
 		1946A6222F435477003DAB03 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		195D673A2F3B144D00936DBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1963A2132F45731A00894298 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		198E64092F44260300B60393 /* UrlImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlImageView.swift; sourceTree = "<group>"; };
 		198E640C2F442EB400B60393 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		198E640E2F4439A700B60393 /* FlexibleInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleInt.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				19293F872F3320B10000973C /* Assets.xcassets */,
 				19293F882F3320B10000973C /* ContentView.swift */,
 				195D673A2F3B144D00936DBD /* AppDelegate.swift */,
+				1963A2132F45731A00894298 /* AppData.swift */,
 				19DF54ED2F35F161008392F3 /* Helper */,
 				1931E1752F3C575B00C5A38F /* GlobalModel */,
 				19DF54DF2F35F0BB008392F3 /* API */,
@@ -648,6 +651,7 @@
 				1931E1742F3C571800C5A38F /* AssetsAPIService.swift in Sources */,
 				1931E1772F3C577200C5A38F /* AssetsViewModel.swift in Sources */,
 				1946A61F2F435369003DAB03 /* ProfileResponseModel.swift in Sources */,
+				1963A2142F45731A00894298 /* AppData.swift in Sources */,
 				19DF55062F35F6B6008392F3 /* HomeView.swift in Sources */,
 				19DF54FF2F35F4D0008392F3 /* NavigationControllerRootView.swift in Sources */,
 				19005E3A2F39D9FE00D613B1 /* CreateVideoView.swift in Sources */,
