@@ -46,8 +46,7 @@ class LikeViewModel: BaseModel {
                 case .failure(let error):
                     switch error {
                     case .unAuthorizationError(let message):
-                        appState.showAlert = true
-                        appState.alertDescription = message
+                        appState.isAuthExpired = true
                     case .internalServerError(_):
                         appState.isInternalServerError = true
                     case .network(let message):

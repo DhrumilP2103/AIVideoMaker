@@ -153,9 +153,13 @@ struct LoginSheet: View {
                     
                     HStack(spacing: 4) {
                         Button {
-                            // TODO: Open Terms
+                            withAnimation {
+                                self.dismiss()
+                            } completion: {
+                                self.router.push(PrivacyPolicyView().environmentObject(appState), route: .privacyPolicyView)
+                            }
                         } label: {
-                            Text("Terms of Service")
+                            Text("Terms & Conditions")
                                 .font(Utilities.font(.SemiBold, size: 12))
                                 .foregroundColor(.white.opacity(0.7))
                                 .underline()
@@ -169,8 +173,8 @@ struct LoginSheet: View {
                             withAnimation {
                                 self.dismiss()
                             } completion: {
-                                self.router.push(PrivacyPolicyView().environmentObject(appState), route: .privacyPolicyView)
-                            }                            
+                                self.router.push(PrivacyPolicyView(isPrivacy: true).environmentObject(appState), route: .privacyPolicyView)
+                            }
                         } label: {
                             Text("Privacy Policy")
                                 .font(Utilities.font(.SemiBold, size: 12))
@@ -215,6 +219,9 @@ struct LoginSheet: View {
                     DEBUGLOG("idToken: \(user.idToken?.tokenString ?? "")")
                     self.viewModel.tokenString = user.idToken?.tokenString ?? ""
                     self.viewModel.gLogin(appState: self.appState)
+                    self.viewModel.handleLoginSuccess = {
+                        self.router.popToRoot()
+                    }
                 case .failure(let error):
                     // Google sign-in failed. Implement handling as needed.
                     DEBUGLOG("error: \(error)")

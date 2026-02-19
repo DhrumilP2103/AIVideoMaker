@@ -12,6 +12,8 @@ struct PrivacyPolicyView: View {
     @EnvironmentObject var appState: NetworkAppState
     @StateObject var viewModel = PrivacyPolicyViewModel()
     
+    @State var isPrivacy: Bool = false
+    
     var body: some View {
         ZStack {
             ZStack {
@@ -46,7 +48,7 @@ struct PrivacyPolicyView: View {
                     
                     Spacer()
                     
-                    Text("Privacy Policy")
+                    Text(self.isPrivacy ? "Privacy Policy" : "Terms & Conditions")
                         .font(Utilities.font(.Bold, size: 20))
                         .foregroundColor(.white)
                     
@@ -60,7 +62,8 @@ struct PrivacyPolicyView: View {
                 .padding(.bottom, 20)
                 
                 // HTML Content
-                if let htmlContent = viewModel.privacyPolicyData.policy, !htmlContent.isEmpty {
+                let text = self.isPrivacy ? self.viewModel.privacyPolicyData.policy : self.viewModel.privacyPolicyData.termConditions
+                if let htmlContent = text, !htmlContent.isEmpty {
                     HTMLStringView(htmlContent: htmlContent)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {

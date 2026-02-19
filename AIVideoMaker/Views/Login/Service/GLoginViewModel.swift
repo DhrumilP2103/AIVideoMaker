@@ -7,13 +7,14 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class GLoginViewModel: BaseModel {
     private let gLoginAPIService: GLoginAPIService
     
     @Published var gLoginResponseData: GLoginResponseData = GLoginResponseData()
     @Published var tokenString: String = ""
-    
+    @Published var handleLoginSuccess: (() -> Void)?
     init(gLoginAPIService: GLoginAPIService = GLoginAPIService())
     {
         self.gLoginAPIService = gLoginAPIService
@@ -44,11 +45,11 @@ class GLoginViewModel: BaseModel {
                     UserDefaults.standard.setValue(data.token ?? "", forKey: "bearer_token")
                     UserDefaults.standard.setValue(data.hashKey ?? "", forKey: "user_hash_key")
                     self.gLoginResponseData = data
+                    self.handleLoginSuccess?()
                 case .failure(let error):
                     switch error {
                     case .unAuthorizationError(let message):
-                        appState.showAlert = true
-                        appState.alertDescription = message
+                        appState.isAuthExpired = true
                     case .internalServerError(_):
                         appState.isInternalServerError = true
                     case .network(let message):

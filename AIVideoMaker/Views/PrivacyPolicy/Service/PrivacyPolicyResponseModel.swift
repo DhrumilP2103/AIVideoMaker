@@ -39,10 +39,12 @@ struct PrivacyPolicyResponseModel: Codable {
 struct PrivacyPolicyData: Codable {
 
   var policy : String? = nil
+  var termConditions : String? = nil
 
   enum CodingKeys: String, CodingKey {
 
     case policy = "policy"
+    case termConditions = "term_conditions"
   
   }
 
@@ -50,6 +52,7 @@ struct PrivacyPolicyData: Codable {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
     policy = try values.decodeIfPresent(String.self , forKey: .policy )
+      termConditions = try values.decodeIfPresent(String.self , forKey: .termConditions )
   }
 
   init() { }

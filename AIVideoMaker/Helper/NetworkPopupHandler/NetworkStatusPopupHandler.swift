@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct NetworkStatusPopupHandler: ViewModifier {
-
+    
+    @EnvironmentObject var router: Router
     @EnvironmentObject var appState: NetworkAppState
     var viewModel: BaseModel
 
@@ -16,9 +17,6 @@ struct NetworkStatusPopupHandler: ViewModifier {
                 }
                 .environmentObject(appState)
             }
-//            .fullScreenCover(isPresented: $appState.isAuthExpired) {
-//                LoginAgainPopUp().background(BackgroundClearView())
-//            }
 //            .navigationDestination(isPresented: $appState.navigateToLogin) {
 //                LoginView().toolbar(.hidden)
 //            }
@@ -32,14 +30,29 @@ struct NetworkStatusPopupHandler: ViewModifier {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(._041_C_32.opacity(0.5))
                     .blur(radius: 20)
-                    .opacity(appState.isNoInternet || appState.isAuthExpired || appState.showConfirmationPopup || self.appState.showLoginSheet ? 1 : 0)
-                    .animation(.easeInOut, value: appState.isNoInternet || appState.isAuthExpired || appState.showConfirmationPopup || self.appState.showLoginSheet)
+                    .opacity(self.appState.isNoInternet || self.appState.isAuthExpired || self.appState.showConfirmationPopup || self.appState.showLoginSheet || self.appState.isAuthExpired ? 1 : 0)
+                    .animation(.easeInOut, value: self.appState.isNoInternet || self.appState.isAuthExpired || self.appState.showConfirmationPopup || self.appState.showLoginSheet || self.appState.isAuthExpired)
             }
 //            .blur(radius: self.appState.showLoginSheet ? 2 : 0)
             .sheet(isPresented: $appState.showLoginSheet) {
                 LoginSheet()
                     .presentationDetents([.medium])
                     .presentationDragIndicator(.visible)
+            }
+            .fullScreenCover(isPresented: $appState.isAuthExpired) {
+                LoginAgainPopUp {
+                    // Clear all UserDefaults (removes bearer_token, user_hash_key, etc.)
+                    UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+                    UserDefaults.standard.synchronize()
+                    // Dismiss the popup first, then navigate after it finishes animating
+                    appState.isAuthExpired = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        // Navigate to Dashboard Home tab (pops nav stack + switches tab)
+                        self.router.popToRoot()
+                        appState.shouldNavigateToHome = true
+                    }
+                }
+                .environmentObject(appState)
             }
             .overlay(
                 ZStack {

@@ -98,6 +98,7 @@
 		19DF55342F35FEBE008392F3 /* HomeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55302F35FEBE008392F3 /* HomeAPIService.swift */; };
 		19DF55352F35FEBE008392F3 /* HomeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55312F35FEBE008392F3 /* HomeResponseModel.swift */; };
 		19DF55362F35FEBE008392F3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF55322F35FEBE008392F3 /* HomeViewModel.swift */; };
+		19DFB1852F46D26900D2D74A /* LoginAgainPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DFB1842F46D26900D2D74A /* LoginAgainPopUp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -188,6 +189,7 @@
 		19DF55302F35FEBE008392F3 /* HomeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIService.swift; sourceTree = "<group>"; };
 		19DF55312F35FEBE008392F3 /* HomeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeResponseModel.swift; sourceTree = "<group>"; };
 		19DF55322F35FEBE008392F3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		19DFB1842F46D26900D2D74A /* LoginAgainPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAgainPopUp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +215,7 @@
 				1931E1822F3C7B6800C5A38F /* ConfirmationPopup.swift */,
 				19005E282F39A45D00D613B1 /* ImageSourcePickerPopup.swift */,
 				1931E1842F3C8FCB00C5A38F /* NoInternetPopUp.swift */,
+				19DFB1842F46D26900D2D74A /* LoginAgainPopUp.swift */,
 			);
 			path = PopUp;
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				19293FA02F3349030000973C /* Utilities.swift in Sources */,
 				198E640D2F442EB400B60393 /* PermissionManager.swift in Sources */,
 				19DF552E2F35FE3B008392F3 /* VideoManager.swift in Sources */,
+				19DFB1852F46D26900D2D74A /* LoginAgainPopUp.swift in Sources */,
 				19D6BA562F346213009805E6 /* VideoCacheManager.swift in Sources */,
 				19293F8B2F3320B10000973C /* ContentView.swift in Sources */,
 			);

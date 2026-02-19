@@ -216,6 +216,7 @@ struct VideoDetailView: View {
                 showUI = true
             }
         }
+//        .networkStatusPopups(viewModel: self.viewModel)
         .onChange(of: isCurrentVideo) { oldValue, newValue in
             if newValue {
                 player?.play()

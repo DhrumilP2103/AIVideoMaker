@@ -57,40 +57,18 @@ struct DashBoardView: View {
                 }
             }
             
-//            ZStack { }
-//                .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                .ignoresSafeArea()
-//                .background(._041_C_32.opacity(0.2))
-//                .blur(radius: 20)
-//                .opacity(appState.isNoInternet || appState.isAuthExpired || appState.showConfirmationPopup ? 1 : 0)
-//                .animation(.easeInOut, value: appState.isNoInternet || appState.isAuthExpired || appState.showConfirmationPopup)
-            
         }
         .networkStatusPopups(viewModel: BaseModel())
-//        .blur(radius: self.showLoginSheet ? 2 : 0)
-//        .sheet(isPresented: $showLoginSheet) {
-//            LoginSheet()
-//                .presentationDetents([.medium])
-//                .presentationDragIndicator(.visible)
-//        }
         .onChange(of: appState.shouldNavigateToHome) { _, shouldNavigate in
             if shouldNavigate {
+                // Pop any pushed screens first (e.g. profile detail, video detail)
+                router.popToRoot()
                 withAnimation {
                     activeTab = .home
                 }
                 appState.shouldNavigateToHome = false
             }
         }
-//        .onChange(of: appState.showLoginSheet) { oldValue, status in
-//            if status {
-//                Utilities().delay(delay: 0.5) {
-//                    if !AppData.shared.isLogin {
-//                        self.showLoginSheet = true
-////                        appState.showLoginSheet = false
-//                    }
-//                }
-//            }
-//        }
     }
     @ViewBuilder
     func HeaderView() -> some View {
